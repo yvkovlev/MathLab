@@ -231,9 +231,10 @@ footer {
     padding-bottom: 10px;
 }
 
-.profile {
+.profile, .teaher-profile {
     display: block;
 }
+
 
 .profile-img {
     margin: auto;
@@ -243,13 +244,21 @@ footer {
    width: 100px; 
 }
 
+.teaher-profile img {
+   width: 100px; 
+}
+
+.teaher-profile p {
+   margin-top: 10px; 
+}
+
 .profile-info {
     margin: 10px auto;
     padding-bottom: 10px;
     border-bottom: 1px solid #dce1e8;
 }
 
-.profile-info h6 {
+.profile-info h6, .teaher-profile h6 {
     color: #7b7b7b;
 }
 
