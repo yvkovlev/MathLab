@@ -121,12 +121,16 @@ footer {
     font-size: 13px;
 }
 
-.form {
+.form, .base {
     padding: 20px;
     border: 1px solid #DCE1E8;
     border-radius: 1px;
     background: #fff;
     overflow: hidden;
+}
+
+.base .nav-tabs {
+    margin: 0 -20px;
 }
 
 .form button {
@@ -226,4 +230,53 @@ footer {
 .confirm-info {
     padding-bottom: 10px;
 }
+
+.profile {
+    display: block;
+}
+
+.profile-img {
+    margin: auto;
+}
+
+.profile-img img {
+   width: 100px; 
+}
+
+.profile-info {
+    margin: 10px auto;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dce1e8;
+}
+
+.profile-info h6 {
+    color: #7b7b7b;
+}
+
+.profile-contacts {
+    margin: 15px auto 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dce1e8;
+}
+
+.profile-contacts h5 {
+    margin: 15px auto
+}
+
+.sub {
+    color: #7b7b7b;
+    font-weight: 400;
+}
+
+.profile-content {
+    margin-top: 20px;
+}
+
+
+
+
+
+
+
+
 
