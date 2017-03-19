@@ -3518,6 +3518,12 @@ tbody.collapse.in {
   right: 0;
   left: auto;
 }
+
+.dropdown-menu i {
+  width: 10px;
+  margin-right: 3px;
+  text-align: left;
+}
 .dropdown-menu .divider {
   height: 1px;
   margin: 9px 0;
