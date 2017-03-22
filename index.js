@@ -73,14 +73,20 @@ passport.use(new LocalStrategy(
 ));*/
 
 app.get('/sign-in', function (req, res){
-	res.sendFile(__dirname + '/public/sign-in.html');
+	res.sendFile(__dirname + '/public/view/sign-in.html');
 });
 
 app.get('/sign-up', function (req, res){
-	res.sendFile(__dirname + '/public/sign-up.html');
+	res.sendFile(__dirname + '/public/view/sign-up.html');
 });
 app.get('/', function (req, res){
-	res.sendFile(__dirname + '/public/cabinet.html');
+	res.sendFile(__dirname + '/public/view/cabinet.html');
+});
+app.get('/course', function (req, res){
+  res.sendFile(__dirname + '/public/view/course.html');
+});
+app.get('/request', function (req, res){
+  res.sendFile(__dirname + '/public/view/request.html');
 });
 
 http.listen(3000, function(){
