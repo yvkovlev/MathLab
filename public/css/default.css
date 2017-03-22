@@ -281,6 +281,52 @@ footer {
     margin-top: 20px;
 }
 
+.courses {
+    display: block;
+}
+
+.course {
+    padding: 10px;
+    border: 1px solid #dce1e8;
+    border-radius: 1px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    opacity: 0.6;
+}
+
+.active-course {
+    opacity: 1;
+}
+
+.course-header, .course-footer {
+    display: flex;
+}
+
+.course-info-img img {
+    width: 50px;
+}
+
+.course-info-titles {
+    margin: 0 10px;
+}
+
+.course-info-titles h5 {
+    margin: 5px 0;
+    max-width: 247px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.course-info-titles h6 {
+    margin: 5px 0;
+}
+
+.course-dates {
+    display: block;
+    font-size: 11px;
+}
+
 
 
 
