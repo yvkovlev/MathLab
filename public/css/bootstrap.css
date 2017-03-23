@@ -5449,8 +5449,6 @@ button.list-group-item-danger.active:focus {
 .panel-heading {
   padding: 10px 15px;
   border-bottom: 1px solid transparent;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
 }
 
 .panel-heading img {
@@ -5477,9 +5475,7 @@ button.list-group-item-danger.active:focus {
 .panel-footer {
   padding: 10px 15px;
   background-color: #f5f5f5;
-  border-top: 1px solid #ddd;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
+  border-top: 1px solid #dce1e8;
 }
 .panel > .list-group,
 .panel > .panel-collapse > .list-group {
@@ -5682,7 +5678,7 @@ button.list-group-item-danger.active:focus {
 .panel-default > .panel-heading {
   color: #333;
   background-color: #f5f5f5;
-  border-color: #ddd;
+  border-color: #dce1e8;
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #ddd;

@@ -327,6 +327,103 @@ footer {
     font-size: 11px;
 }
 
+.attachment, .send-button {
+  display: block;
+  font-size: 22px;
+  color: #828282;
+  cursor: pointer;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 5px;
+}
+
+.message-input-block {
+  position: relative;
+}
+
+.placeholder {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #ccc;
+  pointer-events: none;
+}
+
+.message-input {
+  height: 40px;
+  border: 1px solid #DCE1E8;
+  border-radius: 1px;
+  background: #fff;
+  padding: 10px 10px;
+  outline: none;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.messages-block {
+  height: 500px;
+  padding: 15px 30px;
+  /* overflow-y: scroll; */
+  overflow-x: hidden;
+  position: relative;
+}
+
+.messages {
+  display: block;
+}
+
+.message {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.message-img {
+  margin-right: 10px;
+}
+
+.message-img img {
+  width: 40px;
+}
+
+.message-body {
+  display: block;
+  font-size: 13px;
+}
+
+.message-body h5 {
+  margin: 5px 0;
+  font-weight: bolder;
+  color: #3a65a7;
+  font-size: 13px;
+}
+
+.message-body ul {
+  margin: 0;
+  list-style-type: none;
+  padding: 0;
+}
+
+.message-body li {
+  margin-bottom: 5px;
+}
+
+.messages-content {
+  display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
