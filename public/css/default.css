@@ -503,8 +503,34 @@ footer {
   width: 60%;
 }
 
+.landing-comment {
+  background-color: #EBF7F0;
+  border-radius: 4px;
+  padding: 30px 10px;
+}
 
+.landing-comment-body {
+  display: block;
+}
 
+.landing-comment-body img {
+  width: 100px;
+}
+
+.landing-comment-body h4 {
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+.landing-comment-body h6 {
+  color: #7b7b7b;
+  margin-top: 5px;
+}
+
+.landing-comment-body blockquote {
+  border-left: 2px solid #d1dad5;
+  margin: 0;
+}
 
 
 
