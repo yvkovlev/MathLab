@@ -413,17 +413,95 @@ footer {
   display: block;
 }
 
+.message-attachment {
+  margin: 0;
+  display: flex;
+  padding: 5px 10px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
 
+.message-attachment:hover {
+  background: #f2f4f7;
+}
 
+.message-attachment-img {
+  margin-right: 10px;
+}
 
+.message-attachment-img a {
+  color: #fff;
+  font-size: 22px;
+  border-radius: 2px;
+}
 
+.message-attachment-body {
+  display: block;
+}
 
+.message-attachment-body h5 {
+  margin: 5px 0;
+}
 
+.message-attachment-body h6 {
+  margin: 5px 0;
+}
 
+.no-margin {
+  margin: 0 !important;
+}
 
+.landing {
+  background-color: #fff !important;
+  color: #333;
+}
 
+.landing-head {
+  padding-top: 70px;
+  padding-bottom: 40px;
+  background-image: -webkit-linear-gradient(45deg, #00537e, #136d7e 33%, #3aa17e);
+  background-image: linear-gradient(45deg, #00537e, #136d7e 33%, #3aa17e);
+  color: #fff !important;
+  -webkit-font-smoothing: antialiased;
+}
 
+.landing-head h1 {
+  font-size: 40px;
+  line-height: 1.2;
+  margin: 0;
+}
 
+.landing-lamp img {
+  width: 50%;
+}
+
+.landing-text {
+  padding: 20px 0;
+}
+
+.start-button {
+  padding-top: 10px;
+}
+
+.article-title {
+  font-size: 33px;
+  margin-bottom: 40px;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+.article-p {
+  font-size: 17px;
+}
+
+.article {
+  margin-bottom: 60px;
+}
+
+.article img {
+  width: 60%;
+}
 
 
 

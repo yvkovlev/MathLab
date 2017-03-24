@@ -88,6 +88,9 @@ app.get('/course', function (req, res){
 app.get('/request', function (req, res){
   res.sendFile(__dirname + '/public/view/request.html');
 });
+app.get('/welcome', function (req, res){
+  res.sendFile(__dirname + '/public/view/welcome.html');
+});
 
 http.listen(3000, function(){
   console.log('MathLab is listening on port 3000');
