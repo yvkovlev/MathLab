@@ -2,16 +2,15 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-  fullName: String,
-  login: String,
+  fullname: String,
   email: String,
   password: String,
   phone: String,
-  sex: Boolean, // 0 - Male, 1 - Female
-  grade: Number,
+  sex: String, // 0 - Male, 1 - Female
+  grade: String,
   confirmed: Boolean
 });
 
-var user = mongoose.model('user', userSchema);
+var User = mongoose.model('User', userSchema);
 
-module.exports = user;
+module.exports = User;

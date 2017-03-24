@@ -21,7 +21,7 @@
     <!-- Scripts -->
     <script src="js/jquery.min.js"></script>
     <script src="js/validator.js"></script>
-
+    <script src="js/sign-in.js"></script>
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <div class="form">
-                    <form data-toggle="validator" role="form">
+                    <form data-toggle="validator" role="form" onsubmit="return false">
                         <div class="form-group">
                             <label for="login">Ваш логин или E-mail:</label>
                             <input type="text" class="form-control" id="login" required>
@@ -83,7 +83,7 @@
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block btn-md">Войти</button>
+                            <button type="submit" class="btn btn-primary btn-block btn-md" id="submit">Войти</button>
                         </div>
                     </form>
                 </div>
