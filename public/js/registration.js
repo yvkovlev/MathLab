@@ -1,18 +1,30 @@
 $(document).ready(function() {
   $("#submit-1").on("click", function(){
     if (!($("#submit-1").hasClass('disabled'))) {
-      realHeight();
-      $("#form-1").hide();
-      $(".loader").show();
-      setTimeout(function() {
-        $(".loader").hide();
-        $("#form-2").show();
-        $("#page-1").addClass("disabled-page");
-        $("#page-2").removeClass("disabled-page");
-        $(".forms").css({height: "auto"});
-        formPaginationProgress();
-      }, 500);
-      return false;
+      $.ajax({
+        url: 'api/registration',
+        type: 'put',
+        data: {fullname: $('#login').val(), email: $('#email').val(), password: $('#password').val(), phone: $('#tel').val(), sex: $('#sex option:selected').text(), grade: $('#grade option:selected').text()},
+        success: function(response){
+          if (response == 'Fail') {
+            alert("Такой логин уже занят");
+          }
+          else {
+            realHeight();
+            $("#form-1").hide();
+            $(".loader").show();
+            setTimeout(function() {
+              $(".loader").hide();
+              $("#form-2").show();
+              $("#page-1").addClass("disabled-page");
+              $("#page-2").removeClass("disabled-page");
+              $(".forms").css({height: "auto"});
+              formPaginationProgress();
+            }, 500);
+            return false;
+          }
+        }
+      });
     }
   });
   $("#submit-2").on("click", function(){
@@ -44,7 +56,7 @@ $(document).ready(function() {
       formPaginationProgress();
     }, 500);
     return false;
-  })
+  });
 })
 
 function realHeight() {
