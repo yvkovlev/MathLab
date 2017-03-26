@@ -85,6 +85,9 @@ app.get('/course', function (req, res){
 app.get('/request', function (req, res){
   res.sendFile(__dirname + '/public/view/request.html');
 });
+app.get('/welcome', function (req, res){
+  res.sendFile(__dirname + '/public/view/welcome.html');
+});
 app.get('/cabinet/:id', function (req, res){
   if (req.user._id == req.params.id) res.sendFile(__dirname + '/public/view/cabinet.html');
   else res.send('Fuck off');
