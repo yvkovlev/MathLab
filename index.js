@@ -138,6 +138,10 @@ app.post('/api/login', function (req, res){
   });
 });
 
+app.post('/api/userInfo', function (req, res){
+  res.send({fullname: req.user.fullname, email: req.user.email, phone: req.user.phone, sex: req.user.sex, grade: req.user.grade, confirmed: req.user.confirmed});
+});
+
 http.listen(3000, function(){
   console.log('MathLab is listening on port 3000');
 });
