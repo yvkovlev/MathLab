@@ -13,5 +13,4 @@ $(document).ready(function() {
     disableResize: true,
     scroll: 'bottom' 
   });
-
-})
+});
