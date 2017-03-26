@@ -7,12 +7,15 @@ $(document).ready(function() {
         data: {fullname: $('#login').val(), email: $('#email').val(), password: $('#password').val(), phone: $('#tel').val(), sex: $('#sex option:selected').text(), grade: $('#grade option:selected').text()},
         success: function(response){
           if (response == 'Fail') {
-            alert("Такой логин уже занят");
+            $(".error-alerts").html("<div class='alert alert-danger alert-dismissable'>" +
+                                      "<strong>Ошибка!</strong> Пользователь с таким E-mail уже зарегистрирован." +
+                                    "</div>");
           }
           else {
             realHeight();
             $("#form-1").hide();
             $(".loader").show();
+            $(".error-alerts").html("");
             setTimeout(function() {
               $(".loader").hide();
               $("#form-2").show();
@@ -56,6 +59,13 @@ $(document).ready(function() {
       formPaginationProgress();
     }, 500);
     return false;
+  });
+  $("#show-password").mousedown(function(){
+    $("#password").attr('type','text');
+  }).mouseup(function(){
+    $("#password").attr('type','password');
+  }).mouseout(function(){
+    $("#password").attr('type','password');
   });
 })
 

@@ -2,6 +2,7 @@ function setUserInfo(userInfo) {
   $('#fullname').html(userInfo.fullname);
   $('#email').html(userInfo.email);
   $('#phone').html(userInfo.phone);
+  $('#grade').html(userInfo.grade);
 }
 
 $(document).ready(function() { 
