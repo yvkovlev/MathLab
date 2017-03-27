@@ -18,4 +18,11 @@ $(document).ready(function() {
     });
   }
   else setUserInfo(JSON.parse(sessionStorage.getItem("userInfo")));
+  $("#log-out").on("click", function(){
+    sessionStorage.clear();
+    $.ajax({
+      url: '/api/log-out',
+      method: 'post'
+    });
+  });
 });
