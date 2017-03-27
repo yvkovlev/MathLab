@@ -70,8 +70,21 @@ passport.use(new LocalStrategy(
     });
   }
 ));
+app.use(function (req, res, next){
+  if (req.url.split('/')[1] == 'api') next();
+  else {
+    if (!req.user) {
+      if (req.url == '/' || req.url == '/sign-in' || req.url == '/sign-up') next();
+      else res.redirect('/sign-in');
+    }
+    else {
+      if (req.url == '/sign-in' || req.url == '/sign-up' || req.url == '/') res.redirect('/cabinet/' + req.user._id);
+      else next();
+    }
+  }
+});
 app.get('/', function (req, res){
-  res.sendFile(__dirname + '/public/view/cabinet.html');
+  res.sendFile(__dirname + '/public/view/welcome.html');
 });
 app.get('/sign-in', function (req, res){
 	res.sendFile(__dirname + '/public/view/sign-in.html');
@@ -84,9 +97,6 @@ app.get('/course', function (req, res){
 });
 app.get('/request', function (req, res){
   res.sendFile(__dirname + '/public/view/request.html');
-});
-app.get('/welcome', function (req, res){
-  res.sendFile(__dirname + '/public/view/welcome.html');
 });
 app.get('/cabinet/:id', function (req, res){
   if (req.user._id == req.params.id) res.sendFile(__dirname + '/public/view/cabinet.html');
@@ -112,7 +122,7 @@ app.put('/api/registration', function (req, res, next){
           if(err) throw err;
           req.logIn(newUser, function(err){
             if (err) { return next(err); }
-            res.send('Success');
+            res.send({id: req.user._id, email: req.user.email});
           });
         }); 
       });
@@ -135,6 +145,12 @@ app.post('/api/login', function (req, res){
         }
       });
     }
+  });
+});
+
+app.post('/api/log-out', function (req, res){
+  req.session.destroy(function (err) {
+    res.redirect('/sign-in');
   });
 });
 

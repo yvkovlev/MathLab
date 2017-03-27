@@ -16,6 +16,8 @@ $(document).ready(function() {
             $("#form-1").hide();
             $(".loader").show();
             $(".error-alerts").html("");
+            $("#cabinet-link").attr("href", "/cabinet/" + response.id);
+            $("#user-email").html(response.email);
             setTimeout(function() {
               $(".loader").hide();
               $("#form-2").show();
