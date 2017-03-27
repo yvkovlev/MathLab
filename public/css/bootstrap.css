@@ -6587,7 +6587,11 @@ button.close {
   border: 0;
 }
 .hidden {
-  display: none !important;
+  opacity: 0;
+}
+
+.visible {
+  opacity: 1;
 }
 .affix {
   position: fixed;
