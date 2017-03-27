@@ -532,7 +532,11 @@ footer {
   margin: 0;
 }
 
-
+.error-alerts {
+  position: absolute;
+  top: 60px;
+  left: 7px;
+}
 
 
 

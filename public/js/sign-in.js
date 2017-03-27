@@ -6,10 +6,11 @@ $(document).ready(function() {
       data: {login: $('#login').val(), password: $('#password').val()},
       success: function(response){
         if (response == 'Fail') {
-          alert("Неверный логин или пароль!");
+          $(".error-alerts").html("<div class='alert alert-danger alert-dismissable'>" +
+                                      "<strong>Ошибка!</strong> Неверный e-mail или пароль." +
+                                    "</div>");
         }
         else {
-          alert();
           window.location.href = "/cabinet/" + response;
         }
       }

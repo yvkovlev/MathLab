@@ -17,6 +17,7 @@
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link href="css/animate.css" rel="stylesheet">
+    <link href="css/formhelpers.min.css" rel="stylesheet">
     <link href="css/default.css" rel="stylesheet">
 
     <!-- Scripts -->
@@ -55,6 +56,7 @@
             </ul>
         </div>
     </nav>
+    <div class="error-alerts"></div>
     <div class="container main-content">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -100,14 +102,14 @@
                                     <div class="input-group">
                                         <input type="password" data-minlength="6"  class="form-control" id="password" placeholder="Не менее 6 символов" data-error="К сожалению, Ваш пароль слишком короткий" required>
                                         <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                            <button class="btn btn-default" type="button" id="show-password"><i class="fa fa-eye" aria-hidden="true"></i></button>
                                         </span>
                                     </div>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="tel">Ваш телефон:</label>
-                                    <input type="tel" class="form-control" id="tel" required>
+                                    <input type="tel" class="form-control bfh-phone" id="tel" data-format="+7 (ddd) ddd-dd-dd" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
@@ -232,7 +234,7 @@
                         <div id="form-4" class="hide-form animated">
                             <div class="alert alert-success">
                                 <h4>Поздравляем с успешной регистрацией на портале MathLab.kz!</h4>
-                                <h5>Для начала работы Вы можете перейти в <a href="/" class="alert-link">личный кабинет</a>или сразу <a href="/request" class="alert-link">подать заявку</a> на обучение.</h5>
+                                <h5>Для начала работы Вы можете перейти в <a href="/" class="alert-link">личный кабинет</a> или сразу <a href="/request" class="alert-link">подать заявку</a> на обучение.</h5>
                             </div>
                         </div>
                         <div class="loader"></div>
@@ -264,5 +266,6 @@
 
     <script src="js/bootstrap.min.js"></script>
     <script src="js/registration.js"></script>
+    <script src="js/formhelpers.min.js"></script>
 </body>
 </html>
