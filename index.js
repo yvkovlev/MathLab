@@ -154,7 +154,10 @@ app.post('/api/log-out', function (req, res){
   });
 });
 
-User.find({}, function(err, data){ console.log(data); });
+  User.find({_id: { $gte: mongoose.Types.ObjectId("000000000000")}}, function(err, data){ console.log(data);
+  /*if (data[0]._id > data[1]._id) console.log('ok');
+  else console.log('no');*/
+ });
 
 app.post('/api/userInfo', function (req, res){
   res.send({fullname: req.user.fullname, email: req.user.email, phone: req.user.phone, sex: req.user.sex, grade: req.user.grade, confirmed: req.user.confirmed});
