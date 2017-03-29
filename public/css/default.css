@@ -458,7 +458,7 @@ footer {
 }
 
 .landing-head {
-  padding-top: 70px;
+  padding-top: 120px;
   padding-bottom: 40px;
   background-image: -webkit-linear-gradient(45deg, #00537e, #136d7e 33%, #3aa17e);
   background-image: linear-gradient(45deg, #00537e, #136d7e 33%, #3aa17e);
@@ -538,5 +538,34 @@ footer {
   left: 7px;
 }
 
+.kv-avatar .file-preview-frame,.kv-avatar .file-preview-frame:hover {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  text-align: center;
+}
+.kv-avatar .file-input {
+  margin: auto;
+}
 
+.focus-none {
+  outline: none !important;
+  color: #354251 !important;
+  background-color: #fff !important;
+  border-color: #DCE1E8 !important;
+}
 
+.focus-none.active {
+  outline: none !important;
+  color: #354251 !important;
+  background-color: #e6e6e6 !important;
+  border-color: #adadad !important;
+}
+
+.focus-none.focus {
+  outline: none !important;
+  color: #354251 !important;
+  background-color: #e6e6e6 !important;
+  border-color: #adadad !important;
+}
