@@ -1,5 +1,7 @@
 var express = require('express');
 var app = express();
+var subdomain = require('express-subdomain');
+var router = express.Router();
 var http = require('http').Server(app);
 var path = require('path');
 var io = require('socket.io')(http);
@@ -30,6 +32,7 @@ mongoose.connect('mongodb://localhost:27017/MathLab');
     }
 });*/
 //var upload = multer({ storage: storage });
+app.use(subdomain('admin', router));
 app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(cookieParser());
@@ -83,6 +86,7 @@ app.use(function (req, res, next){
     }
   }
 });
+
 app.get('/', function (req, res){
   res.sendFile(__dirname + '/public/view/welcome.html');
 });
@@ -141,10 +145,10 @@ app.post('/api/login', function (req, res){
       bcrypt.compare(req.body.password, user.password).then(function (resp){
         if (!resp) res.send('Fail');
         else {
-          req.logIn(user, function(err){
-            if (err) { return next(err); }
-            res.send(req.user._id);
-          });
+            req.logIn(user, function(err){
+              if (err) { return next(err); }
+              res.send(req.user._id);
+            });
         }
       });
     }
@@ -163,6 +167,11 @@ app.post('/api/userInfo', function (req, res){
   res.send({fullname: req.user.fullname, email: req.user.email, phone: req.user.phone, sex: req.user.sex, grade: req.user.grade, confirmed: req.user.confirmed});
 });
 
-http.listen(3000, function(){
+router.get('/', function (req, res) {
+  console.log(req.user);
+  res.send('Welcome to our admin panel!');
+});
+
+http.listen(80, function(){
   console.log('MathLab is listening on port 3000');
 });
