@@ -22,7 +22,7 @@ var flash = require('connect-flash');
 var fs = require('fs');
 
 var User = require('./models/user');
-mongoose.connect('mongodb://localhost:27017/MathLab');
+mongoose.connect('mongodb://mathlab.kz:27017/MathLab');
 /*var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/uploads/')
@@ -34,6 +34,7 @@ mongoose.connect('mongodb://localhost:27017/MathLab');
 //var upload = multer({ storage: storage });
 app.use(subdomain('admin', router));
 app.use(express.static('public'));
+router.use(express.static('admin'));
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(session({
@@ -168,8 +169,10 @@ app.post('/api/userInfo', function (req, res){
 });
 
 router.get('/', function (req, res) {
-  console.log(req.user);
-  res.send('Welcome to our admin panel!');
+  res.sendFile(__dirname + '/admin/view/index.html');
+});
+router.get('/teacher-form', function (req, res) {
+  res.sendFile(__dirname + '/admin/view/teacher-form.html');
 });
 
 http.listen(80, function(){
