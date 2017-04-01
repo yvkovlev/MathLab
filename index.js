@@ -161,7 +161,7 @@ app.post('/api/log-out', function (req, res){
   });
 });
 
-User.find({}, function(err, data){ console.log(data); });
+/*User.find({}, function(err, data){ console.log(data); });*/
 
 app.post('/api/userInfo', function (req, res){
   res.send({fullname: req.user.fullname, email: req.user.email, phone: req.user.phone, sex: req.user.sex, grade: req.user.grade, confirmed: req.user.confirmed});
