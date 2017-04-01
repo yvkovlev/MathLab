@@ -56,7 +56,7 @@
             </ul>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Личный кабинет</a></li>
-                <li><a href="#">Наши преподаватели</a></li>
+                <li><a href="/teachers">Наши преподаватели</a></li>
                 <li><a href="/request">Подать заявку на обучение</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -77,27 +77,12 @@
                     </form>
                     <h6>Ваша фотография будет видна только Вам и Вашим учителям.</h6>
                 </div>
-                <h3>Пароль</h3>
-                <div class="base">
-                    <form data-toggle="validator" role="form" onsubmit="return false">
-                        <div class="form-group">
-                            <label for="password">Старый пароль:</label>
-                            <input type="password" data-minlength="6"  class="form-control" id="password" data-error="" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Новый пароль:</label>
-                            <div class="input-group">
-                                <input type="password" data-minlength="6"  class="form-control" id="password" placeholder="Не менее 6 символов" data-error="К сожалению, Ваш пароль слишком короткий" required>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" id="show-password"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                                </span>
-                            </div>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block btn-md" id="submit-1">Сохранить пароль</button>
-                        </div>
-                    </form>
+                <div class="base main-content">
+                    <ul class="list-links">
+                        <li><a href="#">Частые вопросы</a></li>
+                        <li><a href="#">Техническая поддержка</a></li>
+                        <li><a href="#">Условия пользования</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="col-md-8">
@@ -141,6 +126,28 @@
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block btn-md" id="save-settings">Сохранить личные данные</button>
+                        </div>
+                    </form>
+                </div>
+                <h3>Ваш пароль</h3>
+                <div class="base">
+                    <form data-toggle="validator" role="form" onsubmit="return false">
+                        <div class="form-group">
+                            <label for="password">Старый пароль:</label>
+                            <input type="password" data-minlength="6"  class="form-control" id="password" data-error="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Новый пароль:</label>
+                            <div class="input-group">
+                                <input type="password" data-minlength="6"  class="form-control" id="password" placeholder="Не менее 6 символов" data-error="К сожалению, Ваш пароль слишком короткий" required>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" id="show-password"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                </span>
+                            </div>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block btn-md" id="submit-1">Сохранить пароль</button>
                         </div>
                     </form>
                 </div>
