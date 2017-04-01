@@ -244,11 +244,11 @@ footer {
    width: 100px; 
 }
 
-.teaher-profile img {
+.teacher-profile img {
    width: 100px; 
 }
 
-.teaher-profile p {
+.teacher-profile p {
    margin-top: 10px; 
 }
 
@@ -258,7 +258,7 @@ footer {
     border-bottom: 1px solid #dce1e8;
 }
 
-.profile-info h6, .teaher-profile h6 {
+.profile-info h6, .teacher-profile h6 {
     color: #7b7b7b;
 }
 
@@ -569,3 +569,33 @@ footer {
   background-color: #e6e6e6 !important;
   border-color: #adadad !important;
 }
+
+.teachers-list tr {
+  cursor: pointer !important;
+}
+
+.teachers-list td {
+  vertical-align: baseline !important;
+}
+
+.teachers-list-img {
+  width: 40px;
+}
+
+.list-links {
+  padding-left: 0;
+  margin-bottom: 0 !important;
+}
+
+.list-links li {
+  list-style-type: none;
+  text-align: center;
+  font-size: 13px;
+}
+
+.list-links li a {
+  color: #4e6982;
+  line-height: 1.5;
+}
+
+.all-teachers-link {color: #7b7b7b !important;font-size: 12px;font-weight: 300;}
