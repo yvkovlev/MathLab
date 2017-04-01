@@ -184,6 +184,9 @@ router.get('/students', function (req, res) {
 router.get('/teachers', function (req, res) {
   res.sendFile(__dirname + '/admin/view/students.html');
 });
+router.get('/bids', function (req, res) {
+  res.sendFile(__dirname + '/admin/view/bids.html');
+});
 
 http.listen(80, function(){
   console.log('MathLab is listening on port 3000');
