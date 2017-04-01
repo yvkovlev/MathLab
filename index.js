@@ -75,6 +75,7 @@ passport.use(new LocalStrategy(
   }
 ));
 app.use(function (req, res, next){
+  console.log('adsasd');
   if (req.url.split('/')[1] == 'api') next();
   else {
     if (!req.user) {
@@ -105,9 +106,6 @@ app.get('/request', function (req, res){
 });
 app.get('/settings', function (req, res){
   res.sendFile(__dirname + '/public/view/settings.html');
-});
-app.get('/teachers', function (req, res){
-  res.sendFile(__dirname + '/public/view/teachers.html');
 });
 app.get('/cabinet/:id', function (req, res){
   if (req.user._id == req.params.id) res.sendFile(__dirname + '/public/view/cabinet.html');
@@ -176,6 +174,15 @@ router.get('/', function (req, res) {
 });
 router.get('/teacher-form', function (req, res) {
   res.sendFile(__dirname + '/admin/view/teacher-form.html');
+});
+router.get('/sign-in', function (req, res) {
+  res.sendFile(__dirname + '/admin/view/authorization.html');
+});
+router.get('/students', function (req, res) {
+  res.sendFile(__dirname + '/admin/view/students.html');
+});
+router.get('/teachers', function (req, res) {
+  res.sendFile(__dirname + '/admin/view/students.html');
 });
 
 http.listen(80, function(){
