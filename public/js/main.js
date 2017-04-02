@@ -25,4 +25,20 @@ $(document).ready(function() {
       method: 'post'
     });
   });
+  $("#req-submit").on("click", function(){
+    var prefDays = "";
+    if ($('#monday')[0].checked) prefDays += "Пн ";
+    if ($('#tuesday')[0].checked) prefDays += "Вт ";
+    if ($('#wednesday')[0].checked) prefDays += "Ср ";
+    if ($('#thursday')[0].checked) prefDays += "Чт ";
+    if ($('#friday')[0].checked) prefDays += "Пт ";
+    if ($('#saturday')[0].checked) prefDays += "Сб ";
+    if ($('#sunday')[0].checked) prefDays += "Вс ";
+    /*$.ajax({
+      url: "putBid",
+      method: "put",
+      data: {subject: $('#subject option:selected').text(), },
+      success: function(response)
+    });*/
+  });
 });

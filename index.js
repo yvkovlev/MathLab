@@ -227,7 +227,7 @@ router.post('/api/login', function (req, res){
     if (!user) res.send('Fail');
     else {
       bcrypt.compare(req.body.password, user.password).then(function (resp){
-        if (!resp /*|| user.priority != 2*/) res.send('Fail');
+        if (!resp /* || user.priority != 2*/) res.send('Fail');
         else {
             req.logIn(user, function(err){
               if (err) { return next(err); }
