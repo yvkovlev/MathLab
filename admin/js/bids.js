@@ -1,4 +1,4 @@
-function loadTeachers(lastID) {
+function loadBids(lastID) {
   $.ajax({
     url: 'api/loadBids',
     method: 'post',
@@ -34,8 +34,8 @@ $(document).ready(function() {
     $('#anchor').viewportChecker({
         offset: 0,
         callbackFunction: function() {
-        	if (!$('tbody tr').length) loadTeachers("000000000000000000000000");
-          else loadTeachers($("tbody tr:last-child").attr('id'));
+        	if (!$('tbody tr').length) loadBids("000000000000000000000000");
+          else loadBids($("tbody tr:last-child").attr('id'));
         }
     });
 });
