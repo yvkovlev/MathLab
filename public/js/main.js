@@ -34,11 +34,13 @@ $(document).ready(function() {
     if ($('#friday')[0].checked) prefDays += "Пт ";
     if ($('#saturday')[0].checked) prefDays += "Сб ";
     if ($('#sunday')[0].checked) prefDays += "Вс ";
-    /*$.ajax({
-      url: "putBid",
+    $.ajax({
+      url: "api/putBid",
       method: "put",
-      data: {subject: $('#subject option:selected').text(), },
-      success: function(response)
-    });*/
+      data: {subject: $('#subject option:selected').text(), prefDays: prefDays, time: $(".bfh-timepicker input").val()},
+      success: function(response) {
+        console.log(response);
+      }
+    });
   });
 });

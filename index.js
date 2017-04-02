@@ -22,6 +22,8 @@ var flash = require('connect-flash');
 var fs = require('fs');
 
 var User = require('./models/user');
+var bid = require('./models/bid');
+
 mongoose.connect('mongodb://mathlab.kz:27017/MathLab');
 /*var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -158,6 +160,24 @@ app.post('/api/login', function (req, res){
   });
 });
 
+app.put('/api/putBid', function (req, res){
+  console.log(req.body);
+  var newBid = bid({
+    student: req.user.fullname,
+    studentId: req.user._id,
+    subject: req.body.subject,
+    phone: req.user.phone,
+    prefDays: req.body.prefDays,
+    prefTime: req.body.prefTime,
+    date: Date.now(),
+    status: "Pending"
+  });
+  newBid.save(function(err){
+    if (err) throw err;
+    res.send('Success');
+  });
+});
+
 app.post('/api/log-out', function (req, res){
   req.session.destroy(function (err) {
     res.redirect('/sign-in');
@@ -215,7 +235,7 @@ router.get('/students', function (req, res) {
   res.sendFile(__dirname + '/admin/view/students.html');
 });
 router.get('/teachers', function (req, res) {
-  res.sendFile(__dirname + '/admin/view/students.html');
+  res.sendFile(__dirname + '/admin/view/teachers.html');
 });
 router.get('/bids', function (req, res) {
   res.sendFile(__dirname + '/admin/view/bids.html');
