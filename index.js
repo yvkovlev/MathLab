@@ -215,7 +215,7 @@ router.get('/students', function (req, res) {
   res.sendFile(__dirname + '/admin/view/students.html');
 });
 router.get('/teachers', function (req, res) {
-  res.sendFile(__dirname + '/admin/view/students.html');
+  res.sendFile(__dirname + '/admin/view/teachers.html');
 });
 router.get('/bids', function (req, res) {
   res.sendFile(__dirname + '/admin/view/bids.html');
