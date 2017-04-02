@@ -7,10 +7,9 @@ $(document).ready(function() {
       success: function(response){
         console.log(response);
         if (response == 'Fail') {
-          /*$(".error-alerts").html("<div class='alert alert-danger alert-dismissable'>" +
+          $(".error-alerts").html("<div class='alert alert-danger alert-dismissable'>" +
                                       "<strong>Ошибка!</strong> Неверный e-mail или пароль." +
-                                    "</div>");*/
-          alert();
+                                    "</div>");
         }
         else {
           window.location.href = "/";
