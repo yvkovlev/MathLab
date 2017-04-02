@@ -10,5 +10,10 @@ function loadTeachers(lastID) {
 }
 
 $(document).ready(function() {
-
+    $('#anchor').viewportChecker({
+        offset: 0,
+        callbackFunction: function() {
+        	alert("Yeap!");
+        }
+    });
 });
