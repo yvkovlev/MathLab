@@ -9,7 +9,8 @@ var userSchema = new Schema({
   sex: String, // 0 - Male, 1 - Female
   grade: String,
   confirmed: Boolean,
-  priority: Number // 0 - student, 1 - teacher, 2 - admin
+  priority: Number, // 0 - student, 1 - teacher, 2 - admin
+  subject: String
 });
 
 var User = mongoose.model('User', userSchema);
