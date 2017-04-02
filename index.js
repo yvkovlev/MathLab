@@ -160,6 +160,32 @@ app.post('/api/login', function (req, res){
   });
 });
 
+app.put('/api/reg-teacher', function (req, res, next){
+  User.findOne({email: req.body.email}, function(err, user){
+    if (user) res.send('Fail');
+    else {
+      bcrypt.hash(req.body.password, 10).then(function(hash) {
+        var newUser = User({
+          _id: new mongoose.Types.ObjectId,
+          fullname: req.body.fullname,
+          email: req.body.email,
+          password: hash,
+          phone: req.body.phone,
+          sex: req.body.sex,
+          grade: req.body.grade,
+          confirmed: false,
+          priority: 1,
+          subject: req.body.subject
+        });
+        newUser.save(function(err){
+          if(err) throw err;
+          res.send('Success');
+        }); 
+      });
+    }
+  });
+});
+
 app.put('/api/putBid', function (req, res){
   console.log(req.body);
   var newBid = bid({
@@ -172,6 +198,7 @@ app.put('/api/putBid', function (req, res){
     date: Date.now(),
     status: "Pending"
   });
+  console.log(newBid);
   newBid.save(function(err){
     if (err) throw err;
     res.send('Success');
@@ -184,7 +211,7 @@ app.post('/api/log-out', function (req, res){
   });
 });
 
-User.find({}, function(err, data){ console.log(data); });
+/*User.find({}, function(err, data){ console.log(data); });*/
 
 app.post('/api/userInfo', function (req, res){
   res.send({fullname: req.user.fullname, email: req.user.email, phone: req.user.phone, sex: req.user.sex, grade: req.user.grade, confirmed: req.user.confirmed});
@@ -259,30 +286,16 @@ router.post('/api/login', function (req, res){
   });
 });
 
-app.put('/api/reg-teacher', function (req, res, next){
-  User.findOne({email: req.body.email}, function(err, user){
-    if (user) res.send('Fail');
-    else {
-      bcrypt.hash(req.body.password, 10).then(function(hash) {
-        var newUser = User({
-          _id: new mongoose.Types.ObjectId,
-          fullname: req.body.fullname,
-          email: req.body.email,
-          password: hash,
-          phone: req.body.phone,
-          sex: req.body.sex,
-          grade: req.body.grade,
-          confirmed: false,
-          priority: 1,
-          subject: req.body.subject
-        });
-        newUser.save(function(err){
-          if(err) throw err;
-          res.send('Success');
-        }); 
-      });
-    }
-  });
+router.post('/api/loadBids', function (req, res){
+  bid.
+    find({
+      _id: {$gt: mongoose.Types.ObjectId(req.body.lastID)}
+    }).
+    limit(5).
+    exec(function(err, data){
+      if (err) throw err;
+      res.send(data);
+    });
 });
 
 router.post('/api/log-out', function (req, res){
