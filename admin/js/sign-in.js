@@ -3,7 +3,7 @@ $(document).ready(function() {
     $.ajax({
       url: 'api/login',
       method: 'post',
-      data: {login: 'ter@mail.ru'/*$('#login').val()*/, password: '123123'/*$('#password').val()*/},
+      data: {login: $('#login').val(), password: $('#password').val()},
       success: function(response){
         console.log(response);
         if (response == 'Fail') {
