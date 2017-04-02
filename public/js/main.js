@@ -37,7 +37,7 @@ $(document).ready(function() {
     $.ajax({
       url: "api/putBid",
       method: "put",
-      data: {subject: $('#subject option:selected').text(), prefDays: prefDays, time: $(".bfh-timepicker input").val()},
+      data: {subject: $('#subject option:selected').text(), prefDays: prefDays, prefTime: $(".bfh-timepicker input").val()},
       success: function(response) {
         console.log(response);
       }
