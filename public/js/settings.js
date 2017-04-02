@@ -1,4 +1,8 @@
 $(document).ready(function() {
+  /*var userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+  $('#login').attr('placeholder', userInfo.fullname);
+  $('#email').attr('placeholder', userInfo.email);
+  $('#phone').attr('placeholder', userInfo.phone);*/
   $("#avatar").fileinput({
     overwriteInitial: true,
     maxFileSize: 1500,

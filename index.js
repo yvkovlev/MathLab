@@ -187,7 +187,6 @@ app.put('/api/reg-teacher', function (req, res, next){
 });
 
 app.put('/api/putBid', function (req, res){
-  console.log(req.body);
   var newBid = bid({
     student: req.user.fullname,
     studentId: req.user._id,
@@ -198,7 +197,6 @@ app.put('/api/putBid', function (req, res){
     date: Date.now(),
     status: "Pending"
   });
-  console.log(newBid);
   newBid.save(function(err){
     if (err) throw err;
     res.send('Success');
@@ -291,7 +289,34 @@ router.post('/api/loadBids', function (req, res){
     find({
       _id: {$gt: mongoose.Types.ObjectId(req.body.lastID)}
     }).
-    limit(5).
+    select('_id student subject prefDays prefTime phone').
+    limit(10).
+    exec(function(err, data){
+      if (err) throw err;
+      res.send(data);
+    });
+});
+
+router.post('/api/loadTeachers', function (req, res){
+  User.
+    find({
+      $and: [ { _id: {$gt: mongoose.Types.ObjectId(req.body.lastID)} }, { priority: 1 } ]
+    }).
+    select('_id email fullname phone sex subject').
+    limit(10).
+    exec(function(err, data){
+      if (err) throw err;
+      res.send(data);
+    });
+});
+
+router.post('/api/loadStudents', function (req, res){
+  User.
+    find({
+      $and: [ { _id: {$gt: mongoose.Types.ObjectId(req.body.lastID)} }, { priority: 0 } ]
+    }).
+    select('_id email fullname phone sex grade confirmed').
+    limit(10).
     exec(function(err, data){
       if (err) throw err;
       res.send(data);
@@ -305,5 +330,5 @@ router.post('/api/log-out', function (req, res){
 });
 
 http.listen(80, function(){
-  console.log('MathLab is listening on port 3000');
+  console.log('MathLab is listening on port 80');
 });
