@@ -34,7 +34,6 @@ mongoose.connect('mongodb://mathlab.kz:27017/MathLab');
 //var upload = multer({ storage: storage });
 app.use(subdomain('admin', router));
 app.use(express.static('public'));
-router.use(express.static('admin'));
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(session({
@@ -44,7 +43,6 @@ app.use(session({
 	}),
 	cookie: {httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 7}
 }));
-app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
@@ -75,7 +73,6 @@ passport.use(new LocalStrategy(
   }
 ));
 app.use(function (req, res, next){
-  console.log('adsasd');
   if (req.url.split('/')[1] == 'api') next();
   else {
     if (!req.user) {
@@ -107,6 +104,9 @@ app.get('/request', function (req, res){
 app.get('/settings', function (req, res){
   res.sendFile(__dirname + '/public/view/settings.html');
 });
+app.get('/teachers', function (req, res) {
+  res.sendFile(__dirname + '/public/view/teachers.html');
+});
 app.get('/cabinet/:id', function (req, res){
   if (req.user._id == req.params.id) res.sendFile(__dirname + '/public/view/cabinet.html');
   else res.send('Fuck off');
@@ -125,7 +125,8 @@ app.put('/api/registration', function (req, res, next){
           phone: req.body.phone,
           sex: req.body.sex,
           grade: req.body.grade,
-          confirmed: false
+          confirmed: false,
+          priority: 0
         });
         newUser.save(function(err){
           if(err) throw err;
@@ -163,10 +164,42 @@ app.post('/api/log-out', function (req, res){
   });
 });
 
-/*User.find({}, function(err, data){ console.log(data); });*/
+User.find({}, function(err, data){ console.log(data); });
 
 app.post('/api/userInfo', function (req, res){
   res.send({fullname: req.user.fullname, email: req.user.email, phone: req.user.phone, sex: req.user.sex, grade: req.user.grade, confirmed: req.user.confirmed});
+});
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------
+router.use(express.static('admin'));
+router.use(morgan('dev'));
+router.use(cookieParser());
+router.use(session({
+  secret: "Zs&2ls)).@df",
+  store: new MongoStore ({
+    mongooseConnection: mongoose.connection
+  }),
+  cookie: {httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 7}
+}));
+router.use(passport.initialize());
+router.use(passport.session());
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+router.use(function (req, res, next){
+  if (req.url.split('/')[1] == 'api') next();
+  else {
+    if (!req.user) {
+      if (req.url == '/sign-in') next();
+      else res.redirect('/sign-in');
+    }
+    else {
+      if (req.url == '/sign-in') res.redirect('/');
+      else next();
+    }
+  }
 });
 
 router.get('/', function (req, res) {
@@ -183,6 +216,56 @@ router.get('/students', function (req, res) {
 });
 router.get('/teachers', function (req, res) {
   res.sendFile(__dirname + '/admin/view/students.html');
+});
+
+router.post('/api/login', function (req, res){
+  User.findOne({email: req.body.login}, function(err, user) {
+    if (err) throw err;
+    if (!user) res.send('Fail');
+    else {
+      bcrypt.compare(req.body.password, user.password).then(function (resp){
+        if (!resp || user.priority != 2) res.send('Fail');
+        else {
+            req.logIn(user, function(err){
+              if (err) { return next(err); }
+              res.send(req.user._id);
+            });
+        }
+      });
+    }
+  });
+});
+
+app.put('/api/reg-teacher', function (req, res, next){
+  User.findOne({email: req.body.email}, function(err, user){
+    if (user) res.send('Fail');
+    else {
+      bcrypt.hash(req.body.password, 10).then(function(hash) {
+        var newUser = User({
+          _id: new mongoose.Types.ObjectId,
+          fullname: req.body.fullname,
+          email: req.body.email,
+          password: hash,
+          phone: req.body.phone,
+          sex: req.body.sex,
+          grade: req.body.grade,
+          confirmed: false,
+          priority: 1,
+          subject: req.body.subject
+        });
+        newUser.save(function(err){
+          if(err) throw err;
+          res.send('Success');
+        }); 
+      });
+    }
+  });
+});
+
+router.post('/api/log-out', function (req, res){
+  req.session.destroy(function (err) {
+    res.redirect('/sign-in');
+  });
 });
 
 http.listen(80, function(){
