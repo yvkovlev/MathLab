@@ -22,6 +22,7 @@
 
     <!-- Scripts -->
     <script src="js/jquery.min.js"></script>
+    <script src="js/main.js"></script>
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -97,25 +98,25 @@
                                                 <label for="days">Желаемые дни уроков:</label>
                                                 <div class="btn-group btn-group-justified" data-toggle="buttons">
                                                     <label class="btn btn-default focus-none">
-                                                        <input type="checkbox" autocomplete="off"> Пн
+                                                        <input type="checkbox" autocomplete="off" id="monday"> Пн
                                                     </label>
                                                     <label class="btn btn-default focus-none">
-                                                        <input type="checkbox" autocomplete="off"> Вт
+                                                        <input type="checkbox" autocomplete="off" id="tuesday"> Вт
                                                     </label>
                                                     <label class="btn btn-default focus-none">
-                                                        <input type="checkbox" autocomplete="off"> Ср
+                                                        <input type="checkbox" autocomplete="off" id="wednesday"> Ср
                                                     </label>
                                                     <label class="btn btn-default focus-none">
-                                                        <input type="checkbox" autocomplete="off"> Чт
+                                                        <input type="checkbox" autocomplete="off" id="thursday"> Чт
                                                     </label>
                                                     <label class="btn btn-default focus-none">
-                                                        <input type="checkbox" autocomplete="off"> Пт
+                                                        <input type="checkbox" autocomplete="off" id="friday"> Пт
                                                     </label>
                                                     <label class="btn btn-default focus-none">
-                                                        <input type="checkbox" autocomplete="off"> Сб
+                                                        <input type="checkbox" autocomplete="off" id="saturday"> Сб
                                                     </label>
                                                     <label class="btn btn-default focus-none">
-                                                        <input type="checkbox" autocomplete="off"> Вс
+                                                        <input type="checkbox" autocomplete="off" id="sunday"> Вс
                                                     </label>
                                                 </div>
                                             </div>
@@ -148,7 +149,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-primary btn-block btn-md" id="submit">Отправить</button>
+                                                <button type="submit" class="btn btn-primary btn-block btn-md" id="req-submit">Отправить</button>
                                             </div>
                                         </form>
                                     </div>
