@@ -13,3 +13,10 @@ $(document).ready(function() {
     });
   });
 });
+
+$(document).ready(function() {
+    $('.anchor').viewportChecker({
+        offset: 100
+        callbackFunction: function (){}
+    });
+});
