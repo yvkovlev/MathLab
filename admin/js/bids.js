@@ -9,7 +9,7 @@ function loadBids(lastID) {
         bids +=
           "<tr class='even pointer' id='" + bid._id + "'>" +
             "<td>" + bid.student + "</td>" +
-            "<td>18.04.2017 20:45</td>" +
+            "<td>" + moment(bid.date).format('DD.MM.YY, hh.mm') + "</td>" +
             "<td>" + bid.subject + "</td>" +
             "<td>" + bid.prefDays + "</td>" +
             "<td>" + bid.prefTime + "</td>" +
@@ -33,6 +33,7 @@ function loadBids(lastID) {
 $(document).ready(function() {
     $('#anchor').viewportChecker({
         offset: 0,
+        repeat: true,
         callbackFunction: function() {
         	if (!$('tbody tr').length) loadBids("000000000000000000000000");
           else loadBids($("tbody tr:last-child").attr('id'));
