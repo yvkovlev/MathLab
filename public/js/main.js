@@ -38,8 +38,20 @@ $(document).ready(function() {
       url: "api/putBid",
       method: "put",
       data: {subject: $('#subject option:selected').text(), prefDays: prefDays, prefTime: $(".bfh-timepicker input").val()},
+      beforeLoad: function(){
+        $(".modal-body").html("<img src='images/loading.svg'>");
+      },
       success: function(response) {
         console.log(response);
+        if (response == "Success") {
+          $("#requestModal").modal('hide');
+          $("#succesModal").modal({show: true});
+        }
+        else {
+          $(".modal-body").append("<div class='alert alert-danger'>" +
+                                    "<strong>Произошла ошибка!</strong> Попробуйте позже.</a>." +
+                                  "</div>")
+        }
       }
     });
   });
