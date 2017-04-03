@@ -1,5 +1,6 @@
 var pending = true;
 var firstLoad = true;
+var endList = false;
 var currenTr = $("tbody tr:last-child").attr('id');
 function loadBids(lastID) {
   $.ajax({
@@ -34,7 +35,7 @@ function loadBids(lastID) {
       });
       $('tbody').append(bids);
       if(response[response.length - 1]) currenTr = response[response.length - 1]._id;
-      console.log(response);
+      else endList = true;
     }
   });
 }
@@ -49,7 +50,7 @@ $(document).ready(function() {
           offset: 0,
           repeat: true,
           callbackFunction: function() {
-          	if (!pending) loadBids(currenTr);
+          	if (!pending && !endList) loadBids(currenTr);
           }
       });
     }
