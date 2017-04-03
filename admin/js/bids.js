@@ -1,13 +1,20 @@
+var pending = true;
+var firstLoad = true;
+var currenTr = $("tbody tr:last-child").attr('id');
 function loadBids(lastID) {
   $.ajax({
     url: 'api/loadBids',
     method: 'post',
     data: {lastID: lastID},
+    beforeSend: function() {
+      pending = true;
+    },
     success: function(response) {
       var bids = "";
+      pending = false;
       response.forEach(function(bid, response){
         bids +=
-          "<tr class='even pointer' id='" + bid._id + "'>" +
+          "<tr class='even pointer currenTr' id='" + bid._id + "'>" +
             "<td>" + bid.student + "</td>" +
             "<td>" + moment(bid.date).format('DD.MM.YY, hh.mm') + "</td>" +
             "<td>" + bid.subject + "</td>" +
@@ -26,17 +33,24 @@ function loadBids(lastID) {
           "</tr>";
       });
       $('tbody').append(bids);
+      if(response[response.length - 1]) currenTr = response[response.length - 1]._id;
+      console.log(response);
     }
   });
 }
 
 $(document).ready(function() {
-    $('#anchor').viewportChecker({
-        offset: 0,
-        repeat: true,
-        callbackFunction: function() {
-        	if (!$('tbody tr').length) loadBids("000000000000000000000000");
-          else loadBids($("tbody tr:last-child").attr('id'));
-        }
-    });
+    if (firstLoad) { 
+      loadBids("000000000000000000000000");
+      firstLoad = false;
+    }
+    if (!firstLoad) {
+      $('#anchor').viewportChecker({
+          offset: 0,
+          repeat: true,
+          callbackFunction: function() {
+          	if (!pending) loadBids(currenTr);
+          }
+      });
+    }
 });
