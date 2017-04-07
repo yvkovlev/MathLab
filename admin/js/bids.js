@@ -11,6 +11,7 @@ function loadBids(lastID) {
       pending = true;
     },
     success: function(response) {
+      console.log(response);
       var bids = "";
       pending = false;
       response.forEach(function(bid, response){
