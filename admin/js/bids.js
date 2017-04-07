@@ -4,6 +4,7 @@ function loadBids(lastID) {
     method: 'post',
     data: {lastID: lastID},
     success: function(response) {
+      console.log(response);
       var bids = "";
       response.forEach(function(bid, response){
         bids +=
@@ -26,17 +27,23 @@ function loadBids(lastID) {
           "</tr>";
       });
       $('tbody').append(bids);
+      pending = false;
     }
   });
 }
 
 $(document).ready(function() {
-    $('#anchor').viewportChecker({
-        offset: 0,
-        repeat: true,
-        callbackFunction: function() {
-        	if (!$('tbody tr').length) loadBids("000000000000000000000000");
-          else loadBids($("tbody tr:last-child").attr('id'));
-        }
-    });
+    var pending = false;
+    if (!pending) {
+      $('#anchor').viewportChecker({
+          offset: 0,
+          repeat: true,
+          callbackFunction: function() {
+            console.log(pending);
+            pending = true;
+            if (!$('tbody tr').length) loadBids("000000000000000000000000");
+            else loadBids($("tbody tr:last-child").attr('id'));
+          }
+      });
+    }
 });
