@@ -290,7 +290,7 @@ router.post('/api/loadBids', function (req, res){
       _id: {$gt: mongoose.Types.ObjectId(req.body.lastID)}
     }).
     select('_id student subject prefDays prefTime phone').
-    limit(5).
+    limit(10).
     exec(function(err, data){
       if (err) throw err;
       res.send(data);
@@ -303,7 +303,7 @@ router.post('/api/loadTeachers', function (req, res){
       $and: [ { _id: {$gt: mongoose.Types.ObjectId(req.body.lastID)} }, { priority: 1 } ]
     }).
     select('_id email fullname phone sex subject').
-    limit(5).
+    limit(10).
     exec(function(err, data){
       if (err) throw err;
       res.send(data);
@@ -316,7 +316,7 @@ router.post('/api/loadStudents', function (req, res){
       $and: [ { _id: {$gt: mongoose.Types.ObjectId(req.body.lastID)} }, { priority: 0 } ]
     }).
     select('_id email fullname phone sex grade confirmed').
-    limit(5).
+    limit(10).
     exec(function(err, data){
       if (err) throw err;
       res.send(data);
