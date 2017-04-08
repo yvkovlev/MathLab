@@ -139,12 +139,105 @@
                             </th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="tbody-bids">
                         </tbody>
                       </table>
                       <span id="anchor"></span>
                     </div>
                     <div class="loading text-center"></div>
+                    <!-- Course Adding Modal -->
+                    <div id="courseAddingModal" class="modal fade" role="dialog">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Создание курса</h4>
+                          </div>
+                          <div class="modal-body">
+                            <p>Для того, что бы создать курс между учителем и учеником выберите соответсвуюещего преподавателя для данного ученика.</p>
+                            <div class="container">
+                              <div class="row">
+                                <div class="col-md-4 text-right"><h4>ФИО:</h4></div>
+                                <div class="col-md-8"><h4 id="student"></h4></div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-4 text-right"><h4>Предмет:</h4></div>
+                                <div class="col-md-8"><h4 id="subject"></h4></div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-4 text-right"><h4>Желаемые дни:</h4></div>
+                                <div class="col-md-8"><h4 id="prefDays"></h4></div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-4 text-right"><h4>Желаемое время:</h4></div>
+                                <div class="col-md-8"><h4 id="prefTime"></h4></div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-4 text-right"><h4>Учитель:</h4></div>
+                                <div class="col-md-8">
+                                  <div class="form-group">
+                                    <select class="form-control" id="teacher">
+                                      <option>Альжанова Галия Мрзановна</option>
+                                      <option>Соколов Василий Васильевич</option>
+                                      <option>Иванов Иван Иванович</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-4 text-right"><h4>Дни уроков:</h4></div>
+                                <div class="col-md-8">
+                                  <div class="form-group">
+                                      <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                        <label class="btn btn-default focus-none">
+                                            <input type="checkbox" autocomplete="off" id="monday"> Пн
+                                        </label>
+                                        <label class="btn btn-default focus-none">
+                                            <input type="checkbox" autocomplete="off" id="tuesday"> Вт
+                                        </label>
+                                        <label class="btn btn-default focus-none">
+                                            <input type="checkbox" autocomplete="off" id="wednesday"> Ср
+                                        </label>
+                                        <label class="btn btn-default focus-none">
+                                            <input type="checkbox" autocomplete="off" id="thursday"> Чт
+                                        </label>
+                                        <label class="btn btn-default focus-none">
+                                            <input type="checkbox" autocomplete="off" id="friday"> Пт
+                                        </label>
+                                        <label class="btn btn-default focus-none">
+                                            <input type="checkbox" autocomplete="off" id="saturday"> Сб
+                                        </label>
+                                        <label class="btn btn-default focus-none">
+                                            <input type="checkbox" autocomplete="off" id="sunday"> Вс
+                                        </label>
+                                      </div>
+                                   </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-4 text-right"><h4>Время уроков:</h4></div>
+                                <div class="col-md-8">
+                                  <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                    <input id="time" type="text" class="form-control" name="time" value="18.00">
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-4 text-right">
+                                  <button type="button" class="btn btn-success">Создать курс</button>
+                                </div>
+                                <div class="col-md-8">Перед созданием проверьте правильность введных Вами данных.</div>
+                              </div>
+                              
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
