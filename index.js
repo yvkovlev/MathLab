@@ -20,9 +20,11 @@ var multer = require('multer');
 var morgan = require('morgan');
 var flash = require('connect-flash');
 var fs = require('fs');
+var moment = require('moment');
 
 var User = require('./models/user');
 var bid = require('./models/bid');
+var course = require('./models/course');
 
 mongoose.connect('mongodb://mathlab.kz:27017/MathLab');
 /*var storage = multer.diskStorage({
@@ -209,8 +211,6 @@ app.post('/api/log-out', function (req, res){
   });
 });
 
-/*User.find({}, function(err, data){ console.log(data); });*/
-
 app.post('/api/userInfo', function (req, res){
   res.send({fullname: req.user.fullname, email: req.user.email, phone: req.user.phone, sex: req.user.sex, grade: req.user.grade, confirmed: req.user.confirmed});
 });
@@ -289,7 +289,7 @@ router.post('/api/loadBids', function (req, res){
     find({
       _id: {$gt: mongoose.Types.ObjectId(req.body.lastID)}
     }).
-    select('_id student subject prefDays prefTime phone').
+    select('_id student studentId subject prefDays prefTime phone').
     limit(10).
     exec(function(err, data){
       if (err) throw err;
@@ -310,6 +310,13 @@ router.post('/api/loadTeachers', function (req, res){
     });
 });
 
+router.get('/api/teachers', function (req, res){
+  User.find({priority: 1}, '_id fullname', function(err, data){
+    if (err) throw err;
+    res.send(data);
+  });
+});
+
 router.post('/api/loadStudents', function (req, res){
   User.
     find({
@@ -322,6 +329,28 @@ router.post('/api/loadStudents', function (req, res){
       res.send(data);
     });
 });
+
+router.put('/api/createCourse', function (req, res){
+  console.log(req.body);
+  var curDate = Date.now();
+  var newCourse = course({
+    subject: req.body.subject,
+    student: req.body.student,
+    studentId: req.body.studentId,
+    teacher: req.body.teacher,
+    teacherId: req.body.teacherId,
+    days: req.body.days,
+    time: req.body.time,
+    date: curDate,
+    endingTime: moment(curDate).add(1, 'months').toDate()
+  });
+  newCourse.save(function(err){
+    if (err) throw err;
+    res.send('Success');
+  });
+});
+
+course.find({}, function(err, data){ console.log(data); });
 
 router.post('/api/log-out', function (req, res){
   req.session.destroy(function (err) {
