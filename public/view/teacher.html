@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Личный кабинет</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/default.css" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- NavBar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">
+                    <img src="/images/logo.svg" alt="Logo">
+                    <span>MathLab.kz</span>
+                </a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i>&nbsp; Главная</a></li>
+                      <li><a href="#"><i class="fa fa-usd" aria-hidden="true"></i>&nbsp; Оплата</a></li>
+                      <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp; Контакты</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Личный кабинет</a></li>
+                <li><a href="/teachers">Наши преподаватели</a></li>
+                <li><a href="/request">Подать заявку на обучение</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li id="log-out"><a href="">Выход</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container main-content">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="base">
+                    <div class="profile">
+                        <div class="profile-img text-center">
+                            <img src="/images/profile.svg" class="img-circle">
+                        </div>
+                        <div class="profile-info text-center">
+                            <h4 id="fullname"></h4>
+                            <h6 id="priority">Учитель</h6>
+                        </div>
+                        <div class="profile-contacts">
+                            <h5>Контактная информация</h5>
+                            <h6 class="sub">E-mail:</h6>
+                            <h6 id="email"></h6>
+                            <h6 class="sub">Телефон:</h6>
+                            <h6 id="phone"></h6>
+                            <h6 class="sub">Класс учебы:</h6>
+                            <h6 id="grade"></h6>
+                        </div>
+                        <a href="/settings" class="btn btn-default btn-block">Редактировать</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="base">
+                    <ul class="nav nav-tabs">
+                        <li class="active" id="active-courses"><a href="#">Активные курсы</a></li>
+                        <li id="history"><a href="#">История курсов</a></li>
+                        <li id="notes"><a href="#">Заметки</a></li>
+                    </ul>
+                    <div class="profile-content">
+                        <div class="alert alert-info" style="display: none;">
+                            У Вас пока нет активных курсов, свяжитесь с администратором.
+                        </div>
+                        <div class="courses">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="course active-course" onClick="window.location.href='/course'">
+                                        <div class="course-header">
+                                            <div class="course-info-img">
+                                                <img src="/images/teacher.svg" class="img-circle">
+                                            </div>
+                                            <div class="course-info-titles">
+                                                <h5>Владимир Алексеев</h5>
+                                                <h6>Математика <small>18.02.2017 - 18.03.2017</small></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="course active-course">
+                                        <div class="course-header">
+                                            <div class="course-info-img">
+                                                <img src="/images/teacher-w.svg" class="img-circle">
+                                            </div>
+                                            <div class="course-info-titles">
+                                                <h5>Альжанова Галия Мрзановна</h5>
+                                                <h6>Информатика <small>18.02.2017 - 18.03.2017</small></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="course active-course">
+                                        <div class="course-header">
+                                            <div class="course-info-img">
+                                                <img src="/images/teacher.svg" class="img-circle">
+                                            </div>
+                                            <div class="course-info-titles">
+                                                <h5>Владимир Алексеев</h5>
+                                                <h6>Математика <small>18.02.2017 - 18.03.2017</small></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="course active-course">
+                                        <div class="course-header">
+                                            <div class="course-info-img">
+                                                <img src="/images/teacher-w.svg" class="img-circle">
+                                            </div>
+                                            <div class="course-info-titles">
+                                                <h5>Альжанова Галия Мрзановна</h5>
+                                                <h6>Информатика <small>18.02.2017 - 18.03.2017</small></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-7">
+                        <ul class="footer-links">
+                            <li><a href="#">Личный кабинет</a></li>
+                            <li><a href="#">Техническая поддержка</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-5 text-right">
+                        <ul class="footer-links">
+                            <li>© MathLab.kz 2017</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

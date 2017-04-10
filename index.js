@@ -118,6 +118,9 @@ app.get('/settings', function (req, res){
 app.get('/teachers', function (req, res) {
   res.sendFile(__dirname + '/public/view/teachers.html');
 });
+app.get('/teacher', function (req, res) {
+  res.sendFile(__dirname + '/public/view/teacher.html');
+});
 app.get('/cabinet/:id', function (req, res){
   if (req.user._id == req.params.id) res.sendFile(__dirname + '/public/view/cabinet.html');
   else res.send('Fuck off');
