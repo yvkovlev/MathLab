@@ -97,7 +97,24 @@ $(document).ready(function() {
       method: 'put',
       data: {id: id, studentId: studentId, student: student, subject: subject, teacherId: $('#teacher-list option:selected').attr('id'), teacher: $('#teacher-list option:selected').text(), days: prefDaysFinally, time: $("#time").val()},
       success: function(response){
-        alert(response);
+        if (response == 'Success') {
+          $("#courseAddingModal").modal('hide');
+          $(".abs-alerts").html("<div class='alert alert-success'>" +
+                                  "<strong>Готово!</strong> Курс установлен!" +
+                                "</div>");
+          setTimeout(function() { 
+            $(".abs-alerts").html("");
+          }, 2000);
+        }
+        else {
+          $("#courseAddingModal").modal('hide');
+          $(".abs-alerts").html("<div class='alert alert-danger'>" +
+                                  "<strong>Ошибка!</strong> Попробуйте позже" +
+                                "</div>");
+          setTimeout(function() { 
+            $(".abs-alerts").html("");
+          }, 2000);
+        }
       }
     });
   });

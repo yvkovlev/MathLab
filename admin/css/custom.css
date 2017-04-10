@@ -144,7 +144,8 @@ html , body{
     padding: 0 0 4px 0
 }
 .left_col {
-    background: #2A3F54
+    background: #2A3F54;
+    /* position: relative; */
 }
 .nav-sm .container.body .col-md-3.left_col {
     min-height: 100%;
@@ -349,8 +350,9 @@ body .container.body .right_col {
 }
 .nav-md .container.body .right_col {
     padding: 10px 20px 0;
-    margin-left: 230px
+    margin-left: 230px;
 }
+
 .nav_title {
     width: 230px;
     float: left;
@@ -361,7 +363,7 @@ body .container.body .right_col {
     .nav-md .container.body .right_col,
     .nav-md .container.body .top_nav {
         width: 100%;
-        margin: 0
+        margin: 0;
     }
     .nav-md .container.body .col-md-3.left_col {
         display: none
@@ -1421,6 +1423,12 @@ td.group {
 td.details {
     background-color: #d1cfd0;
     border: 2px solid #A19B9E
+}
+
+.abs-alerts {
+    position: fixed;
+    top: 5px;
+    left: 40%;
 }
 
 .currenTr:hover {
