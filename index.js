@@ -118,11 +118,11 @@ app.get('/settings', function (req, res){
 app.get('/teachers', function (req, res) {
   res.sendFile(__dirname + '/public/view/teachers.html');
 });
-app.get('/teacher', function (req, res) {
-  res.sendFile(__dirname + '/public/view/teacher.html');
-});
 app.get('/cabinet/:id', function (req, res){
-  if (req.user._id == req.params.id) res.sendFile(__dirname + '/public/view/cabinet.html');
+  if (req.params.id == req.user._id) {
+    if (req.user.priority == 1 || req.user.priority == 2) res.sendFile(__dirname + '/public/view/teacher.html');
+    else res.sendFile(__dirname + '/public/view/cabinet.html');
+  }
   else res.send('Fuck off');
 });
 
