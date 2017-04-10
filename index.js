@@ -27,15 +27,22 @@ var bid = require('./models/bid');
 var course = require('./models/course');
 
 mongoose.connect('mongodb://mathlab.kz:27017/MathLab');
-/*var storage = multer.diskStorage({
+var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/uploads/')
     },
     filename: function (req, file, cb) {
-        cb(null, req.user._id + '.jpg');
+        var filename = ((file.originalname).split('.')[1] == "jpg" || (file.originalname).split('.')[1] == "png") ? req.user._id + "." + (file.originalname).split('.')[1] : (file.originalname).split('.')[0] + "-" + Date.now() + "." + (file.originalname).split('.')[1];
+        User.update({_id: mongoose.Types.ObjectId(req.user._id)}, 
+          { $set: {avatarUrl: '/uploads/' + filename } }, 
+          function(err){
+            if (err) throw err;
+            cb(null, filename);
+          });
     }
-});*/
-//var upload = multer({ storage: storage });
+});
+User.find({}, function(err, data){ console.log(data); });
+var upload = multer({ storage: storage });
 app.use(subdomain('admin', router));
 app.use(express.static('public'));
 app.use(morgan('dev'));
@@ -205,6 +212,37 @@ app.put('/api/putBid', function (req, res){
   });
 });
 
+app.post('/api/changeSettings', function (req, res){
+  User.update({_id: mongoose.Types.ObjectId(req.user._id)}, 
+    { $set: {fullname: req.body.newLogin, phone: req.body.newPhone, grade: req.body.newGrade} }, 
+    function(err){
+      if (err) throw err;
+      res.send(req.user._id);
+    });
+});
+
+app.post('/api/changePassword', function (req, res){
+  bcrypt.compare(req.body.oldPassword, req.user.password).then(function (resp){
+    if (!resp) res.send('Fail');
+    else {
+      bcrypt.hash(req.body.newPassword, 10).then(function(hash) {
+        User.update({_id: mongoose.Types.ObjectId(req.user._id)},
+          {$set: {password: hash} }, 
+          function(err){
+            if(err) throw err;
+            req.user.password = hash;
+            res.send("Success");
+          });
+      });
+    }
+  });
+});
+
+app.post('/api/uploadImg', upload.single('file'), function (req, res){
+
+  res.send("Success");
+});
+
 app.post('/api/log-out', function (req, res){
   req.session.destroy(function (err) {
     res.redirect('/sign-in');
@@ -212,7 +250,8 @@ app.post('/api/log-out', function (req, res){
 });
 
 app.post('/api/userInfo', function (req, res){
-  res.send({fullname: req.user.fullname, email: req.user.email, phone: req.user.phone, sex: req.user.sex, grade: req.user.grade, confirmed: req.user.confirmed});
+  console.log(req.user);
+  res.send({fullname: req.user.fullname, email: req.user.email, phone: req.user.phone, sex: req.user.sex, grade: req.user.grade, confirmed: req.user.confirmed, avatarUrl: req.user.avatarUrl});
 });
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -350,7 +389,7 @@ router.put('/api/createCourse', function (req, res){
   });
 });
 
-course.find({}, function(err, data){ console.log(data); });
+/*course.find({}, function(err, data){ console.log(data); });*/
 
 router.post('/api/log-out', function (req, res){
   req.session.destroy(function (err) {

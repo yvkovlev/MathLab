@@ -9,6 +9,7 @@ var courseSchema = new Schema({
 	teacherId: String,
 	days: String,
 	time: String,
+	comment: String,
 	date: {type: Date},
 	endingTime: {type: Date}
 });
