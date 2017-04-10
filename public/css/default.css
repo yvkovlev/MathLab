@@ -241,7 +241,7 @@ footer {
 }
 
 .profile-img img {
-   width: 100px; 
+   width: 130px;
 }
 
 .teacher-profile img {
@@ -285,12 +285,15 @@ footer {
     display: block;
 }
 
+.courses td {
+    border: none !important;
+}
+
 .course {
     padding: 10px;
     border: 1px solid #dce1e8;
     border-radius: 1px;
     cursor: pointer;
-    margin-bottom: 15px;
     opacity: 0.6;
 }
 
