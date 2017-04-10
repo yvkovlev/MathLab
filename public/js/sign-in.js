@@ -11,6 +11,7 @@ $(document).ready(function() {
                                     "</div>");
         }
         else {
+          sessionStorage.clear();
           window.location.href = "/cabinet/" + response;
         }
       }

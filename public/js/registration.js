@@ -12,6 +12,7 @@ $(document).ready(function() {
                                     "</div>");
           }
           else {
+            sessionStorage.clear();
             realHeight();
             $("#form-1").hide();
             $(".loader").show();
