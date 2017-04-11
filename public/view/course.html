@@ -11,18 +11,19 @@
     <title>Информатика (Альжанова Галия Мрзановна)</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/default.css" rel="stylesheet">
-    <link href="css/nanoscroller.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/default.css" rel="stylesheet">
+    <link href="/css/nanoscroller.css" rel="stylesheet">
 
     <!-- Scripts -->
-    <script src="js/jquery.min.js"></script>
-
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/course.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -34,7 +35,7 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">
-                    <img src="images/logo.svg" alt="Logo">
+                    <img src="/images/logo.svg" alt="Logo">
                     <span>MathLab.kz</span>
                 </a>
             </div>
@@ -67,7 +68,7 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-sm-6">
-                                <img src="images/teacher-w.svg" class="img-circle">Альжанова Галия Мрзановна
+                                <img src="/images/teacher-w.svg" class="img-circle">Альжанова Галия Мрзановна
                             </div>
                             <div class="col-sm-6 text-right">
                                 Информатика
@@ -77,9 +78,9 @@
                     <div class="panel-body nano" style="height: 600px;">
                         <div class="nano-content">
                             <div class="messages">
-                                <div class="message message-in">
+                                <!-- <div class="message message-in">
                                     <div class="message-img">
-                                        <img src="images/teacher-w.svg" class="img-circle">
+                                        <img src="/images/teacher-w.svg" class="img-circle">
                                     </div>
                                     <div class="message-body">
                                         <h5>Альжанова Галия Мрзановна</h5>
@@ -91,7 +92,7 @@
                                 </div>
                                 <div class="message message-out">
                                     <div class="message-img">
-                                        <img src="images/profile.svg" class="img-circle">
+                                        <img src="/images/profile.svg" class="img-circle">
                                     </div>
                                     <div class="message-body">
                                         <h5>Яковлев Денис Викторович</h5>
@@ -103,7 +104,7 @@
                                 </div>
                                 <div class="message message-in">
                                     <div class="message-img">
-                                        <img src="images/teacher-w.svg" class="img-circle">
+                                        <img src="/images/teacher-w.svg" class="img-circle">
                                     </div>
                                     <div class="message-body">
                                         <h5>Альжанова Галия Мрзановна</h5>
@@ -115,7 +116,7 @@
                                 </div>
                                 <div class="message message-out">
                                     <div class="message-img">
-                                        <img src="images/profile.svg" class="img-circle">
+                                        <img src="/images/profile.svg" class="img-circle">
                                     </div>
                                     <div class="message-body">
                                         <h5>Яковлев Денис Викторович</h5>
@@ -126,7 +127,7 @@
                                 </div>
                                 <div class="message message-in">
                                     <div class="message-img">
-                                        <img src="images/teacher-w.svg" class="img-circle">
+                                        <img src="/images/teacher-w.svg" class="img-circle">
                                     </div>
                                     <div class="message-body">
                                         <h5>Альжанова Галия Мрзановна</h5>
@@ -143,7 +144,7 @@
                                 </div>
                                 <div class="message message-in">
                                     <div class="message-img">
-                                        <img src="images/teacher-w.svg" class="img-circle">
+                                        <img src="/images/teacher-w.svg" class="img-circle">
                                     </div>
                                     <div class="message-body">
                                         <h5>Альжанова Галия Мрзановна</h5>
@@ -151,7 +152,7 @@
                                             <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et bibendum dolor.</li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -194,8 +195,7 @@
         </div>
     </footer>
 
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/nanoscroller.min.js"></script>
-    <script src="js/course.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/nanoscroller.min.js"></script>
 </body>
 </html>

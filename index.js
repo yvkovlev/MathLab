@@ -25,6 +25,7 @@ var moment = require('moment');
 var User = require('./models/user');
 var bid = require('./models/bid');
 var course = require('./models/course');
+var message = require('./models/message');
 
 mongoose.connect('mongodb://mathlab.kz:27017/MathLab');
 var storage = multer.diskStorage({
@@ -41,7 +42,7 @@ var storage = multer.diskStorage({
           });
     }
 });
-User.find({}, function(err, data){ console.log(data); });
+/*User.find({}, function(err, data){ console.log(data); });*/
 var upload = multer({ storage: storage });
 app.use(subdomain('admin', router));
 app.use(express.static('public'));
@@ -106,8 +107,23 @@ app.get('/sign-in', function (req, res){
 app.get('/sign-up', function (req, res){
 	res.sendFile(__dirname + '/public/view/sign-up.html');
 });
-app.get('/course', function (req, res){
-  res.sendFile(__dirname + '/public/view/course.html');
+app.get('/course/:id', function (req, res){
+  if (req.user.priority == "0") {
+    course.findOne({ $and: [ {_id: mongoose.Types.ObjectId(req.params.id)}, {studentId: req.user._id} ] },
+      function(err, data){
+        if (err) throw err;
+        if (!data) res.send('Fuck off');
+        else res.sendFile(__dirname + '/public/view/course.html');
+      });
+  }
+  else {
+    course.findOne({ $and: [ {_id: mongoose.Types.ObjectId(req.params.id)}, {teacherId: req.user._id} ] },
+      function(err, data){
+        if (err) throw err;
+        if (!data) res.send('Fuck off');
+        else res.sendFile(__dirname + '/public/view/course.html');
+      });
+  }
 });
 app.get('/request', function (req, res){
   res.sendFile(__dirname + '/public/view/request.html');
@@ -241,8 +257,51 @@ app.post('/api/changePassword', function (req, res){
   });
 });
 
-app.post('/api/uploadImg', upload.single('file'), function (req, res){
+app.get('/api/loadStudentCourses', function (req, res){
+  course.find({studentId: req.user._id}, '_id subject teacher days time endingTime', function(err, data){
+    if (err) throw err;
+    res.send(data);
+  });
+});
 
+app.post('/api/courseInfo', function (req, res){
+  course.findOne({_id: mongoose.Types.ObjectId(req.body.dialogId)}, function(err, data){
+    if (err) throw err;
+    res.send(data);
+  });
+});
+
+/*course.find({}, function(err, data){ console.log(data); });*/
+/*User.find({}, function(err, data){ console.log(data); });*/
+
+app.post('/api/loadMessages', function (req, res){
+  message.
+    find({dialogId: req.body.dialogId}).
+    select('_id sender senderId message fileUrl date').
+    sort({date: -1}).
+    limit(10).
+    exec(function(err, data){
+      if (err) throw err;
+      res.send(data);
+    });
+});
+
+app.put('/api/sendMessage', function (req, res){
+  var newMessage = message({
+    dialogId: req.body.dialogId,
+    senderId: req.user._id,
+    sender: req.user.fullname,
+    message: req.body.message,
+    fileUrl: "",
+    date: Date.now()
+  });
+  newMessage.save(function(err){
+    if (err) throw err;
+    res.send("Success");
+  });
+});
+
+app.post('/api/uploadImg', upload.single('file'), function (req, res){
   res.send("Success");
 });
 
@@ -253,9 +312,53 @@ app.post('/api/log-out', function (req, res){
 });
 
 app.post('/api/userInfo', function (req, res){
-  console.log(req.user);
-  res.send({fullname: req.user.fullname, email: req.user.email, phone: req.user.phone, sex: req.user.sex, grade: req.user.grade, confirmed: req.user.confirmed, avatarUrl: req.user.avatarUrl});
+  res.send({id: req.user._id, fullname: req.user.fullname, email: req.user.email, phone: req.user.phone, sex: req.user.sex, grade: req.user.grade, confirmed: req.user.confirmed, avatarUrl: req.user.avatarUrl});
 });
+
+io.on('connection', function(socket){
+  socket.on('setRooms', function(userId){
+    console.log('adsds');
+    console.log(userId);
+    User.
+      findOne( {_id: mongoose.Types.ObjectId(userId)} ).
+      select('priority').
+      exec(function(err, data1){
+        if (err) throw err;
+        console.log(data1);
+        if (data1.priority == "0") {
+          course.
+            find({studentId: userId}).
+            select('_id').
+            exec(function(err, data){
+              if (err) throw err;
+              data.forEach(function(item, data){
+                socket.join(item._id);
+              });
+            });
+        }
+        else {
+          course.
+            find({teacherId: userId}).
+            select('_id').
+            exec(function(err, data){
+              if (err) throw err;
+              console.log("tut");
+              data.forEach(function(item, data){
+                socket.join(item._id);
+              });
+            });
+        }
+      });
+  });
+  socket.on('sendMessage', function(data){
+    var message = {};
+    console.log(data);
+    message.sender = data.sender;
+    message.senderId = data.senderId;
+    message.message = data.message;
+    socket.broadcast.to(data.dialogId).emit('newMessage', message);
+  });
+})
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------
 router.use(express.static('admin'));
@@ -332,6 +435,7 @@ router.post('/api/loadBids', function (req, res){
       _id: {$gt: mongoose.Types.ObjectId(req.body.lastID)}
     }).
     select('_id student studentId subject prefDays prefTime phone').
+    sort({date: -1}).
     limit(10).
     exec(function(err, data){
       if (err) throw err;
@@ -373,7 +477,6 @@ router.post('/api/loadStudents', function (req, res){
 });
 
 router.put('/api/createCourse', function (req, res){
-  console.log(req.body);
   var curDate = Date.now();
   var newCourse = course({
     subject: req.body.subject,
@@ -391,8 +494,6 @@ router.put('/api/createCourse', function (req, res){
     res.send('Success');
   });
 });
-
-/*course.find({}, function(err, data){ console.log(data); });*/
 
 router.post('/api/log-out', function (req, res){
   req.session.destroy(function (err) {

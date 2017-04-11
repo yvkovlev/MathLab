@@ -7,6 +7,7 @@ function setUserInfo(userInfo) {
 }
 
 $(document).ready(function() { 
+  var socket = io();
   var userInfo = new Object();
   if (!sessionStorage.getItem("userInfo") || typeof(window.sessionStorage) === "undefined") {
     $.ajax({
@@ -19,12 +20,44 @@ $(document).ready(function() {
     });
   }
   else setUserInfo(JSON.parse(sessionStorage.getItem("userInfo")));
+  socket.emit('setRooms', JSON.parse(sessionStorage.getItem("userInfo")).id);
   $("#log-out").on("click", function(){
     sessionStorage.clear();
     $.ajax({
       url: '/api/log-out',
       method: 'post'
     });
+  });
+  $.ajax({
+    url: '/api/loadStudentCourses',
+    method: 'get',
+    success: function(response) {
+      var courses = "<tr>", cnt = 0, len = 0, siz = response.length;
+      response.forEach(function(item, response){
+        courses += 
+          "<td id='" + item._id + "''>" +
+            "<div class='course active-course'>" +
+              "<div class='course-header'>" +
+                "<div class='course-info-img'>" +
+                  "<img src='/images/teacher.svg' class='img-circle'>" +
+                "</div>" +
+                "<div class='course-info-titles'>" + 
+                  "<h5>" + item.teacher + "</h5>" +
+                  "<h6>" + item.subject + " <small>" + item.endingTime + "</small></h6>" +
+                "</div>" +
+              "</div>" +
+            "</div>" +
+          "</td>";
+        cnt++;
+        len++;
+        if (cnt == 2 && len != siz) {
+          courses += "</tr><tr>";
+          cnt = 0;
+        }
+      });
+      courses += "</tr>";
+      $('tbody').append(courses);
+    }
   });
   $("#req-submit").on("click", function(){
     var prefDays = "";
@@ -43,7 +76,6 @@ $(document).ready(function() {
         $(".modal-body").html("<img src='images/loading.svg'>");
       },
       success: function(response) {
-        console.log(response);
         if (response == "Success") {
           $("#requestModal").modal('hide');
           $("#succesModal").modal({show: true});
