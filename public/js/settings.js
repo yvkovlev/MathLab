@@ -78,6 +78,7 @@ $(document).ready(function() {
           processData: false,
           contentType: false,
           success: function(response){
+              sessionStorage.clear();
               if (response == "Success") {
                 $(".avatar-block").append("<div class='alert alert-success alert-dismissable'>" +
                                             "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
