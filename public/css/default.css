@@ -281,7 +281,7 @@ footer {
     margin-top: 20px;
 }
 
-.courses {
+.courses, .courses-history, .calendar, .nodes {
     display: block;
 }
 
