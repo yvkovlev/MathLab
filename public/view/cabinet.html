@@ -21,6 +21,7 @@
 
     <!-- Scripts -->
     <script src="/js/jquery.min.js"></script>
+    <script src="/js/moment.min.js"></script>
     <script src="/js/main.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <!--[if lt IE 9]>
@@ -93,7 +94,7 @@
                         <li><a href="#">Заявки на обучение</a></li>
                     </ul>
                     <div class="profile-content">
-                        <div class="alert alert-info" style="display: none;">
+                        <div class="alert alert-info" id="empty-courses" style="display: none;">
                             У Вас пока нет активных курсов, Вы можете подать <a href="/request" class="alert-link">заявку на обучение</a> на специальной странице.
                         </div>
                         <div class="courses">

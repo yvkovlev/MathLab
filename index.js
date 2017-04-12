@@ -258,7 +258,7 @@ app.post('/api/changePassword', function (req, res){
 });
 
 app.get('/api/loadStudentCourses', function (req, res){
-  course.find({studentId: req.user._id}, '_id subject teacher days time endingTime', function(err, data){
+  course.find({studentId: req.user._id}, '_id subject teacher days time date endingTime', function(err, data){
     if (err) throw err;
     res.send(data);
   });
