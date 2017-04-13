@@ -33,7 +33,7 @@ var storage = multer.diskStorage({
         cb(null, './public/uploads/')
     },
     filename: function (req, file, cb) {
-        var filename = ((file.originalname).split('.')[1] == "jpg" || (file.originalname).split('.')[1] == "png") ? req.user._id + "." + (file.originalname).split('.')[1] : (file.originalname).split('.')[0] + "-" + Date.now() + "." + (file.originalname).split('.')[1];
+        var filename = ((file.originalname).split('.')[1] == "jpg" || (file.originalname).split('.')[1] == "png") ? req.user._id + ".jpg" /*+ (file.originalname).split('.')[1]*/ : (file.originalname).split('.')[0] + "-" + Date.now() + "." + (file.originalname).split('.')[1];
         User.update({_id: mongoose.Types.ObjectId(req.user._id)}, 
           { $set: {avatarUrl: '/uploads/' + filename } }, 
           function(err){
@@ -278,7 +278,7 @@ app.post('/api/loadMessages', function (req, res){
   message.
     find({dialogId: req.body.dialogId}).
     select('_id sender senderId message fileUrl date').
-    sort({date: -1}).
+    sort({date: 1}).
     limit(10).
     exec(function(err, data){
       if (err) throw err;
@@ -317,14 +317,11 @@ app.post('/api/userInfo', function (req, res){
 
 io.on('connection', function(socket){
   socket.on('setRooms', function(userId){
-    console.log('adsds');
-    console.log(userId);
     User.
       findOne( {_id: mongoose.Types.ObjectId(userId)} ).
       select('priority').
       exec(function(err, data1){
         if (err) throw err;
-        console.log(data1);
         if (data1.priority == "0") {
           course.
             find({studentId: userId}).
@@ -342,7 +339,6 @@ io.on('connection', function(socket){
             select('_id').
             exec(function(err, data){
               if (err) throw err;
-              console.log("tut");
               data.forEach(function(item, data){
                 socket.join(item._id);
               });
@@ -352,7 +348,6 @@ io.on('connection', function(socket){
   });
   socket.on('sendMessage', function(data){
     var message = {};
-    console.log(data);
     message.sender = data.sender;
     message.senderId = data.senderId;
     message.message = data.message;
@@ -493,6 +488,15 @@ router.put('/api/createCourse', function (req, res){
     if (err) throw err;
     res.send('Success');
   });
+});
+
+router.post('/api/updateBid', function (req, res){
+  bid.update({_id: mongoose.Types.ObjectId(req.body.bidId)}, 
+    { $set: {status: req.body.bidStatus } }, 
+    function(err){
+      if (err) throw err;
+      res.send('Success');
+    });
 });
 
 router.post('/api/log-out', function (req, res){

@@ -35,7 +35,8 @@ $(document).ready(function() {
       var courses = "<tr>", cnt = 0, len = 0, siz = response.length;
       response.forEach(function(item, response){
         courses += 
-          "<td id='" + item._id + "''>" +
+          "<td>" +
+            "<a href='/course/" + item._id + "'>" +
             "<div class='course active-course'>" +
               "<div class='course-header'>" +
                 "<div class='course-info-img'>" +
@@ -47,6 +48,7 @@ $(document).ready(function() {
                 "</div>" +
               "</div>" +
             "</div>" +
+            "</a>" +
           "</td>";
         cnt++;
         len++;
@@ -56,6 +58,7 @@ $(document).ready(function() {
         }
       });
       courses += "</tr>";
+      console.log(courses);
       $('tbody').append(courses);
     }
   });
