@@ -123,6 +123,5 @@ $(document).ready(function() {
   $(".tbody-bids").on("click", "#cancelBid", function(){
     $("#courseAddingModal").modal('hide');
     $(this).parent().parent().find(".bid-status").first().html(canceledStatus);
-    console.log(this.parent().parent());
   });
 });

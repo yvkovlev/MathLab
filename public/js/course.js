@@ -10,6 +10,9 @@ $(document).ready(function() {
     data: {dialogId: dialogId},
     success: function(response) {
       dialogInfo = response;
+      console.log(response);
+      $(".panel-heading .col-sm-6").html((dialogInfo.studentId != userInfo.id) ? ("<img src='/uploads/" + dialogInfo.studentId + ".jpg' class='img-circle'> " + dialogInfo.student) : ("<img src='/uploads/" + dialogInfo.teacherId + ".jpg' class='img-circle'> " + dialogInfo.teacher));
+      $(".panel-heading .text-right").html(dialogInfo.subject);
     }
   });
   $.ajax({
@@ -23,7 +26,7 @@ $(document).ready(function() {
           messages +=
             "<div class='message message-out'>" +
               "<div class='message-img'>" +
-                "<img src='/images/profile.svg' class='img-circle'>" +
+                "<img src='/uploads/" + message.senderId + ".jpg' class='img-circle'>" +
               "</div>" +
               "<div class='message-body'>" +
                 "<h5>" + message.sender + "</h5>" +
@@ -37,7 +40,7 @@ $(document).ready(function() {
           messages +=
             "<div class='message message-in'>" +
               "<div class='message-img'>" +
-                "<img src='/images/profile.svg' class='img-circle'>" +
+                "<img src='/uploads/" + message.senderId + ".jpg' class='img-circle'>" +
               "</div>" +
               "<div class='message-body'>" +
                 "<h5>" + message.sender + "</h5>" +
