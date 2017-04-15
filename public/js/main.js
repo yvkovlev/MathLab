@@ -32,19 +32,25 @@ $(document).ready(function() {
     url: '/api/loadStudentCourses',
     method: 'get',
     success: function(response) {
+      if (response.length == 0) $("#empty-courses").show();
       var courses = "<tr>", cnt = 0, len = 0, siz = response.length;
       response.forEach(function(item, response){
         courses += 
+<<<<<<< HEAD
+          "<td id='" + item._id + "''>" +
+            "<div class='course active-course' onClick='window.location.href=`/course/" + item._id + "`'>" +
+=======
           "<td>" +
             "<a href='/course/" + item._id + "'>" +
             "<div class='course active-course'>" +
+>>>>>>> e46fe1321266ff4ccfbcecd6c3a1668d7a3ba20c
               "<div class='course-header'>" +
                 "<div class='course-info-img'>" +
                   "<img src='/images/teacher.svg' class='img-circle'>" +
                 "</div>" +
                 "<div class='course-info-titles'>" + 
                   "<h5>" + item.teacher + "</h5>" +
-                  "<h6>" + item.subject + " <small>" + item.endingTime + "</small></h6>" +
+                  "<h6>" + item.subject + " <small>" + moment(item.date).format('DD.MM.YY') + ' - ' + moment(item.endingTime).format('DD.MM.YY') + "</small></h6>" +
                 "</div>" +
               "</div>" +
             "</div>" +
@@ -60,6 +66,7 @@ $(document).ready(function() {
       courses += "</tr>";
       console.log(courses);
       $('tbody').append(courses);
+      console.log(response.length);
     }
   });
   $("#req-submit").on("click", function(){

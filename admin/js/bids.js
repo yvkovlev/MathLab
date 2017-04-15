@@ -2,6 +2,9 @@ var pending = true;
 var firstLoad = true;
 var endList = false;
 var currenTr = $(".tbody-bids tr:last-child").attr('id');
+var inProgressStatus = "<span class='label label-primary'>На рассмотрении</span>";
+var successStatus = "<span class='label label-success'>Подтверждено</span>";
+var canceledStatus = "<span class='label label-danger'>Отказано</span>";
 function loadBids(lastID) {
   $.ajax({
     url: 'api/loadBids',
@@ -12,8 +15,12 @@ function loadBids(lastID) {
     },
     success: function(response) {
       var bids = "";
+      var currentStatus = "";
       pending = false;
       response.forEach(function(bid, response){
+        if (bid.status == 'Success') currentStatus = successStatus;
+        else if (bid.status == 'Canceled') currentStatus = canceledStatus;
+        else currentStatus = inProgressStatus;
         bids +=
           "<tr class='even pointer currenTr' id='" + bid._id + "'>" +
             "<td class='bid-student' id='" + bid.studentId + "'>" + bid.student + "</td>" +
@@ -22,20 +29,14 @@ function loadBids(lastID) {
             "<td class='bid-prefDays'>" + bid.prefDays + "</td>" +
             "<td class='bid-prefTime'>" + bid.prefTime + "</td>" +
             "<td class='bid-phone'>" + bid.phone + "</td>" +
-            "<td class='last'>" +
-              "<div class='dropup'>" +
-                "<button class='btn btn-xs btn-primary dropdown-toggle' type='button' data-toggle='dropdown'>На рассмотрении <span class='caret'></span></button>" +
-                "<ul class='dropdown-menu'>" +
-                  "<li><a href='#'>Подтверждено</a></li>" +
-                  "<li><a href='#'>Отказано</a></li>" +
-                "</ul>" +
-              "</div>" +
-            "</td>" +
+            "<td class='bid-status'>" + currentStatus + "</td>" +
+            "<td class='bid-cancel'><a href='#' id='cancelBid'><i class='fa fa-times'></i></a></td>" +
           "</tr>";
       });
       $('.tbody-bids').append(bids);
       if(response[response.length - 1]) currenTr = response[response.length - 1]._id;
       else endList = true;
+      console.log(response);
     }
   });
 }
@@ -102,6 +103,7 @@ $(document).ready(function() {
           $(".abs-alerts").html("<div class='alert alert-success'>" +
                                   "<strong>Готово!</strong> Курс установлен!" +
                                 "</div>");
+          $("#" + id).find(".bid-status").first().html(successStatus);
           setTimeout(function() { 
             $(".abs-alerts").html("");
           }, 2000);
@@ -117,5 +119,9 @@ $(document).ready(function() {
         }
       }
     });
+  });
+  $(".tbody-bids").on("click", "#cancelBid", function(){
+    $("#courseAddingModal").modal('hide');
+    $(this).parent().parent().find(".bid-status").first().html(canceledStatus);
   });
 });
