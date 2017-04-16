@@ -1,10 +1,10 @@
 var pending = true;
 var firstLoad = true;
 var endList = false;
-var currenTr = $(".tbody-bids tr:last-child").attr('id');
+var currenTr;
 var inProgressStatus = "<span class='label label-primary'>На рассмотрении</span>";
-var successStatus = "<span class='label label-success'>Подтверждено</span>";
-var canceledStatus = "<span class='label label-danger'>Отказано</span>";
+var acceptStatus = "<span class='label label-success'>Подтверждено</span>";
+var refuseStatus = "<span class='label label-danger'>Отказано</span>";
 function loadBids(lastID) {
   $.ajax({
     url: 'api/loadBids',
@@ -18,25 +18,25 @@ function loadBids(lastID) {
       var currentStatus = "";
       pending = false;
       response.forEach(function(bid, response){
-        if (bid.status == 'Success') currentStatus = successStatus;
-        else if (bid.status == 'Canceled') currentStatus = canceledStatus;
+        if (bid.status == 'accept') currentStatus = acceptStatus;
+        else if (bid.status == 'refuse') currentStatus = refuseStatus;
         else currentStatus = inProgressStatus;
         bids +=
           "<tr class='even pointer currenTr' id='" + bid._id + "'>" +
             "<td class='bid-student' id='" + bid.studentId + "'>" + bid.student + "</td>" +
-            "<td class='bid-date'>" + moment(bid.date).format('DD.MM.YY, hh.mm') + "</td>" +
+            "<td class='bid-date'>" + moment(bid.date).format('DD.MM.YY, HH:mm') + "</td>" +
             "<td class='bid-subject'>" + bid.subject + "</td>" +
             "<td class='bid-prefDays'>" + bid.prefDays + "</td>" +
             "<td class='bid-prefTime'>" + bid.prefTime + "</td>" +
             "<td class='bid-phone'>" + bid.phone + "</td>" +
             "<td class='bid-status'>" + currentStatus + "</td>" +
-            "<td class='bid-cancel'><a href='#' id='cancelBid'><i class='fa fa-times'></i></a></td>" +
+            "<td class='bid-cancel'><a href='#' data-toggle='tooltip' data-placement='left' title='Отмена заявки' id='cancelBid'><i class='fa fa-times'></i></a></td>" +
           "</tr>";
       });
       $('.tbody-bids').append(bids);
       if(response[response.length - 1]) currenTr = response[response.length - 1]._id;
       else endList = true;
-      console.log(response);
+      $('[data-toggle="tooltip"]').tooltip();
     }
   });
 }
@@ -59,11 +59,13 @@ $(document).ready(function() {
     firstLoad = false;
   }
   if (!firstLoad) {
+    currenTr = $(".tbody-bids tr:last-child").attr('id');
     $('#anchor').viewportChecker({
         offset: 0,
         repeat: true,
         callbackFunction: function() {
         	if (!pending && !endList) loadBids(currenTr);
+          //console.log(currenTr);
         }
     });
   }
@@ -103,10 +105,18 @@ $(document).ready(function() {
           $(".abs-alerts").html("<div class='alert alert-success'>" +
                                   "<strong>Готово!</strong> Курс установлен!" +
                                 "</div>");
-          $("#" + id).find(".bid-status").first().html(successStatus);
+          $("#" + id).find(".bid-status").first().html(acceptStatus);
           setTimeout(function() { 
             $(".abs-alerts").html("");
           }, 2000);
+          $.ajax({
+            url: 'api/updateBid',
+            method: 'post',
+            data: {bidId: id, bidStatus: 'accept'},
+            success: function(){
+
+            }
+          });
         }
         else {
           $("#courseAddingModal").modal('hide');
@@ -121,7 +131,16 @@ $(document).ready(function() {
     });
   });
   $(".tbody-bids").on("click", "#cancelBid", function(){
+    var id = $(this).parent().parent().attr('id');
     $("#courseAddingModal").modal('hide');
-    $(this).parent().parent().find(".bid-status").first().html(canceledStatus);
+    $(this).parent().parent().find(".bid-status").first().html(refuseStatus);
+    $.ajax({
+      url: 'api/updateBid',
+      method: 'post',
+      data: {bidId: id, bidStatus: 'refuse'},
+      success: function(response){
+        console.log('Bid refused.');
+      }
+    });
   });
 });
