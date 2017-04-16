@@ -1,11 +1,20 @@
+var pending = true;
+var firstLoad = true;
+var endList = false;
+var currenTr;
+
+
 function loadStudents(lastID) {
   $.ajax({
     url: 'api/loadStudents',
     method: 'post',
     data: {lastID: lastID},
+    beforeSend: function() {
+      pending = true;
+    },
     success: function(response) {
       var students = "";
-      console.log(response);
+      pending = false;
       response.forEach(function(student, response){
         students += 
           "<tr id='" + student._id + "'>" +
@@ -18,16 +27,24 @@ function loadStudents(lastID) {
           "</tr>";
       });
       $('tbody').append(students);
+      if(response[response.length - 1]) currenTr = response[response.length - 1]._id;
+      else endList = true;
     }
   });
 }
 
 $(document).ready(function() {
-    $('#anchor').viewportChecker({
+  $('#anchor').viewportChecker({
         offset: 0,
+        repeat: true,
         callbackFunction: function() {
-        	if (!$('tbody tr').length) loadStudents("000000000000000000000000");
-          else loadStudents($("tbody tr:last-child").attr('id'));
+          if (firstLoad) { 
+            loadStudents("000000000000000000000000");
+            firstLoad = false;
+          }
+          else if (!pending && !endList && !firstLoad){
+           loadStudents(currenTr);
+          }
         }
     });
 });

@@ -478,11 +478,12 @@ footer {
 }
 
 .landing-lamp img {
-  width: 50%;
+  width: 60%;
 }
 
 .landing-text {
-  padding: 20px 0;
+  padding: 10px 0;
+  font-size: 15px;
 }
 
 .start-button {
@@ -509,7 +510,7 @@ footer {
 }
 
 .landing-comment {
-  background-color: #EBF7F0;
+  background-color: #ebf7f5;
   border-radius: 4px;
   padding: 30px 10px;
 }
@@ -651,12 +652,22 @@ footer {
   color: #bbbbbb;
 }
 
+.landing-h4 {
+  cursor: pointer;
+}
 
+.landing-h4 i {
+  font-size: 90%;
+}
 
+.landing-collapses {
+  padding-bottom: 10px;
+}
 
+.landing-teacher {
+  background-color: #EBF7F0 !important;
+}
 
-
-
-
-
-
+.nav-anchor {
+  padding-bottom: 30px;
+}

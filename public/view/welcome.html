@@ -51,31 +51,53 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav">
-                <li><a href="#">Главная</a></li>
-                <li><a href="#">О нас</a></li>
-                <li><a href="#">Отзывы</a></li>
-                <li><a href="#">Контакты</a></li>
+                <li><a href="#main">Главная</a></li>
+                <li><a href="#about-us">О нас</a></li>
+                <li><a href="#teachers">Наши преподаватели</a></li>
+                <li><a href="#comments">Отзывы</a></li>
+                <li><a href="#contacts">Контакты</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/sign-in"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Вход и регистрация</a></li>
             </ul>
         </div>
     </nav>
-    <div class="landing-head">
+    <div class="landing-head" id="main">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <h1>Интерактивный обучающий портал</h1>
+                <div class="col-md-7">
+                    <h1>On-line репетиторский центр</h1>
                 </div>
-                <div class="col-md-6 start-button text-center">
+                <div class="col-md-5 start-button text-center">
                     <a href="/sign-up" class="btn btn-landing btn-lg" role="button">Начать пользоваться</a>
-                    <h5>Это легко и удобно!</h5>
+                    <h5>Образование, которое не знает преград!</h5>
                 </div>
             </div>
             <div class="row main-content">
-                <div class="col-md-6">
-                    <p class="landing-text">Donec facilisis tortor ut augue lacinia, at viverra est semper. Sed sapien metus, scelerisque nec pharetra id, tempor a tortor. Pellentesque non dignissim neque. Ut porta viverra est, ut dignissim elit elementum ut. Nunc vel rhoncus nibh, ut tincidunt turpis. Integer ac enim pellentesque, adipiscing metus id, pharetra odio. Donec bibendum nunc sit amet tortor scelerisque luctus et sit amet mauris. Suspendisse felis sem, condimentum ullamcorper est sit amet, molestie mollis nulla. Etiam lorem orci, consequat ac magna quis, facilisis vehicula neque.</p>
-                    <div class="row">
+                <div class="col-md-7">
+                    <h3 class="no-margin normal-text">Дорогой друг! Добро пожаловать на обучающий интерактивный портал «Mathlab.kz»</h3>
+                    <p class="landing-text">Мы предлагаем Вам репетиторские услуги в on-line режиме по математике, физике и информатике. <br>On-line обучение имеет несколько неоспоримых преимуществ:<br>
+                    </p>
+                    <div class="landing-collapses">
+                        <h4 data-toggle="collapse" data-target="#text-1" class="landing-h4">Нет привязки к месту <i class="fa fa-angle-down" aria-hidden="true"></i></h4>
+                        <ul id="text-1" class="collapse">
+                            <li>Вам не нужно вести ребенка в другой конец города к определенному репетитору, отвлекаться от своих дел, переносить их.</li>
+                            <li>Вы не должны делать паузы в обучении, если уезжаете в другой город или страну, к родственникам, на отдых. Ваш ребенок можете загорать на пляже и продолжать обучение!</li>
+                            <li>Вы не будете переживать – как ребенок доберется до репетитора и обратно в темное время суток и по безлюдным улицам.</li>
+                            <li>Репетитор не откажет вам в обучении потому, что «вы живете далеко» и «неудобно добираться».</li>
+                        </ul>
+                        <h4 data-toggle="collapse" data-target="#text-2" class="landing-h4">Нет привязки ко времени <i class="fa fa-angle-down" aria-hidden="true"></i></h4>
+                        <ul id="text-2" class="collapse">
+                            <li>Можно выполнять задания в любое удобное время.</li>
+                            <li>Достаточно отправлять выполненный урок до 20.00 в тот день, на который есть договоренность с репетитором.Достаточно отправлять выполненный урок до 20.00 в тот день, на который есть договоренность с репетитором.</li>
+                        </ul>
+                        <h4 data-toggle="collapse" data-target="#text-3" class="landing-h4">Нет ценовых накруток за обучение <i class="fa fa-angle-down" aria-hidden="true"></i></h4>
+                        <ul id="text-3" class="collapse">
+                            <li>Ваш репетитор возьмет плату только за свою работу, без учета аренды помещения и транспортных расходов.</li>
+                        </ul>
+                        <h4 style="padding-top: 20px;">Эти условия показались вам привлекательными? Смело регистрируйтесь на нашем портале и начинайте обучение!</h4>
+                    </div>
+                    <div class="row main-content">
                         <div class="col-xs-4">
                             <a href="/sign-up" class="btn btn-warning btn-lg" role="button">Регистрация</a>
                         </div>
@@ -85,12 +107,13 @@
                         <div class="col-xs-4"></div>
                     </div>
                 </div>
-                <div class="col-md-6 landing-lamp text-center">
+                <div class="col-md-5 landing-lamp text-center">
                     <img src="images/lamp.svg">
                 </div>
             </div>
         </div>
     </div>
+    <div id="about-us" class="nav-anchor"></div>
     <div class="container main-content">
         <div class="row animated animated-post">
             <div class="col-xs-1"></div>
@@ -121,8 +144,8 @@
         </div>
         <div class="row article animated animated-post">
             <div class="col-sm-1"></div>
-            <div class="col-sm-7">
-                <p class="article-p">Перед началом обучения, каждый ребенок в обязательном порядке должен пройти профориентационный тест, соответствующий своему возрасту и тест на определение уровня познаний в предмете.<br>После обработки результатов тестов, наши учителя разрабатывают для каждого ученика индивидуальную программу подготовки – это, пожалуй, главная особенность репетиторского центра MathLab.kz.</p>
+            <div class="col-sm-7" style="padding-top: 40px;">
+                <p class="article-p">Мы рекомендуем нашим ученикам настроиться на серьезное обучение по индивидуальной программе, которая будет корректироваться в соответствии с потребностями обучающегося и выявленными «провалами» в знаниях.</p>
             </div>
             <div class="col-sm-3 text-center">
                 <img src="images/article-img-3.svg">
@@ -134,19 +157,68 @@
             <div class="col-sm-3 text-center">
                 <img src="images/article-img-4.svg">
             </div>
-            <div class="col-sm-7" style="padding-top: 40px;">
-                <p class="article-p">Мы рекомендуем нашим ученикам настроиться на серьезное обучение по индивидуальной программе, которая будет корректироваться в соответствии с потребностями обучающегося и выявленными «провалами» в знаниях.</p>
-            </div>
-            <div class="col-sm-1"></div>
-        </div>
-        <div class="row article animated animated-post">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-10">
+            <div class="col-sm-7" style="padding-top: 30px;">
                 <p class="article-p">Обучаясь в нашем онлайн центре, ваш ребенок не будет привязан к определенному времени встречи с учителем, а вы, выбирая репетитора для своего ребенка, не будете ограничены географическим положением педагога – и это несомненное преимуществом онлайн обучения.</p>
             </div>
             <div class="col-sm-1"></div>
         </div>
     </div>
+    <div id="teachers" class="nav-anchor"></div>
+    <div class="container main-content animated animated-post">
+        <div class="row">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-10">
+                <h2 class="article-title">Наши преподаватели</h2>
+            </div>
+            <div class="col-xs-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-10">
+                <div class="col-md-4">
+                    <div class="landing-comment landing-teacher">
+                        <div class="landing-comment-body text-center">
+                            <img src="images/teacher-w.svg" class="img-circle">
+                            <h4>Галия Мрзановна Альжанова</h4>
+                            <h6>Учитель математики, информатики</h6>
+                            <blockquote>
+                                <p>Преподает в физмат лицее. Призер республиканской олимпиады среди учителей математики, физики, информатики (2 место). Большой опыт подготовки призеров международных, республиканских олимпиад.</p>
+                                <h6>Стаж работы репетитором - 10 лет</h6>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="landing-comment landing-teacher">
+                        <div class="landing-comment-body text-center">
+                            <img src="images/teacher.svg" class="img-circle">
+                            <h4>Василий Васильевич Соколов</h4>
+                            <h6>Учитель физики</h6>
+                            <blockquote>
+                                <p>Преподает в физмат школе. Призер Международной олимпиады среди учителей математики, физики, информатики (I место). Имеет учеников-призеров международных и республиканских олимпиад.</p>
+                                <h6>Стаж работы репетитором - 7 лет</h6>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="landing-comment landing-teacher">
+                        <div class="landing-comment-body text-center">
+                            <img src="images/teacher-w.svg" class="img-circle">
+                            <h4>Гребенюк Анастасия Николаевна</h4>
+                            <h6>Учитель математики</h6>
+                            <blockquote>
+                                <p>Выпускница Специализированной школы-лицея для одаренных детей. Призер Республиканской олимпиады среди студентов технических вузов по начертательной геометрии (2 место).</p>
+                                <h6>Стаж работы репетитором - 3 года</h6>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1"></div>
+        </div>
+    </div>
+    <div id="comments" class="nav-anchor"></div>
     <div class="container main-content animated animated-post">
         <div class="row">
             <div class="col-xs-1"></div>
@@ -198,6 +270,7 @@
             <div class="col-xs-1"></div>
         </div>
     </div>
+    <div id="contacts" class="nav-anchor"></div>
     <footer>
         <div class="container">
             <div class="row">
@@ -218,7 +291,12 @@
             </div>
         </div>
     </footer>
-
+    <script src="js/smoothscroll.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('nav').smoothScroll(500);  
+        })
+    </script>
     <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
