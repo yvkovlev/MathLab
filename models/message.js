@@ -7,6 +7,7 @@ var messageSchema = new Schema({
 	sender: String,
 	message: String,
 	fileUrl: String,
+	fileSize: Number,
 	date: {type: Date},
 });
 

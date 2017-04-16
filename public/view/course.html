@@ -23,6 +23,7 @@
     <!-- Scripts -->
     <script src="/js/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/viewportchecker.js"></script>
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -76,85 +77,9 @@
                     </div>
                     <div class="panel-body nano" style="height: 600px;">
                         <div class="nano-content">
+                            <span id="anchor"></span>
                             <div class="messages">
-                                <!-- <div class="message message-in">
-                                    <div class="message-img">
-                                        <img src="/images/teacher-w.svg" class="img-circle">
-                                    </div>
-                                    <div class="message-body">
-                                        <h5>Альжанова Галия Мрзановна</h5>
-                                        <ul>
-                                            <li>Добрый день!</li>
-                                            <li>Рада приветствовать на портале MathLab.kz! Сегодня наше первое занятие!</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="message message-out">
-                                    <div class="message-img">
-                                        <img src="/images/profile.svg" class="img-circle">
-                                    </div>
-                                    <div class="message-body">
-                                        <h5>Яковлев Денис Викторович</h5>
-                                        <ul>
-                                            <li>Здравствуйте!</li>
-                                            <li>Я готов к занятию, можем начинать.</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="message message-in">
-                                    <div class="message-img">
-                                        <img src="/images/teacher-w.svg" class="img-circle">
-                                    </div>
-                                    <div class="message-body">
-                                        <h5>Альжанова Галия Мрзановна</h5>
-                                        <ul>
-                                            <li>Тогда начем с того, что ...</li>
-                                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et bibendum dolor. Maecenas orci sapien, ultrices sed ante ac, pretium mollis metus. Ut quis ligula nec nunc accumsan rhoncus. Nunc lobortis in quam id fermentum. Duis vel tortor felis. Morbi imperdiet quam sit amet enim pretium, vitae dapibus nisi dapibus. Duis maximus ac mi sed luctus.</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="message message-out">
-                                    <div class="message-img">
-                                        <img src="/images/profile.svg" class="img-circle">
-                                    </div>
-                                    <div class="message-body">
-                                        <h5>Яковлев Денис Викторович</h5>
-                                        <ul>
-                                            <li>Etiam quis ipsum eu tortor malesuada egestas in eget diam. Nam aliquam purus sit amet velit sodales, sed imperdiet orci tempus. Donec vulputate nibh ac elit tristique auctor. Proin venenatis aliquet sapien eget scelerisque. Morbi at elit facilisis, tristique dolor ut, bibendum augue. Cras eu tincidunt risus. In sit amet lectus ornare, efficitur urna sed, gravida est. Mauris eu vestibulum dolor.</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="message message-in">
-                                    <div class="message-img">
-                                        <img src="/images/teacher-w.svg" class="img-circle">
-                                    </div>
-                                    <div class="message-body">
-                                        <h5>Альжанова Галия Мрзановна</h5>
-                                        <div class="message-attachment">
-                                            <div class="message-attachment-img">
-                                                <a href="#" class="btn btn-primary" role="button"><i class="fa fa-paperclip" aria-hidden="true"></i></a>
-                                            </div>
-                                            <div class="message-attachment-body">
-                                                <h5>filename.doc</h5>
-                                                <h6>433 КБ</h6>
-                                            </div>
-                                        </div>
-                                        <ul>
-                                            <li>Etiam quis ipsum eu tortor malesuada egestas in eget diam. Nam aliquam purus sit amet velit sodales, sed imperdiet orci tempus. Donec vulputate nibh ac elit tristique auctor. Proin venenatis aliquet sapien eget scelerisque. Morbi at elit facilisis, tristique dolor ut, bibendum augue. Cras eu tincidunt risus. In sit amet lectus ornare, efficitur urna sed, gravida est. Mauris eu vestibulum dolor.</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="message message-in">
-                                    <div class="message-img">
-                                        <img src="/images/teacher-w.svg" class="img-circle">
-                                    </div>
-                                    <div class="message-body">
-                                        <h5>Альжанова Галия Мрзановна</h5>
-                                        <ul>
-                                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et bibendum dolor.</li>
-                                        </ul>
-                                    </div>
-                                </div> -->
+
                             </div>
                         </div>
                     </div>

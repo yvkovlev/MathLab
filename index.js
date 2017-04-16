@@ -34,13 +34,9 @@ var storage = multer.diskStorage({
         cb(null, './public/uploads/')
     },
     filename: function (req, file, cb) {
-        var filename = ((file.originalname).split('.')[1] == "jpg" || (file.originalname).split('.')[1] == "png") ? req.user._id + ".jpg" /*+ (file.originalname).split('.')[1]*/ : (file.originalname).split('.')[0] + "-" + Date.now() + "." + (file.originalname).split('.')[1];
-        User.update({_id: mongoose.Types.ObjectId(req.user._id)}, 
-          { $set: {avatarUrl: '/uploads/' + filename } }, 
-          function(err){
-            if (err) throw err;
-            cb(null, filename);
-          });
+      console.log('asdasdasd');
+        var filename = ((file.originalname).split('.')[1] == "jpg" || (file.originalname).split('.')[1] == "png") ? req.user._id + ".jpg" : Date.now() + "-" + (file.originalname);
+        cb(null, filename);
     }
 });
 /*User.find({}, function(err, data){ console.log(data); });*/
@@ -102,6 +98,10 @@ app.use(function (req, res, next){
 
 app.get('/', function (req, res){
   res.sendFile(__dirname + '/public/view/welcome.html');
+});
+app.get('/public/uploads/:filename', function (req, res){
+  console.log('adadads');
+  res.sendFile(__dirname + '/public/uploads/' + req.params.filename);
 });
 app.get('/sign-in', function (req, res){
 	res.sendFile(__dirname + '/public/view/sign-in.html');
@@ -167,7 +167,13 @@ app.put('/api/registration', function (req, res, next){
           if(err) throw err;
           req.logIn(newUser, function(err){
             if (err) { return next(err); }
-            res.send({id: req.user._id, email: req.user.email});
+            fs.readFile('public/images/profile.jpg', function (err, data) {
+              if (err) throw err;
+              fs.writeFile('public/uploads/' + newUser._id + '.jpg', data, function (err) {
+                if (err) throw err;
+                else res.send({id: req.user._id, email: req.user.email});
+              });
+            });
           });
         }); 
       });
@@ -212,7 +218,13 @@ app.put('/api/reg-teacher', function (req, res, next){
         });
         newUser.save(function(err){
           if(err) throw err;
-          res.send('Success');
+          fs.readFile('public/images/teacher.jpg', function (err, data) {
+            if (err) throw err;
+            fs.writeFile('public/uploads/' + newUser._id + '.jpg', data, function (err) {
+              if (err) throw err;
+              else res.send('Success');
+            });
+          });
         }); 
       });
     }
@@ -278,35 +290,39 @@ app.post('/api/courseInfo', function (req, res){
 
 /*course.find({}, function(err, data){ console.log(data); });*/
 //User.find({}, function(err, data){ console.log(data); });
+message.find({}, function(err, data){ console.log(data); });
 
 app.post('/api/loadMessages', function (req, res){
   message.
-    find({dialogId: req.body.dialogId}).
-    select('_id sender senderId message fileUrl date').
+    find({ $and: [ {dialogId: req.body.dialogId}, { _id: {$gt: mongoose.Types.ObjectId(req.body.lastId) } } ] }).
+    select('_id sender senderId message fileUrl fileSize date').
     sort({date: 1}).
-    limit(10).
+    limit(100).
     exec(function(err, data){
       if (err) throw err;
       res.send(data);
     });
 });
 
-app.put('/api/sendMessage', function (req, res){
+app.post('/api/sendMessage', upload.single('file'), function (req, res){
+  console.log(req.file);
   var newMessage = message({
     dialogId: req.body.dialogId,
     senderId: req.user._id,
     sender: req.user.fullname,
     message: req.body.message,
-    fileUrl: "",
+    fileUrl: (req.file) ? ("/" + req.file.path) : (""),
+    fileSize: (req.file) ? (req.file.size) : (0),
     date: Date.now()
   });
   newMessage.save(function(err){
     if (err) throw err;
-    res.send("Success");
+    res.send(newMessage);
   });
 });
 
 app.post('/api/uploadImg', upload.single('file'), function (req, res){
+  console.log(req.body);
   res.send("Success");
 });
 
@@ -317,7 +333,7 @@ app.post('/api/log-out', function (req, res){
 });
 
 app.post('/api/userInfo', function (req, res){
-  res.send({id: req.user._id, fullname: req.user.fullname, email: req.user.email, phone: req.user.phone, sex: req.user.sex, grade: req.user.grade, confirmed: req.user.confirmed, avatarUrl: req.user.avatarUrl});
+  res.send({id: req.user._id, fullname: req.user.fullname, email: req.user.email, phone: req.user.phone, sex: req.user.sex, grade: req.user.grade, confirmed: req.user.confirmed});
 });
 
 io.on('connection', function(socket){
@@ -352,11 +368,7 @@ io.on('connection', function(socket){
       });
   });
   socket.on('sendMessage', function(data){
-    var message = {};
-    message.sender = data.sender;
-    message.senderId = data.senderId;
-    message.message = data.message;
-    socket.broadcast.to(data.dialogId).emit('newMessage', message);
+    socket.broadcast.to(data.dialogId).emit('newMessage', data);
   });
 })
 

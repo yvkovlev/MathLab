@@ -2,6 +2,63 @@ var dialogId = (window.location.href).split('/')[4];
 var dialogInfo;
 var userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
 var socket = io();
+var pending = true;
+var firstLoad = true;
+var endList = false;
+var currenTr;
+
+function loadMessages(lastId) {
+  $.ajax({
+    url: '/api/loadMessages',
+    method: 'post',
+    data: {dialogId: dialogId, lastId: lastId},
+    beforeSend: function() {
+      pending = true;
+    },
+    success: function(response) {
+      pending = false;
+      var messages = "";
+      response.forEach(function(message, response){
+        if (message.senderId != $(".message:last-child").attr("id")) {
+          messages +=
+            "<div class='message' id='" + message._id + "'>" +
+              "<div class='message-img'>" +
+                "<img src='/uploads/" + message.senderId + ".jpg' class='img-circle'>" +
+              "</div>" +
+              "<div class='message-body'>" +
+                "<h5>" + message.sender + "</h5>";
+        if (message.fileUrl) {
+          messages +=
+            "<div class='message-attachment'>" +
+              "<div class='message-attachment-img'>" +
+                "<a href='" + message.fileUrl + "' class='btn btn-primary' role='button'><i class='fa fa-paperclip' aria-hidden='true'></i></a>" +
+              "</div>" +
+              "<div class='message-attachment-body'>" +
+                  "<h5>" + (message.fileUrl).split('/')[(message.fileUrl).split('/').length - 1] + "</h5>" +
+                "<h6>" + (message.fileSize / 1024)+ " КБ</h6>" +
+              "</div>" +
+            "</div>";
+        }
+          messages +=
+                "<ul>" +
+                  "<li>" + message.message + "</li>" +
+                "</ul>" +
+              "</div>" +
+              "<div class='message-date'>" +
+                "<span>" + moment(message.date).format("HH:mm") + "</span>" +
+              "</div>" +
+            "</div>";
+        }
+      });
+      $('.messages').prepend(messages);
+      if (response[response.length - 1]) currenTr = response[0]._id;
+      else endList = true;
+      $(".nano").nanoScroller({ 
+        scroll: 'bottom' 
+      });
+    }
+  });
+}
 
 $(document).ready(function() {
   var rows = 1;
@@ -17,53 +74,57 @@ $(document).ready(function() {
       $(".panel-heading .text-right").html(dialogInfo.subject);
     }
   });
-  $.ajax({
-    url: '/api/loadMessages',
-    method: 'post',
-    data: {dialogId: dialogId},
-    success: function(response) {
-      var messages = "";
-      response.forEach(function(message, response){
-        if (message.senderId != $(".message:last-child").attr("id")) {
-          messages +=
-            "<div class='message' id='" + message.senderId + "'>" +
-              "<div class='message-img'>" +
-                "<img src='/uploads/" + message.senderId + ".jpg' class='img-circle'>" +
-              "</div>" +
-              "<div class='message-body'>" +
-                "<h5>" + message.sender + "</h5>" +
-                "<ul>" +
-                  "<li>" + message.message + "</li>" +
-                "</ul>" +
-              "</div>" +
-              "<div class='message-date'>" +
-                "<span>" + moment(message.date).format("HH:mm") + "</span>" +
-              "</div>" +
-            "</div>";
-        }
-      });
-      $('.messages').append(messages);
-      $(".nano").nanoScroller({ 
-        scroll: 'bottom' 
-      });
+
+  $('#anchor').viewportChecker({
+    offset: 0,
+    repeat: true,
+    callbackFunction: function() {
+      console.log('adsasd');
+      console.log(pending);
+      console.log(endList);
+      console.log(firstLoad);
+      if (firstLoad) { 
+        loadMessages("000000000000000000000000");
+        firstLoad = false;
+      }
+      else if (!pending && !endList && !firstLoad){
+        loadMessages(currenTr);
+      }
     }
   });
-  socket.on('newMessage', function(message){
-    $('.messages').append(
-        "<div class='message message-out'>" +
-              "<div class='message-img'>" +
-                "<img src='/uploads/" + message.senderId + ".jpg' class='img-circle'>" +
-              "</div>" +
-              "<div class='message-body'>" +
-                "<h5>" + message.sender + "</h5>" +
-                "<ul>" +
-                  "<li>" + message.message + "</li>" +
-                "</ul>" +
-              "</div>" +
-              "<div class='message-date'>" +
-                "<span>" + moment(message.date).format("HH:mm") + "</span>" +
-              "</div>" +
-            "</div>");
+
+  socket.on('newMessage', function(response){
+    console.log(response);
+    var message = "";
+    message += 
+      "<div class='message' id='" + response.senderId + "'>" +
+        "<div class='message-img'>" +
+          "<img src='/uploads/" + response.senderId + ".jpg' class='img-circle'>" +
+        "</div>" +
+        "<div class='message-body'>" +
+          "<h5>" + response.sender + "</h5>";
+    if (response.fileUrl) {
+      message +=
+        "<div class='message-attachment'>" +
+          "<div class='message-attachment-img'>" +
+            "<a href='" + response.fileUrl + "' class='btn btn-primary' role='button'><i class='fa fa-paperclip' aria-hidden='true'></i></a>" +
+          "</div>" +
+          "<div class='message-attachment-body'>" +
+              "<h5>" + (response.fileUrl).split('/')[(response.fileUrl).split('/').length - 1] + "</h5>" +
+            "<h6>" + (response.fileSize / 1024)+ " КБ</h6>" +
+          "</div>" +
+        "</div>";
+    }
+    message +=
+          "<ul>" +
+            "<li>" + response.message + "</li>" +
+          "</ul>" +
+        "</div>" +
+        "<div class='message-date'>" +
+          "<span>" + moment(response.date).format("HH:mm") + "</span>" +
+        "</div>" +
+      "</div>";
+    $('.messages').append(message);
     $(".nano").nanoScroller();
     $(".nano").nanoScroller({ 
       scroll: 'bottom' 
@@ -100,7 +161,6 @@ $(document).ready(function() {
       }
   });
   $(".message-input").keyup(function(e){
-    console.log($('.message-input').html());
     if ($('.message-input').html() == "" || $('.message-input').html() == "<br>") {
       $('.message-input').html("");
       $(".message-input").css("height", "40px");
@@ -109,27 +169,49 @@ $(document).ready(function() {
 });
 
 function sendMessage() {
+  var file = $('#attachment').prop('files')[0];
+  var formData = new FormData();
+  formData.append('file', file);
+  formData.append('dialogId', dialogId);
+  formData.append('message', $('.message-input').html());
   $.ajax({
     url: '/api/sendMessage',
-    method: 'put',
-    data: {dialogId: dialogId, message: $('.message-input').html()},
+    method: 'post',
+    data: formData,
+    processData: false,
+    contentType: false,
     success: function(response){
-      socket.emit('sendMessage', {dialogId: dialogId, sender: userInfo.fullname, senderId: userInfo.id, message: $('.message-input').html()});
-      $('.messages').append(
-      "<div class='message message-out'>" +
-            "<div class='message-img'>" +
-              "<img src='/uploads/" + userInfo.id + ".jpg' class='img-circle'>" +
+      socket.emit('sendMessage', response);
+      var message = "";
+      message += 
+        "<div class='message' id='" + response.senderId + "'>" +
+          "<div class='message-img'>" +
+            "<img src='/uploads/" + response.senderId + ".jpg' class='img-circle'>" +
+          "</div>" +
+          "<div class='message-body'>" +
+            "<h5>" + response.sender + "</h5>";
+      if (response.fileUrl) {
+        message +=
+          "<div class='message-attachment'>" +
+            "<div class='message-attachment-img'>" +
+              "<a href='" + response.fileUrl + "' class='btn btn-primary' role='button'><i class='fa fa-paperclip' aria-hidden='true'></i></a>" +
             "</div>" +
-            "<div class='message-body'>" +
-              "<h5>" + userInfo.fullname + "</h5>" +
-              "<ul>" +
-                "<li>" + $('.message-input').html() + "</li>" +
-              "</ul>" +
+            "<div class='message-attachment-body'>" +
+                "<h5>" + (response.fileUrl).split('/')[(response.fileUrl).split('/').length - 1] + "</h5>" +
+              "<h6>" + (response.fileSize / 1024)+ " КБ</h6>" +
             "</div>" +
-            "<div class='message-date'>" +
-                "<span>" + moment().format("HH:mm") + "</span>" +
-              "</div>" +
-          "</div>");
+          "</div>";
+      }
+      message +=
+            "<ul>" +
+              "<li>" + response.message + "</li>" +
+            "</ul>" +
+          "</div>" +
+          "<div class='message-date'>" +
+            "<span>" + moment(response.date).format("HH:mm") + "</span>" +
+          "</div>" +
+        "</div>";
+      $('.messages').append(message);
       $('.message-input').html("");
       $(".panel-body").css("height", "600px");
       $(".nano").nanoScroller();
