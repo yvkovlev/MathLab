@@ -1,3 +1,4 @@
+var compression = require('compression');
 var express = require('express');
 var app = express();
 var subdomain = require('express-subdomain');
@@ -44,6 +45,7 @@ var storage = multer.diskStorage({
 });
 /*User.find({}, function(err, data){ console.log(data); });*/
 var upload = multer({ storage: storage });
+app.use(compression());
 app.use(subdomain('admin', router));
 app.use(express.static('public'));
 app.use(morgan('dev'));
