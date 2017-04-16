@@ -38,9 +38,6 @@ $(document).ready(function() {
         courses += 
           "<td id='" + item._id + "''>" +
             "<div class='course active-course' onClick='window.location.href=`/course/" + item._id + "`'>" +
-          "<td>" +
-            "<a href='/course/" + item._id + "'>" +
-            "<div class='course active-course'>" +
               "<div class='course-header'>" +
                 "<div class='course-info-img'>" +
                   "<img src='/images/teacher.svg' class='img-circle'>" +

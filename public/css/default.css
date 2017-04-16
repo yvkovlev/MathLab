@@ -359,6 +359,7 @@ footer {
   background: #fff;
   padding: 10px 10px;
   outline: none;
+  overflow: scroll;
 }
 
 .no-padding {
@@ -380,6 +381,7 @@ footer {
 .message {
   display: flex;
   margin-bottom: 15px;
+  position: relative;
 }
 
 .message-img {
@@ -601,4 +603,60 @@ footer {
   line-height: 1.5;
 }
 
-.all-teachers-link {color: #7b7b7b !important;font-size: 12px;font-weight: 300;}
+.all-teachers-link {
+  color: #7b7b7b !important;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.ad-lock {
+  width: 70%;
+  padding: 15px;
+}
+
+.margin-10 {
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+.attachment-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.attachment label {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+
+.attachment label:hover {
+  background: #e0e0e0;
+}
+
+.message-date {
+  position: absolute;
+  right: 0;
+  top: 5px;
+}
+
+.message-date span {
+  font-size: 11px;
+  color: #bbbbbb;
+}
+
+
+
+
+
+
+
+
+
+
