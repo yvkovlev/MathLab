@@ -111,7 +111,7 @@ $(document).ready(function() {
     removeTitle: 'Отменить',
     elErrorContainer: '#kv-avatar-errors-1',
     msgErrorClass: 'alert alert-block alert-danger',
-    defaultPreviewContent: (!userInfo.avatarUrl) ? ('<img src="/images/profile.svg" alt="Ваш аватар" class="img-circle" style="width:100%">') : ('<img src="' + userInfo.avatarUrl + '" class="img-circle" style="width:100%">'),
+    defaultPreviewContent: '<img src="/uploads/' + userInfo.id + ".jpg" + '" alt="Ваш аватар" class="img-circle" style="width:100%">',
     layoutTemplates: {main2: '{preview} ' + '<div class="btn-group">' + '{browse} {remove} {upload}' + '</div>'},
     allowedFileExtensions: ["jpg", "jpeg", "png"]
   });

@@ -3,7 +3,7 @@ function setUserInfo(userInfo) {
   $('#email').html(userInfo.email);
   $('#phone').html(userInfo.phone);
   $('#grade').html(userInfo.grade);
-  $('.profile-img img').attr('src', userInfo.avatarUrl);
+  $('.profile-img img').attr('src', "/uploads/" + userInfo.id + ".jpg");
 }
 
 $(document).ready(function() { 
