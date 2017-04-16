@@ -141,6 +141,9 @@ app.get('/cabinet/:id', function (req, res){
   }
   else res.send('Fuck off');
 });
+app.get('/access-denied', function (req, res){
+  res.sendFile(__dirname + '/public/view/access-denied.html');
+});
 
 app.put('/api/registration', function (req, res, next){
   User.findOne({email: req.body.email}, function(err, user){
@@ -272,7 +275,7 @@ app.post('/api/courseInfo', function (req, res){
 });
 
 /*course.find({}, function(err, data){ console.log(data); });*/
-/*User.find({}, function(err, data){ console.log(data); });*/
+//User.find({}, function(err, data){ console.log(data); });
 
 app.post('/api/loadMessages', function (req, res){
   message.
@@ -429,7 +432,7 @@ router.post('/api/loadBids', function (req, res){
     find({
       _id: {$gt: mongoose.Types.ObjectId(req.body.lastID)}
     }).
-    select('_id student studentId subject prefDays prefTime phone').
+    select('_id student studentId subject prefDays prefTime date phone status').
     sort({date: -1}).
     limit(10).
     exec(function(err, data){
@@ -496,6 +499,7 @@ router.post('/api/updateBid', function (req, res){
     function(err){
       if (err) throw err;
       res.send('Success');
+      console.log(req.body.bidId);
     });
 });
 
