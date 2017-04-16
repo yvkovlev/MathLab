@@ -58,9 +58,7 @@ $(document).ready(function() {
         }
       });
       courses += "</tr>";
-      console.log(courses);
       $('tbody').append(courses);
-      console.log(response.length);
     }
   });
   $("#req-submit").on("click", function(){
