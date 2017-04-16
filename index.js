@@ -432,7 +432,7 @@ router.post('/api/login', function (req, res){
 router.post('/api/loadBids', function (req, res){
   bid.
     find({
-      _id: {$gt: mongoose.Types.ObjectId(req.body.lastID)}
+      _id: {$lt: mongoose.Types.ObjectId(req.body.lastID)}
     }).
     select('_id student studentId subject prefDays prefTime date phone status').
     sort({date: -1}).

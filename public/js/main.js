@@ -16,11 +16,14 @@ $(document).ready(function() {
       success: function(response){
         sessionStorage.setItem("userInfo", JSON.stringify(response));
         setUserInfo(response);
+        socket.emit('setRooms', JSON.parse(sessionStorage.getItem("userInfo")).id);
       }
     });
   }
-  else setUserInfo(JSON.parse(sessionStorage.getItem("userInfo")));
-  socket.emit('setRooms', JSON.parse(sessionStorage.getItem("userInfo")).id);
+  else { 
+    setUserInfo(JSON.parse(sessionStorage.getItem("userInfo")));
+    socket.emit('setRooms', JSON.parse(sessionStorage.getItem("userInfo")).id);
+  }
   $("#log-out").on("click", function(){
     sessionStorage.clear();
     $.ajax({

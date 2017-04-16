@@ -24,27 +24,9 @@ $(document).ready(function() {
     success: function(response) {
       var messages = "";
       response.forEach(function(message, response){
-        if (message.senderId == userInfo.id) {
+        if (message.senderId != $(".message:last-child").attr("id")) {
           messages +=
-            "<div class='message message-out'>" +
-              "<div class='message-img'>" +
-                "<img src='/uploads/" + message.senderId + ".jpg' class='img-circle'>" +
-              "</div>" +
-              "<div class='message-body'>" +
-                "<h5>" + message.sender + "</h5>" +
-                "<ul>" +
-                  "<li>" + message.message + "</li>" +
-                "</ul>" +
-              "</div>" +
-              "<div class='message-date'>" +
-                "<span>" + moment(message.date).format("HH:mm") + "</span>" +
-              "</div>" +
-            "</div>";
-          console.log(response);
-        }
-        else {
-          messages +=
-            "<div class='message message-in'>" +
+            "<div class='message' id='" + message.senderId + "'>" +
               "<div class='message-img'>" +
                 "<img src='/uploads/" + message.senderId + ".jpg' class='img-circle'>" +
               "</div>" +
@@ -116,7 +98,6 @@ $(document).ready(function() {
         sendMessage();
         e.preventDefault();
       }
-      console.log(rows);
   });
   $(".message-input").keyup(function(e){
     console.log($('.message-input').html());

@@ -42,33 +42,19 @@ function loadBids(lastID) {
 }
 
 $(document).ready(function() {
-  $.ajax({
-    url: 'api/teachers',
-    method: 'get',
-    success: function(response){
-      var teacherList = "";
-      response.forEach(function(item, response){
-        teacherList +=
-          "<option id='" + item._id + "'>" + item.fullname + "</option>";
-      });
-      $('#teacher-list').append(teacherList);
-    }
-  });
-  if (firstLoad) { 
-    loadBids("000000000000000000000000");
-    firstLoad = false;
-  }
-  if (!firstLoad) {
-    currenTr = $(".tbody-bids tr:last-child").attr('id');
-    $('#anchor').viewportChecker({
+  $('#anchor').viewportChecker({
         offset: 0,
         repeat: true,
         callbackFunction: function() {
-        	if (!pending && !endList) loadBids(currenTr);
-          //console.log(currenTr);
+          if (firstLoad) { 
+            loadBids("ffffffffffffffffffffffff");
+            firstLoad = false;
+          }
+          else if (!pending && !endList && !firstLoad){
+           loadBids(currenTr);
+          }
         }
     });
-  }
 });
 
 $(document).ready(function() {
@@ -142,5 +128,18 @@ $(document).ready(function() {
         console.log('Bid refused.');
       }
     });
+  });
+
+  $.ajax({
+    url: 'api/teachers',
+    method: 'get',
+    success: function(response){
+      var teacherList = "";
+      response.forEach(function(item, response){
+        teacherList +=
+          "<option id='" + item._id + "'>" + item.fullname + "</option>";
+      });
+      $('#teacher-list').append(teacherList);
+    }
   });
 });
