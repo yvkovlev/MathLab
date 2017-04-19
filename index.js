@@ -523,6 +523,6 @@ router.post('/api/log-out', function (req, res){
   });
 });
 
-http.listen(3000, function(){
+http.listen(80, function(){
   console.log('MathLab is listening on port 80');
 });
