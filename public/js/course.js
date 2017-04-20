@@ -35,7 +35,7 @@ function loadMessages(lastId) {
               "</div>" +
               "<div class='message-attachment-body'>" +
                   "<h5>" + (message.fileUrl).split('/')[(message.fileUrl).split('/').length - 1] + "</h5>" +
-                "<h6>" + (message.fileSize / 1024)+ " КБ</h6>" +
+                "<h6>" + (message.fileSize / 1024).toFixed(2) + " КБ</h6>" +
               "</div>" +
             "</div>";
         }
@@ -72,6 +72,7 @@ $(document).ready(function() {
       console.log(response);
       $(".panel-heading .col-sm-6").html((dialogInfo.studentId != userInfo.id) ? ("<img src='/uploads/" + dialogInfo.studentId + ".jpg' class='img-circle'> " + dialogInfo.student) : ("<img src='/uploads/" + dialogInfo.teacherId + ".jpg' class='img-circle'> " + dialogInfo.teacher));
       $(".panel-heading .text-right").html(dialogInfo.subject);
+      $(document).prop('title', dialogInfo.subject + " (" + dialogInfo.teacher + ")");
     }
   });
 
@@ -79,10 +80,6 @@ $(document).ready(function() {
     offset: 0,
     repeat: true,
     callbackFunction: function() {
-      console.log('adsasd');
-      console.log(pending);
-      console.log(endList);
-      console.log(firstLoad);
       if (firstLoad) { 
         loadMessages("000000000000000000000000");
         firstLoad = false;
@@ -92,6 +89,8 @@ $(document).ready(function() {
       }
     }
   });
+
+
 
   socket.on('newMessage', function(response){
     console.log(response);
@@ -111,7 +110,7 @@ $(document).ready(function() {
           "</div>" +
           "<div class='message-attachment-body'>" +
               "<h5>" + (response.fileUrl).split('/')[(response.fileUrl).split('/').length - 1] + "</h5>" +
-            "<h6>" + (response.fileSize / 1024)+ " КБ</h6>" +
+            "<h6>" + (response.fileSize / 1024).toFixed(2) + " КБ</h6>" +
           "</div>" +
         "</div>";
     }
@@ -198,7 +197,7 @@ function sendMessage() {
             "</div>" +
             "<div class='message-attachment-body'>" +
                 "<h5>" + (response.fileUrl).split('/')[(response.fileUrl).split('/').length - 1] + "</h5>" +
-              "<h6>" + (response.fileSize / 1024)+ " КБ</h6>" +
+              "<h6>" + (response.fileSize / 1024).toFixed(2) + " КБ</h6>" +
             "</div>" +
           "</div>";
       }
@@ -213,6 +212,7 @@ function sendMessage() {
         "</div>";
       $('.messages').append(message);
       $('.message-input').html("");
+      $('.attachments-block').html("");
       $(".panel-body").css("height", "600px");
       $(".nano").nanoScroller();
       $(".nano").nanoScroller({ 

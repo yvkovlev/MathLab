@@ -28,13 +28,12 @@ var bid = require('./models/bid');
 var course = require('./models/course');
 var message = require('./models/message');
 
-mongoose.connect('mongodb://mathlab.kz:27017/MathLab');
+mongoose.connect('mongodb://mathlab1.kz:27017/MathLab');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/uploads/')
     },
     filename: function (req, file, cb) {
-      console.log('asdasdasd');
         var filename = ((file.originalname).split('.')[1] == "jpg" || (file.originalname).split('.')[1] == "png") ? req.user._id + ".jpg" : Date.now() + "-" + (file.originalname);
         cb(null, filename);
     }
@@ -100,7 +99,6 @@ app.get('/', function (req, res){
   res.sendFile(__dirname + '/public/view/welcome.html');
 });
 app.get('/public/uploads/:filename', function (req, res){
-  console.log('adadads');
   res.sendFile(__dirname + '/public/uploads/' + req.params.filename);
 });
 app.get('/sign-in', function (req, res){
@@ -275,7 +273,7 @@ app.post('/api/changePassword', function (req, res){
 });
 
 app.get('/api/loadStudentCourses', function (req, res){
-  course.find({studentId: req.user._id}, '_id subject teacher days time date endingTime', function(err, data){
+  course.find({studentId: req.user._id}, '_id subject teacher days time date endingTime teacherId', function(err, data){
     if (err) throw err;
     res.send(data);
   });
@@ -290,7 +288,7 @@ app.post('/api/courseInfo', function (req, res){
 
 /*course.find({}, function(err, data){ console.log(data); });*/
 //User.find({}, function(err, data){ console.log(data); });
-message.find({}, function(err, data){ console.log(data); });
+// message.find({}, function(err, data){ console.log(data); });
 
 app.post('/api/loadMessages', function (req, res){
   message.
