@@ -397,7 +397,7 @@ footer {
   font-size: 13px;
 }
 
-.message-body h5 {
+.message-body h5, .attachment-document h5 {
   margin: 5px 0;
   font-weight: bolder;
   color: #3a65a7;
@@ -670,4 +670,26 @@ footer {
 
 .nav-anchor {
   padding-bottom: 30px;
+}
+
+.attachments-block {
+  display: block;
+}
+
+.attachment-document {
+  display: flex;
+}
+
+.attachment-document-img {
+  margin: 0;
+}
+
+.attachment-document-img span {
+  color: #fff;
+  font-size: 20px;
+  border-radius: 2px;
+}
+
+.upload-attachment {
+  padding: 10px 10px 0;
 }

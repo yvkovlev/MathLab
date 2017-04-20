@@ -43,7 +43,7 @@ $(document).ready(function() {
             "<div class='course active-course' onClick='window.location.href=`/course/" + item._id + "`'>" +
               "<div class='course-header'>" +
                 "<div class='course-info-img'>" +
-                  "<img src='/images/teacher.svg' class='img-circle'>" +
+                  "<img src='/uploads/" + item.teacherId + ".jpg' class='img-circle'>" +
                 "</div>" +
                 "<div class='course-info-titles'>" + 
                   "<h5>" + item.teacher + "</h5>" +
