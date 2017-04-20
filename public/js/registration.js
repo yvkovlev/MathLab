@@ -21,9 +21,9 @@ $(document).ready(function() {
             $("#user-email").html(response.email);
             setTimeout(function() {
               $(".loader").hide();
-              $("#form-2").show();
+              $("#form-3").show();
               $("#page-1").addClass("disabled-page");
-              $("#page-2").removeClass("disabled-page");
+              $("#page-3").removeClass("disabled-page");
               $(".forms").css({height: "auto"});
               formPaginationProgress();
             }, 500);
@@ -79,5 +79,5 @@ function realHeight() {
 }
 
 function formPaginationProgress() {
-  $(".form-pagination-progress").animate({width: "+=25%"}, 200);
+  $(".form-pagination-progress").animate({width: "+=33.333%"}, 200);
 }
