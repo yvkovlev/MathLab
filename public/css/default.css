@@ -169,6 +169,16 @@ footer {
     color: #788594;
 }
 
+.footer-links li a img {
+    width: 25px;
+    opacity: 0.7;
+    transition: all 0.2s ease-in-out;
+}
+
+.footer-links li a img:hover {
+    opacity: 1;
+}
+
 .nopadding {
    padding: 0 !important;
    margin: 0 !important;
@@ -692,4 +702,10 @@ footer {
 
 .upload-attachment {
   padding: 10px 10px 0;
+}
+
+.contacts-bg {
+  background-color: #f6f7eb;
+  border-radius: 4px;
+  padding: 30px 10px;
 }
