@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Информатика (Альжанова Галия Мрзановна)</title>
+    <title>Ваш текущий курс</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
@@ -87,7 +87,7 @@
                         <div class="row">
                             <div class="col-sm-1 col-xs-2 text-center attachment no-padding">
                                 <label for="attachment"><i class="fa fa-paperclip" aria-hidden="true"></i></label>
-                                <input type="file" name="attachment" id="attachment" class="attachment-input">
+                                <input type="file" name="attachment" id="attachment" class="attachment-input" data-multiple-caption="{count} files selected" multiple>
                             </div>
                             <div class="col-sm-10 col-xs-8 message-input-block no-padding">
                                 <div class="message-input" contenteditable="true"></div>
@@ -96,6 +96,15 @@
                             <div class="col-sm-1 col-xs-2 send-button text-center no-padding">
                                 <i class="fa fa-paper-plane" aria-hidden="true"></i>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1 col-xs-2 no-padding"></div>
+                            <div class="col-sm-10 col-xs-8 no-padding">
+                                <div class="attachments-block">
+                                    
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-2 no-padding"></div>
                         </div>
                     </div>
                 </div>
@@ -122,7 +131,7 @@
             </div>
         </div>
     </footer>
-    
+    <script src="/js/attachment-visualization.js"></script>
     <script src="/js/course.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/nanoscroller.min.js"></script>
