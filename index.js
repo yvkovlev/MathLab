@@ -28,18 +28,16 @@ var bid = require('./models/bid');
 var course = require('./models/course');
 var message = require('./models/message');
 
-mongoose.connect('mongodb://mathlab.kz:27017/MathLab');
+mongoose.connect('mongodb://mathlab1.kz:27017/MathLab');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/uploads/')
     },
     filename: function (req, file, cb) {
-      console.log('asdasdasd');
         var filename = ((file.originalname).split('.')[1] == "jpg" || (file.originalname).split('.')[1] == "png") ? req.user._id + ".jpg" : Date.now() + "-" + (file.originalname);
         cb(null, filename);
     }
 });
-/*User.find({}, function(err, data){ console.log(data); });*/
 var upload = multer({ storage: storage });
 app.use(compression());
 app.use(subdomain('admin', router));
@@ -100,7 +98,6 @@ app.get('/', function (req, res){
   res.sendFile(__dirname + '/public/view/welcome.html');
 });
 app.get('/public/uploads/:filename', function (req, res){
-  console.log('adadads');
   res.sendFile(__dirname + '/public/uploads/' + req.params.filename);
 });
 app.get('/sign-in', function (req, res){
@@ -288,10 +285,6 @@ app.post('/api/courseInfo', function (req, res){
   });
 });
 
-/*course.find({}, function(err, data){ console.log(data); });*/
-//User.find({}, function(err, data){ console.log(data); });
-message.find({}, function(err, data){ console.log(data); });
-
 app.post('/api/loadMessages', function (req, res){
   message.
     find({ $and: [ {dialogId: req.body.dialogId}, { _id: {$gt: mongoose.Types.ObjectId(req.body.lastId) } } ] }).
@@ -305,7 +298,6 @@ app.post('/api/loadMessages', function (req, res){
 });
 
 app.post('/api/sendMessage', upload.single('file'), function (req, res){
-  console.log(req.file);
   var newMessage = message({
     dialogId: req.body.dialogId,
     senderId: req.user._id,
@@ -322,7 +314,6 @@ app.post('/api/sendMessage', upload.single('file'), function (req, res){
 });
 
 app.post('/api/uploadImg', upload.single('file'), function (req, res){
-  console.log(req.body);
   res.send("Success");
 });
 
@@ -513,7 +504,6 @@ router.post('/api/updateBid', function (req, res){
     function(err){
       if (err) throw err;
       res.send('Success');
-      console.log(req.body.bidId);
     });
 });
 
