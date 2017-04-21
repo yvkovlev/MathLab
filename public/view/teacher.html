@@ -22,6 +22,7 @@
     <!-- Scripts -->
     <script src="/js/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/moment.min.js"></script>
     <script src="/js/main.js"></script>
 
     <!--[if lt IE 9]>
@@ -79,8 +80,6 @@
                             <h6 id="email"></h6>
                             <h6 class="sub">Телефон:</h6>
                             <h6 id="phone"></h6>
-                            <h6 class="sub">Класс учебы:</h6>
-                            <h6 id="grade"></h6>
                         </div>
                         <a href="/settings" class="btn btn-default btn-block">Редактировать</a>
                     </div>
@@ -94,102 +93,19 @@
                         <li id="notes"><a href="#">Заметки</a></li>
                     </ul>
                     <div class="profile-content">
-                        <div class="alert alert-info">
+                        <div class="alert alert-info" id="empty-courses-t" style="display: none;">
                             У Вас пока нет активных курсов, свяжитесь с администратором.
                         </div>
-                        <div class="courses" style="display: none;">
+                        <div class="courses">
                             <div class="table-responsive">          
                               <table class="table">
                                 <tbody>
-                                  <tr>
-                                    <td>
-                                        <div class="course active-course">
-                                            <div class="course-header">
-                                                <div class="course-info-img">
-                                                    <img src="/images/teacher.svg" class="img-circle">
-                                                </div>
-                                                <div class="course-info-titles">
-                                                    <h5>Владимир Алексеев</h5>
-                                                    <h6>Математика <small>18.02.2017 - 18.03.2017</small></h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="course">
-                                            <div class="course-header">
-                                                <div class="course-info-img">
-                                                    <img src="/images/teacher.svg" class="img-circle">
-                                                </div>
-                                                <div class="course-info-titles">
-                                                    <h5>Владимир Алексеев</h5>
-                                                    <h6>Математика <small>18.02.2017 - 18.03.2017</small></h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                        <div class="course active-course">
-                                            <div class="course-header">
-                                                <div class="course-info-img">
-                                                    <img src="/images/teacher.svg" class="img-circle">
-                                                </div>
-                                                <div class="course-info-titles">
-                                                    <h5>Владимир Алексеев</h5>
-                                                    <h6>Математика <small>18.02.2017 - 18.03.2017</small></h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="course">
-                                            <div class="course-header">
-                                                <div class="course-info-img">
-                                                    <img src="/images/teacher.svg" class="img-circle">
-                                                </div>
-                                                <div class="course-info-titles">
-                                                    <h5>Владимир Алексеев</h5>
-                                                    <h6>Математика <small>18.02.2017 - 18.03.2017</small></h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                        <div class="course active-course">
-                                            <div class="course-header">
-                                                <div class="course-info-img">
-                                                    <img src="/images/teacher.svg" class="img-circle">
-                                                </div>
-                                                <div class="course-info-titles">
-                                                    <h5>Владимир Алексеев</h5>
-                                                    <h6>Математика <small>18.02.2017 - 18.03.2017</small></h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="course">
-                                            <div class="course-header">
-                                                <div class="course-info-img">
-                                                    <img src="/images/teacher.svg" class="img-circle">
-                                                </div>
-                                                <div class="course-info-titles">
-                                                    <h5>Владимир Алексеев</h5>
-                                                    <h6>Математика <small>18.02.2017 - 18.03.2017</small></h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                  </tr>
+                                  
                                 </tbody>
                               </table>
                             </div>
                         </div>
-                        <div class="courses-history">
+                        <div class="courses-history" style="display: none;">
                             <table class="table table-hover">
                                 <thead>
                                   <tr>

@@ -279,6 +279,13 @@ app.get('/api/loadStudentCourses', function (req, res){
   });
 });
 
+app.get('/api/loadTeacherCourses', function (req, res){
+  course.find({teacherId: req.user._id}, '_id subject student days time date endingTime studentId', function(err, data){
+    if (err) throw err;
+    res.send(data);
+  });
+});
+
 app.post('/api/courseInfo', function (req, res){
   course.findOne({_id: mongoose.Types.ObjectId(req.body.dialogId)}, function(err, data){
     if (err) throw err;

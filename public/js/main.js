@@ -64,6 +64,39 @@ $(document).ready(function() {
       $('tbody').append(courses);
     }
   });
+  $.ajax({
+    url: '/api/loadTeacherCourses',
+    method: 'get',
+    success: function(response) {
+      if (response.length == 0) $("#empty-courses-t").show();
+      var courses = "<tr>", cnt = 0, len = 0, siz = response.length;
+      response.forEach(function(item, response){
+        courses += 
+          "<td id='" + item._id + "''>" +
+            "<div class='course active-course' onClick='window.location.href=`/course/" + item._id + "`'>" +
+              "<div class='course-header'>" +
+                "<div class='course-info-img'>" +
+                  "<img src='/uploads/" + item.studentId + ".jpg' class='img-circle'>" +
+                "</div>" +
+                "<div class='course-info-titles'>" + 
+                  "<h5>" + item.student + "</h5>" +
+                  "<h6>" + item.subject + " <small>" + moment(item.date).format('DD.MM.YY') + ' - ' + moment(item.endingTime).format('DD.MM.YY') + "</small></h6>" +
+                "</div>" +
+              "</div>" +
+            "</div>" +
+            "</a>" +
+          "</td>";
+        cnt++;
+        len++;
+        if (cnt == 2 && len != siz) {
+          courses += "</tr><tr>";
+          cnt = 0;
+        }
+      });
+      courses += "</tr>";
+      $('tbody').append(courses);
+    }
+  });
   $("#req-submit").on("click", function(){
     var prefDays = "";
     if ($('#monday')[0].checked) prefDays += "Пн ";
