@@ -37,7 +37,8 @@ $(document).ready(function() {
     success: function(response) {
       if (response.length == 0) $("#empty-courses").show();
       var courses = "<tr>", cnt = 0, len = 0, siz = response.length;
-      response.forEach(function(item, response){
+      var arr = response.answer;
+      arr.forEach(function(item, arr){
         courses += 
           "<td id='" + item._id + "''>" +
             "<div class='course active-course' onClick='window.location.href=`/course/" + item._id + "`'>" +
@@ -70,7 +71,8 @@ $(document).ready(function() {
     success: function(response) {
       if (response.length == 0) $("#empty-courses-t").show();
       var courses = "<tr>", cnt = 0, len = 0, siz = response.length;
-      response.forEach(function(item, response){
+      var arr = response.answer;
+      arr.forEach(function(item, arr){
         courses += 
           "<td id='" + item._id + "''>" +
             "<div class='course active-course' onClick='window.location.href=`/course/" + item._id + "`'>" +
