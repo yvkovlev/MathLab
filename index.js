@@ -28,7 +28,7 @@ var bid = require('./models/bid');
 var course = require('./models/course');
 var message = require('./models/message');
 
-mongoose.connect('mongodb://mathlab1.kz:27017/MathLab');
+mongoose.connect('mongodb://mathlab.kz:27017/MathLab');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/uploads/')
@@ -38,6 +38,7 @@ var storage = multer.diskStorage({
         cb(null, filename);
     }
 });
+/*User.find({}, function(err, data){ console.log(data); });*/
 var upload = multer({ storage: storage });
 app.use(compression());
 app.use(subdomain('admin', router));
@@ -111,7 +112,7 @@ app.get('/course/:id', function (req, res){
     course.findOne({ $and: [ {_id: mongoose.Types.ObjectId(req.params.id)}, {studentId: req.user._id} ] },
       function(err, data){
         if (err) throw err;
-        if (!data) res.redirect('/access-denied');
+        if (!data) res.send('Fuck off');
         else res.sendFile(__dirname + '/public/view/course.html');
       });
   }
@@ -119,7 +120,7 @@ app.get('/course/:id', function (req, res){
     course.findOne({ $and: [ {_id: mongoose.Types.ObjectId(req.params.id)}, {teacherId: req.user._id} ] },
       function(err, data){
         if (err) throw err;
-        if (!data) res.redirect('/access-denied');
+        if (!data) res.send('Fuck off');
         else res.sendFile(__dirname + '/public/view/course.html');
       });
   }
@@ -138,7 +139,7 @@ app.get('/cabinet/:id', function (req, res){
     if (req.user.priority == 1 || req.user.priority == 2) res.sendFile(__dirname + '/public/view/teacher.html');
     else res.sendFile(__dirname + '/public/view/cabinet.html');
   }
-  else res.redirect('/access-denied');
+  else res.send('Fuck off');
 });
 app.get('/access-denied', function (req, res){
   res.sendFile(__dirname + '/public/view/access-denied.html');
@@ -274,14 +275,14 @@ app.post('/api/changePassword', function (req, res){
 app.get('/api/loadStudentCourses', function (req, res){
   course.find({studentId: req.user._id}, '_id subject teacher days time date endingTime teacherId', function(err, data){
     if (err) throw err;
-    res.send({time: Date.now(), answer: data});
+    res.send(data);
   });
 });
 
 app.get('/api/loadTeacherCourses', function (req, res){
   course.find({teacherId: req.user._id}, '_id subject student days time date endingTime studentId', function(err, data){
     if (err) throw err;
-    res.send({time: Date.now(), answer: data});
+    res.send(data);
   });
 });
 
@@ -292,7 +293,9 @@ app.post('/api/courseInfo', function (req, res){
   });
 });
 
-User.find({}, function(err, data){console.log(data);});
+/*course.find({}, function(err, data){ console.log(data); });*/
+//User.find({}, function(err, data){ console.log(data); });
+// message.find({}, function(err, data){ console.log(data); });
 
 app.post('/api/loadMessages', function (req, res){
   message.
@@ -307,6 +310,7 @@ app.post('/api/loadMessages', function (req, res){
 });
 
 app.post('/api/sendMessage', upload.single('file'), function (req, res){
+  console.log(req.file);
   var newMessage = message({
     dialogId: req.body.dialogId,
     senderId: req.user._id,
@@ -323,6 +327,7 @@ app.post('/api/sendMessage', upload.single('file'), function (req, res){
 });
 
 app.post('/api/uploadImg', upload.single('file'), function (req, res){
+  console.log(req.body);
   res.send("Success");
 });
 
@@ -513,6 +518,7 @@ router.post('/api/updateBid', function (req, res){
     function(err){
       if (err) throw err;
       res.send('Success');
+      console.log(req.body.bidId);
     });
 });
 
