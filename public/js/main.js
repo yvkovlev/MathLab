@@ -3,7 +3,7 @@ function setUserInfo(userInfo) {
   $('#email').html(userInfo.email);
   $('#phone').html(userInfo.phone);
   $('#grade').html(userInfo.grade);
-  $('.profile-img img').attr('src', "/uploads/" + userInfo.id + ".jpg");
+  $('#profile-img').css('backgroundImage', "url(/uploads/" + userInfo.id + ".jpg)");
 }
 
 $(document).ready(function() { 
@@ -44,7 +44,7 @@ $(document).ready(function() {
             "<div class='course active-course' onClick='window.location.href=`/course/" + item._id + "`'>" +
               "<div class='course-header'>" +
                 "<div class='course-info-img'>" +
-                  "<img src='/uploads/" + item.teacherId + ".jpg' class='img-circle'>" +
+                  "<div class='center-cropped img-50' style='background-image: url(/uploads/" + item.teacherId + ".jpg);'></div>" +
                 "</div>" +
                 "<div class='course-info-titles'>" + 
                   "<h5>" + item.teacher + "</h5>" +
@@ -78,7 +78,7 @@ $(document).ready(function() {
             "<div class='course active-course' onClick='window.location.href=`/course/" + item._id + "`'>" +
               "<div class='course-header'>" +
                 "<div class='course-info-img'>" +
-                  "<img src='/uploads/" + item.studentId + ".jpg' class='img-circle'>" +
+                  "<div class='center-cropped img-50' style='background-image: url(/uploads/" + item.studentId + ".jpg);'></div>" +
                 "</div>" +
                 "<div class='course-info-titles'>" + 
                   "<h5>" + item.student + "</h5>" +
