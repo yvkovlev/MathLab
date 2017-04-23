@@ -23,7 +23,7 @@ function loadMessages(lastId) {
           messages +=
             "<div class='message' id='" + message._id + "'>" +
               "<div class='message-img'>" +
-                "<img src='/uploads/" + message.senderId + ".jpg' class='img-circle'>" +
+                "<div class='center-cropped img-40' style='background-image: url(/uploads/" + message.senderId + ".jpg);'></div>" +
               "</div>" +
               "<div class='message-body'>" +
                 "<h5>" + message.sender + "</h5>";
@@ -70,7 +70,7 @@ $(document).ready(function() {
     success: function(response) {
       dialogInfo = response;
       console.log(response);
-      $(".panel-heading .col-sm-6").html((dialogInfo.studentId != userInfo.id) ? ("<img src='/uploads/" + dialogInfo.studentId + ".jpg' class='img-circle'> " + dialogInfo.student) : ("<img src='/uploads/" + dialogInfo.teacherId + ".jpg' class='img-circle'> " + dialogInfo.teacher));
+      $(".panel-heading .col-sm-6").html((dialogInfo.studentId != userInfo.id) ? ("<div class='center-cropped img-30 panel-heading-img' style='background-image: url(/uploads/" + dialogInfo.studentId + ".jpg);'></div>" + dialogInfo.student) : ("<div class='center-cropped img-30 panel-heading-img' style='background-image: url(/uploads/" + dialogInfo.teacherId + ".jpg);'></div>" + dialogInfo.teacher));
       $(".panel-heading .text-right").html(dialogInfo.subject);
       $(document).prop('title', dialogInfo.subject + " (" + dialogInfo.teacher + ")");
     }
@@ -98,7 +98,7 @@ $(document).ready(function() {
     message += 
       "<div class='message' id='" + response.senderId + "'>" +
         "<div class='message-img'>" +
-          "<img src='/uploads/" + response.senderId + ".jpg' class='img-circle'>" +
+          "<div class='center-cropped img-40' style='background-image: url(/uploads/" + response.senderId + ".jpg);'></div>" +
         "</div>" +
         "<div class='message-body'>" +
           "<h5>" + response.sender + "</h5>";
@@ -185,7 +185,7 @@ function sendMessage() {
       message += 
         "<div class='message' id='" + response.senderId + "'>" +
           "<div class='message-img'>" +
-            "<img src='/uploads/" + response.senderId + ".jpg' class='img-circle'>" +
+            "<div class='center-cropped img-40' style='background-image: url(/uploads/" + response.senderId + ".jpg);'></div>" +
           "</div>" +
           "<div class='message-body'>" +
             "<h5>" + response.sender + "</h5>";

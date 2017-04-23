@@ -369,7 +369,7 @@ footer {
   background: #fff;
   padding: 10px 10px;
   outline: none;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .no-padding {
@@ -708,4 +708,38 @@ footer {
   background-color: #f6f7eb;
   border-radius: 4px;
   padding: 30px 10px;
+} 
+
+.center-cropped {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  border-radius: 50%;
+  background-size: cover;
+  background-position-x: center;
+}
+
+.img-130 {
+  width: 130px;
+  height: 130px;
+}
+
+.img-50 {
+  width: 50px;
+  height: 50px;
+}
+
+.img-40 {
+  width: 40px;
+  height: 40px;
+}
+
+.img-30 {
+  width: 30px;
+  height: 30px;
+}
+
+.panel-heading-img {
+  margin: -6px 10px -6px 0;
+  float: left;
 }
