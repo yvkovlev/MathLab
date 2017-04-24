@@ -78,13 +78,9 @@ $(document).ready(function() {
     success: function(response) {
       if (response.length == 0) $("#empty-courses-t").show();
       var courses = "<tr>", cnt = 0, len = 0, siz = response.length;
-<<<<<<< HEAD
-      response.forEach(function(item, response){
-=======
       var arr = response.answer;
       var activeCourse = "";
       arr.forEach(function(item, arr){
->>>>>>> 5eee1172fb709fbab239d68afd5665a8fcf08ffd
         courses += 
           "<td id='" + item._id + "''>" +
             "<div class='course active-course' onClick='window.location.href=`/course/" + item._id + "`'>" +
