@@ -90,7 +90,9 @@ $(document).ready(function() {
     }
   });
 
-
+  var windowHeight = $(window).height();
+  console.log(windowHeight);
+  $(".panel-body").height(windowHeight * 0.7);
 
   socket.on('newMessage', function(response){
     console.log(response);
@@ -182,6 +184,7 @@ function sendMessage() {
     success: function(response){
       socket.emit('sendMessage', response);
       var message = "";
+      var windowHeight = $(window).height();
       message += 
         "<div class='message' id='" + response.senderId + "'>" +
           "<div class='message-img'>" +
@@ -213,7 +216,7 @@ function sendMessage() {
       $('.messages').append(message);
       $('.message-input').html("");
       $('.attachments-block').html("");
-      $(".panel-body").css("height", "600px");
+      $(".panel-body").height(windowHeight * 0.7);
       $(".nano").nanoScroller();
       $(".nano").nanoScroller({ 
         scroll: 'bottom' 

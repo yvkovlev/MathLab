@@ -35,7 +35,7 @@ $(document).ready(function() {
     url: '/api/loadStudentCourses',
     method: 'get',
     success: function(response) {
-      if (response.length == 0) $("#empty-courses").show();
+      if (response.answer.length == 0) $("#empty-courses").show();
       var courses = "<tr>", cnt = 0, len = 0, siz = response.length;
 <<<<<<< HEAD
       response.forEach(function(item, response){
