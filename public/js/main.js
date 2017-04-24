@@ -37,15 +37,11 @@ $(document).ready(function() {
     success: function(response) {
       if (response.answer.length == 0) $("#empty-courses").show();
       var courses = "<tr>", cnt = 0, len = 0, siz = response.length;
-<<<<<<< HEAD
-      response.forEach(function(item, response){
-=======
       var arr = response.answer;
       var activeCourse = "";
       arr.forEach(function(item, arr){
         if (moment(response.time) < moment(item.endingTime)) activeCourse = 'active-course';
         else activeCourse = '';
->>>>>>> 5eee1172fb709fbab239d68afd5665a8fcf08ffd
         courses += 
           "<td id='" + item._id + "''>" +
             "<div class='course " + activeCourse + "' onClick='window.location.href=`/course/" + item._id + "`'>" +
