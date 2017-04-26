@@ -2,9 +2,9 @@ var pending = true;
 var firstLoad = true;
 var endList = false;
 var currenTr;
-var inProgressStatus = "<span class='label label-primary'>На рассмотрении</span>";
-var acceptStatus = "<span class='label label-success'>Подтверждено</span>";
-var refuseStatus = "<span class='label label-danger'>Отказано</span>";
+var inProgressStatus = "<span class='label label-primary' id='inProgressStatus'>На рассмотрении</span>";
+var acceptStatus = "<span class='label label-success'id='acceptStatus' >Подтверждено</span>";
+var refuseStatus = "<span class='label label-danger' id='refuseStatus'>Отказано</span>";
 function loadBids(lastID) {
   $.ajax({
     url: 'api/loadBids',
@@ -58,19 +58,23 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-  var student, subject, prefDays, prefTime, id, studentId;
+  var student, subject, prefDays, prefTime, id, studentId, currentStatus;
   $(".tbody-bids").on("click", ".currenTr", function(){
     student = $(this).find(".bid-student").first().html();
     subject = $(this).find(".bid-subject").first().html();
     prefDays = $(this).find(".bid-prefDays").first().html();
     prefTime = $(this).find(".bid-prefTime").first().html();
     studentId = $(this).find(".bid-student").first().attr('id');
+    currentStatus = $(this).find(".bid-status span").first().attr('id');
+    console.log(currentStatus);
     id = $(this).attr('id');
-    $("#student").html(student);
-    $("#subject").html(subject);
-    $("#prefDays").html(prefDays);
-    $("#prefTime").html(prefTime);
-    $("#courseAddingModal").modal({show: true});
+    if (currentStatus == 'inProgressStatus') {
+      $("#student").html(student);
+      $("#subject").html(subject);
+      $("#prefDays").html(prefDays);
+      $("#prefTime").html(prefTime);
+      $("#courseAddingModal").modal({show: true});
+    }
   });
   $("#create-course").on('click', function(){
     var prefDaysFinally = "";
