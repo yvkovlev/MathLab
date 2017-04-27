@@ -14,6 +14,7 @@ function loadMessages(lastId) {
     data: {dialogId: dialogId, lastId: lastId},
     beforeSend: function() {
       pending = true;
+      $(".messages-loader").show();
     },
     success: function(response) {
       pending = false;
@@ -51,11 +52,12 @@ function loadMessages(lastId) {
         }
       });
       $('.messages').prepend(messages);
-      if (response[response.length - 1]) currenTr = response[0]._id;
+      if (response[response.length - 1]) currenTr = response[response.length - 1]._id;
       else endList = true;
       $(".nano").nanoScroller({ 
         scroll: 'bottom' 
       });
+      $(".messages-loader").hide();
     }
   });
 }
@@ -90,7 +92,7 @@ $(document).ready(function() {
     }
   });
 
-/*  $(".nano-content").scroll(function(){
+  $(".nano-content").scroll(function(){
     var panelBodyTop = $('.panel-body').offset().top;
     var anchorTop = $('#anchor').offset().top;
     if (panelBodyTop < anchorTop) {
@@ -102,7 +104,7 @@ $(document).ready(function() {
         loadMessages(currenTr);
       }
     }
-  });*/
+  });
 
   var windowHeight = $(window).height();
   console.log(windowHeight);
@@ -195,6 +197,15 @@ function sendMessage() {
     data: formData,
     processData: false,
     contentType: false,
+    beforeSend: function(){
+        $("#send-button").removeClass("send-button").html("<div class='send-message-loader'>" +
+                                                            "<div id='loader-sm'>" +
+                                                                "<div id='loader-sm_1' class='loader-sm'></div>" +
+                                                                "<div id='loader-sm_2' class='loader-sm'></div>" +
+                                                                "<div id='loader-sm_3' class='loader-sm'></div>" +
+                                                            "</div>" +
+                                                        "</div>");
+      },
     success: function(response){
       socket.emit('sendMessage', response);
       var message = "";
@@ -235,6 +246,7 @@ function sendMessage() {
       $(".nano").nanoScroller({ 
         scroll: 'bottom' 
       });
+      $("#send-button").addClass("send-button").html("<i class='fa fa-paper-plane' aria-hidden='true'></i>");
     }
   });
 };
