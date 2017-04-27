@@ -342,6 +342,7 @@ footer {
 
 .attachment, .send-button {
   display: block;
+  position: relative;
   font-size: 22px;
   color: #828282;
   cursor: pointer;
@@ -742,4 +743,254 @@ footer {
 .panel-heading-img {
   margin: -6px 10px -6px 0;
   float: left;
+}
+
+.messages-loader-block {
+  position: relative;
+  height: 40px;
+}
+
+.messages-loader {
+  display: none;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+}
+
+.send-message-loader {
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 20px);
+  text-align: center;
+  margin: auto;
+}
+
+#loader-md{
+  width:56px;
+  margin:auto;
+}
+
+.loader-md{
+  background-color: rgb(222, 226, 232);
+  float:left;
+  height:12px;
+  margin-left:6px;
+  width:12px;
+  animation-name:bounce_loader-md;
+    -o-animation-name:bounce_loader-md;
+    -ms-animation-name:bounce_loader-md;
+    -webkit-animation-name:bounce_loader-md;
+    -moz-animation-name:bounce_loader-md;
+  animation-duration:0.5875s;
+    -o-animation-duration:0.5875s;
+    -ms-animation-duration:0.5875s;
+    -webkit-animation-duration:0.5875s;
+    -moz-animation-duration:0.5875s;
+  animation-iteration-count:infinite;
+    -o-animation-iteration-count:infinite;
+    -ms-animation-iteration-count:infinite;
+    -webkit-animation-iteration-count:infinite;
+    -moz-animation-iteration-count:infinite;
+  animation-direction:normal;
+    -o-animation-direction:normal;
+    -ms-animation-direction:normal;
+    -webkit-animation-direction:normal;
+    -moz-animation-direction:normal;
+  border-radius:8px;
+    -o-border-radius:8px;
+    -ms-border-radius:8px;
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+}
+
+#loader-md_1{
+  animation-delay:0.1195s;
+    -o-animation-delay:0.1195s;
+    -ms-animation-delay:0.1195s;
+    -webkit-animation-delay:0.1195s;
+    -moz-animation-delay:0.1195s;
+}
+
+#loader-md_2{
+  animation-delay:0.2755s;
+    -o-animation-delay:0.2755s;
+    -ms-animation-delay:0.2755s;
+    -webkit-animation-delay:0.2755s;
+    -moz-animation-delay:0.2755s;
+}
+
+#loader-md_3{
+  animation-delay:0.3485s;
+    -o-animation-delay:0.3485s;
+    -ms-animation-delay:0.3485s;
+    -webkit-animation-delay:0.3485s;
+    -moz-animation-delay:0.3485s;
+}
+
+
+
+@keyframes bounce_loader-md{
+  0%{}
+
+  50%{
+    background-color: rgb(242, 244, 247);
+  }
+
+  100%{}
+}
+
+@-o-keyframes bounce_loader-md{
+  0%{}
+
+  50%{
+    background-color: rgb(242, 244, 247);
+  }
+
+  100%{}
+}
+
+@-ms-keyframes bounce_loader-md{
+  0%{}
+
+  50%{
+    background-color: rgb(242, 244, 247);
+  }
+
+  100%{}
+}
+
+@-webkit-keyframes bounce_loader-md{
+  0%{}
+
+  50%{
+    background-color: rgb(242, 244, 247);
+  }
+
+  100%{}
+}
+
+@-moz-keyframes bounce_loader-md{
+  0%{}
+
+  50%{
+    background-color: rgb(242, 244, 247);
+  }
+
+  100%{}
+}
+
+#loader-sm{
+  width:56px;
+  margin:auto;
+}
+
+.loader-sm{
+  background-color: rgb(163, 167, 173);
+  float:left;
+  height:5px;
+  margin-left:6px;
+  width:5px;
+  animation-name:bounce_loader-md;
+    -o-animation-name:bounce_loader-md;
+    -ms-animation-name:bounce_loader-md;
+    -webkit-animation-name:bounce_loader-md;
+    -moz-animation-name:bounce_loader-md;
+  animation-duration:0.5875s;
+    -o-animation-duration:0.5875s;
+    -ms-animation-duration:0.5875s;
+    -webkit-animation-duration:0.5875s;
+    -moz-animation-duration:0.5875s;
+  animation-iteration-count:infinite;
+    -o-animation-iteration-count:infinite;
+    -ms-animation-iteration-count:infinite;
+    -webkit-animation-iteration-count:infinite;
+    -moz-animation-iteration-count:infinite;
+  animation-direction:normal;
+    -o-animation-direction:normal;
+    -ms-animation-direction:normal;
+    -webkit-animation-direction:normal;
+    -moz-animation-direction:normal;
+  border-radius:8px;
+    -o-border-radius:8px;
+    -ms-border-radius:8px;
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+}
+
+#loader-sm_1{
+  animation-delay:0.1195s;
+    -o-animation-delay:0.1195s;
+    -ms-animation-delay:0.1195s;
+    -webkit-animation-delay:0.1195s;
+    -moz-animation-delay:0.1195s;
+}
+
+#loader-sm_2{
+  animation-delay:0.2755s;
+    -o-animation-delay:0.2755s;
+    -ms-animation-delay:0.2755s;
+    -webkit-animation-delay:0.2755s;
+    -moz-animation-delay:0.2755s;
+}
+
+#loader-sm_3{
+  animation-delay:0.3485s;
+    -o-animation-delay:0.3485s;
+    -ms-animation-delay:0.3485s;
+    -webkit-animation-delay:0.3485s;
+    -moz-animation-delay:0.3485s;
+}
+
+
+
+@keyframes bounce_loader-sm{
+  0%{}
+
+  50%{
+    background-color: rgb(209, 212, 218);
+  }
+
+  100%{}
+}
+
+@-o-keyframes bounce_loader-sm{
+  0%{}
+
+  50%{
+    background-color: rgb(209, 212, 218);
+  }
+
+  100%{}
+}
+
+@-ms-keyframes bounce_loader-sm{
+  0%{}
+
+  50%{
+    background-color: rgb(209, 212, 218);
+  }
+
+  100%{}
+}
+
+@-webkit-keyframes bounce_loader-sm {
+  0%{}
+
+  50%{
+    background-color: rgb(209, 212, 218);
+  }
+
+  100%{}
+}
+
+@-moz-keyframes bounce_loader-sm {
+  0%{}
+
+  50%{
+    background-color: rgb(209, 212, 218);
+  }
+
+  100%{}
 }
