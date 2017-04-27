@@ -299,7 +299,7 @@ app.post('/api/loadMessages', function (req, res){
     find({ $and: [ {dialogId: req.body.dialogId}, { _id: {$gt: mongoose.Types.ObjectId(req.body.lastId) } } ] }).
     select('_id sender senderId message fileUrl fileSize date').
     sort({date: 1}).
-    limit(100).
+    limit(150).
     exec(function(err, data){
       if (err) throw err;
       res.send(data);
