@@ -90,6 +90,20 @@ $(document).ready(function() {
     }
   });
 
+/*  $(".nano-content").scroll(function(){
+    var panelBodyTop = $('.panel-body').offset().top;
+    var anchorTop = $('#anchor').offset().top;
+    if (panelBodyTop < anchorTop) {
+      if (firstLoad) { 
+        loadMessages("000000000000000000000000");
+        firstLoad = false;
+      }
+      else if (!pending && !endList && !firstLoad){
+        loadMessages(currenTr);
+      }
+    }
+  });*/
+
   var windowHeight = $(window).height();
   console.log(windowHeight);
   $(".panel-body").height(windowHeight * 0.7);
