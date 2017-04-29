@@ -69,7 +69,6 @@ $(document).ready(function() {
     data: {dialogId: dialogId},
     success: function(response) {
       dialogInfo = response;
-      console.log(response);
       $(".panel-heading .col-sm-6").html((dialogInfo.studentId != userInfo.id) ? ("<div class='center-cropped img-30 panel-heading-img' style='background-image: url(/uploads/" + dialogInfo.studentId + ".jpg);'></div>" + dialogInfo.student) : ("<div class='center-cropped img-30 panel-heading-img' style='background-image: url(/uploads/" + dialogInfo.teacherId + ".jpg);'></div>" + dialogInfo.teacher));
       $(".panel-heading .text-right").html(dialogInfo.subject);
       $(document).prop('title', dialogInfo.subject + " (" + dialogInfo.teacher + ")");
@@ -91,7 +90,6 @@ $(document).ready(function() {
   });
 
   var windowHeight = $(window).height();
-  console.log(windowHeight);
   $(".panel-body").height(windowHeight * 0.7);
 
   socket.on('newMessage', function(response){
