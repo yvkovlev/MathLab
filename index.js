@@ -297,7 +297,7 @@ app.post('/api/loadMessages', function (req, res){
     find({ $and: [ {dialogId: req.body.dialogId}, { _id: {$gt: mongoose.Types.ObjectId(req.body.lastId) } } ] }).
     select('_id sender senderId message fileUrl fileSize date').
     sort({date: 1}).
-    limit(100).
+    limit(30).
     exec(function(err, data){
       if (err) throw err;
       res.send(data);
@@ -326,7 +326,7 @@ app.post('/api/uploadImg', upload.single('file'), function (req, res){
 
 app.post('/api/log-out', function (req, res){
   req.session.destroy(function (err) {
-    res.redirect('/sign-in');
+    //res.redirect('/sign-in');
   });
 });
 

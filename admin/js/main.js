@@ -9,7 +9,10 @@ $(document).ready(function() {
   $("#log-out").on("click", function(){
     $.ajax({
       url: '/api/log-out',
-      method: 'post'
+      method: 'post',
+      success: function() {
+        window.location.href = "/sign-in";
+      }
     });
   });
 });

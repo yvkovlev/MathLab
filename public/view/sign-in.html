@@ -32,26 +32,34 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Меню</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <a class="navbar-brand" href="/">
-                    <img src="images/logo.svg" alt="Logo">
+                    <img src="/images/logo.svg" alt="Logo">
                     <span>MathLab.kz</span>
                 </a>
             </div>
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i>&nbsp; Главная</a></li>
-                      <li><a href="#"><i class="fa fa-usd" aria-hidden="true"></i>&nbsp; Оплата</a></li>
-                      <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp; Контакты</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/sign-up">Регистрация</a></li>
-            </ul>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bars" aria-hidden="true"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i>&nbsp; Главная</a></li>
+                          <li><a href="#"><i class="fa fa-usd" aria-hidden="true"></i>&nbsp; Оплата</a></li>
+                          <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp; Контакты</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/sign-up">Регистрация</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
     <div class="error-alerts"></div>

@@ -33,32 +33,29 @@
     <nav class="navbar navbar-inverse navbar-fixed-top no-margin">
         <div class="container-fluid">
             <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Меню</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <a class="navbar-brand" href="#">
                     <img src="images/logo.svg" alt="Logo">
                     <span>MathLab.kz</span>
                 </a>
             </div>
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a href="#"><i class="fa fa-usd" aria-hidden="true"></i>&nbsp; Оплата</a></li>
-                      <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp; Контакты</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav">
-                <li><a href="#main">Главная</a></li>
-                <li><a href="#about-us">О нас</a></li>
-                <li><a href="#teachers">Наши преподаватели</a></li>
-                <li><a href="#comments">Отзывы</a></li>
-                <li><a href="#contacts">Контакты</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/sign-in"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Вход и регистрация</a></li>
-            </ul>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#main">Главная</a></li>
+                    <li><a href="#about-us">О нас</a></li>
+                    <li><a href="#teachers">Наши преподаватели</a></li>
+                    <li><a href="#comments">Отзывы</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/sign-in"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Вход и регистрация</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
     <div class="landing-head" id="main">
@@ -97,13 +94,10 @@
                         <h4 style="padding-top: 20px;">Эти условия показались вам привлекательными? Смело регистрируйтесь на нашем портале и начинайте обучение!</h4>
                     </div>
                     <div class="row main-content">
-                        <div class="col-xs-4">
-                            <a href="/sign-up" class="btn btn-warning btn-lg" role="button">Регистрация</a>
-                        </div>
-                        <div class="col-xs-4">
+                        <div class="col-xs-12 text-left">
+                            <a href="/sign-up" class="btn btn-warning btn-lg" role="button" style="margin-right: 20px;">Регистрация</a>
                             <a href="/sign-in" class="btn btn-warning btn-lg" role="button">Войти в систему</a>
                         </div>
-                        <div class="col-xs-4"></div>
                     </div>
                 </div>
                 <div class="col-md-5 landing-lamp text-center">
@@ -335,5 +329,14 @@
         })
     </script>
     <script src="js/bootstrap.min.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-71816939-6', 'auto');
+      ga('send', 'pageview');
+    </script>
 </body>
 </html>
