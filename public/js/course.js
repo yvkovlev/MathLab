@@ -52,10 +52,7 @@ function loadMessages(lastId) {
         }
       });
       $('.messages').prepend(messages);
-      if (response[response.length - 1]) {
-        currenTr = response[0/*response.length - 1*/]._id;
-        alert(currenTr);
-      }
+      if (response[response.length - 1]) currenTr = response[0]._id;
       else endList = true;
       $(".nano").nanoScroller({ 
         scroll: 'bottom' 
