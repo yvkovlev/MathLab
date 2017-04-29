@@ -34,7 +34,13 @@ var storage = multer.diskStorage({
         cb(null, './public/uploads/')
     },
     filename: function (req, file, cb) {
-        var filename = ((file.originalname).split('.')[1] == "jpg" || (file.originalname).split('.')[1] == "png") ? req.user._id + ".jpg" : Date.now() + "-" + (file.originalname);
+        var filename;
+        if (req.route.path == '/api/sendMessage') {
+          filename = Date.now() + "-" + (file.originalname);
+        }
+        else if (req.route.path == '/api/uploadImg'){
+          filename = req.user._id + ".jpg";
+        }
         cb(null, filename);
     }
 });
