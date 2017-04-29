@@ -28,7 +28,10 @@ $(document).ready(function() {
     sessionStorage.clear();
     $.ajax({
       url: '/api/log-out',
-      method: 'post'
+      method: 'post',
+      success: function(){
+        window.location.href = "/";
+      }
     });
   });
   $.ajax({
