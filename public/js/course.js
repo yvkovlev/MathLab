@@ -52,7 +52,10 @@ function loadMessages(lastId) {
         }
       });
       $('.messages').prepend(messages);
-      if (response[response.length - 1]) currenTr = response[response.length - 1]._id;
+      if (response[response.length - 1]) {
+        currenTr = response[0/*response.length - 1*/]._id;
+        alert(currenTr);
+      }
       else endList = true;
       $(".nano").nanoScroller({ 
         scroll: 'bottom' 
@@ -88,7 +91,7 @@ $(document).ready(function() {
     repeat: true,
     callbackFunction: function() {
       if (firstLoad) { 
-        loadMessages("000000000000000000000000");
+        loadMessages("ffffffffffffffffffffffff");
         firstLoad = false;
       }
       else if (!pending && !endList && !firstLoad){
@@ -102,7 +105,7 @@ $(document).ready(function() {
     var anchorTop = $('#anchor').offset().top;
     if (panelBodyTop < anchorTop) {
       if (firstLoad) { 
-        loadMessages("000000000000000000000000");
+        loadMessages("ffffffffffffffffffffffff");
         firstLoad = false;
       }
       else if (!pending && !endList && !firstLoad){

@@ -300,12 +300,13 @@ app.post('/api/courseInfo', function (req, res){
 
 app.post('/api/loadMessages', function (req, res){
   message.
-    find({ $and: [ {dialogId: req.body.dialogId}, { _id: {$gt: mongoose.Types.ObjectId(req.body.lastId) } } ] }).
+    find({ $and: [ {dialogId: req.body.dialogId}, { _id: {$lt: mongoose.Types.ObjectId(req.body.lastId) } } ] }).
     select('_id sender senderId message fileUrl fileSize date').
-    sort({date: 1}).
-    limit(30).
+    sort({date: -1}).
+    limit(10).
     exec(function(err, data){
       if (err) throw err;
+      data.reverse();
       res.send(data);
     });
 });
@@ -508,6 +509,17 @@ router.put('/api/createCourse', function (req, res){
   newCourse.save(function(err){
     if (err) throw err;
     res.send('Success');
+  });
+});
+
+router.post('/api/extendCourse', function (req, res){
+  course.findOne({_id: mongoose.Types.ObjectId(req.body.courseId)}, function(err, data){
+    if (err) throw err;
+    data.endingTime = moment(data.endingTime).add(1, 'months').toDate();
+    data.save(function(err){
+      if (err) throw err;
+      res.send('Success');
+    });
   });
 });
 
