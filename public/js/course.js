@@ -72,9 +72,15 @@ $(document).ready(function() {
     success: function(response) {
       dialogInfo = response;
       console.log(response);
-      $(".panel-heading .col-sm-6").html((dialogInfo.studentId != userInfo.id) ? ("<div class='center-cropped img-30 panel-heading-img' style='background-image: url(/uploads/" + dialogInfo.studentId + ".jpg);'></div>" + dialogInfo.student) : ("<div class='center-cropped img-30 panel-heading-img' style='background-image: url(/uploads/" + dialogInfo.teacherId + ".jpg);'></div>" + dialogInfo.teacher));
-      $(".panel-heading .text-right").html(dialogInfo.subject);
+      $("#panel-heading-img").html((dialogInfo.studentId != userInfo.id) ? ("<div class='center-cropped img-30 panel-heading-img' style='background-image: url(/uploads/" + dialogInfo.studentId + ".jpg);'></div>" + dialogInfo.student) : ("<div class='center-cropped img-30 panel-heading-img' style='background-image: url(/uploads/" + dialogInfo.teacherId + ".jpg);'></div>" + dialogInfo.teacher));
+      $("#panel-heading-subject").html(dialogInfo.subject);
       $(document).prop('title', dialogInfo.subject + " (" + dialogInfo.teacher + ")");
+      $("#ci-teacher").html(dialogInfo.teacher);
+      $("#ci-student").html(dialogInfo.student);
+      $("#ci-start-date").html(moment(dialogInfo.date).format('DD.MM.YY'));
+      $("#ci-end-date").html(moment(dialogInfo.endingTime).format('DD.MM.YY'));
+      $("#ci-days").html(dialogInfo.days);
+      $("#ci-time").html(dialogInfo.time);
     }
   });
 
