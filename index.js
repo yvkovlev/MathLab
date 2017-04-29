@@ -115,7 +115,7 @@ app.get('/course/:id', function (req, res){
         else res.sendFile(__dirname + '/public/view/course.html');
       });
   }
-  else {
+  else  {
     course.findOne({ $and: [ {_id: mongoose.Types.ObjectId(req.params.id)}, {teacherId: req.user._id} ] },
       function(err, data){
         if (err) throw err;
@@ -135,7 +135,7 @@ app.get('/teachers', function (req, res) {
 });
 app.get('/cabinet/:id', function (req, res){
   if (req.params.id == req.user._id) {
-    if (req.user.priority == 1 || req.user.priority == 2) res.sendFile(__dirname + '/public/view/teacher.html');
+    if (req.user.priority >= 1) res.sendFile(__dirname + '/public/view/teacher.html');
     else res.sendFile(__dirname + '/public/view/cabinet.html');
   }
   else res.redirect('/access-denied');
@@ -291,8 +291,6 @@ app.post('/api/courseInfo', function (req, res){
     res.send(data);
   });
 });
-
-User.find({}, function(err, data){console.log(data);});
 
 app.post('/api/loadMessages', function (req, res){
   message.
