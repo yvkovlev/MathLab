@@ -75,11 +75,22 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row">
-                            <div class="col-sm-6 dialog-info">
+                            <div class="col-sm-6 dialog-info" id="panel-heading-img">
                                 <img src="/images/teacher-w.svg" class="img-circle">
                             </div>
                             <div class="col-sm-6 text-right">
-                    
+                                <span id="panel-heading-subject"></span>
+                                <span class="dropdown">
+                                    <img src="/images/ellipsis.svg" class="panel-heading-icon" data-toggle="dropdown">
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li class="disabled"><a href="#"><span class="course-info-li">Преподаватель:</span> <span id="ci-teacher"></span></a></li>
+                                        <li class="disabled"><a href="#"><span class="course-info-li">Ученик:</span> <span id="ci-student"></span></a></li>
+                                        <li class="disabled"><a href="#"><span class="course-info-li">Начало курса:</span> <span id="ci-start-date"></span></a></li>
+                                        <li class="disabled"><a href="#"><span class="course-info-li">Окончание курса:</span> <span id="ci-end-date"></span></a></li>
+                                        <li class="disabled"><a href="#"><span class="course-info-li">Дни уроков:</span> <span id="ci-days"></span></a></li>
+                                        <li class="disabled"><a href="#"><span class="course-info-li">Время уроков:</span> <span id="ci-time"></span></a></li>
+                                    </ul>
+                                </span>
                             </div> 
                         </div>
                     </div>

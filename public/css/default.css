@@ -344,7 +344,7 @@ footer {
   display: block;
   position: relative;
   font-size: 22px;
-  color: #828282;
+  color: #a8adb8;
   cursor: pointer;
   height: 40px;
   line-height: 40px;
@@ -740,9 +740,35 @@ footer {
   height: 30px;
 }
 
+.panel-heading {
+  background-color: #fff !important;
+}
+
+.panel-footer {
+  background-color: #fbfbfb !important;
+}
+
 .panel-heading-img {
   margin: -6px 10px -6px 0;
   float: left;
+}
+
+.panel-heading-icon {
+  width: 16px !important;
+  margin-left: 10px !important;
+  cursor: pointer;
+  opacity: .7;
+  transition: all 0.2s ease-in-out;
+}
+
+.panel-heading-icon:hover {
+  opacity: 1;
+}
+
+.dropdown-menu {
+  border: 1px solid #dce1e8 !important;
+  -webkit-box-shadow: 0 2px 12px rgba(0, 0, 0, .175) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, .175) !important;
 }
 
 .messages-loader-block {
@@ -765,6 +791,14 @@ footer {
   left: calc(50% - 20px);
   text-align: center;
   margin: auto;
+}
+
+.course-info-li {
+  color: #232e3a;
+}
+
+.dropdown-header {
+  border-bottom: 1px solid #dce1e8;
 }
 
 #loader-md{
