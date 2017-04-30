@@ -427,6 +427,9 @@ router.get('/teachers', function (req, res) {
 router.get('/bids', function (req, res) {
   res.sendFile(__dirname + '/admin/view/bids.html');
 });
+router.get('/courses', function (req, res) {
+  res.sendFile(__dirname + '/admin/view/courses.html');
+});
 
 router.post('/api/login', function (req, res){
   User.findOne({email: req.body.login}, function(err, user) {
