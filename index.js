@@ -496,6 +496,19 @@ router.post('/api/loadStudents', function (req, res){
     });
 });
 
+router.post('/api/loadCourses', function (req, res){
+  course.
+    find({
+      _id: { $gt: mongoose.Types.ObjectId(req.body.lastID) }
+    }).
+    select('_id subject student teacher days time date endingTime').
+    limit(10).
+    exec(function(err, data){
+      if (err) throw err;
+      res.send(data);
+    });
+});
+
 router.put('/api/createCourse', function (req, res){
   var curDate = Date.now();
   var newCourse = course({
