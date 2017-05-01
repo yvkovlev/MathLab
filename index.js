@@ -51,11 +51,11 @@ app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(session({
-	secret: "Zs&2ls)).@df",
-	store: new MongoStore ({
-		mongooseConnection: mongoose.connection
-	}),
-	cookie: {httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 7}
+  secret: "Zs&2ls)).@df",
+  store: new MongoStore ({
+    mongooseConnection: mongoose.connection
+  }),
+  cookie: {httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 7}
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -80,7 +80,7 @@ passport.use(new LocalStrategy(
         if (!resp) return done(null, false);
         else
         {
-        	return done(null, user);
+          return done(null, user);
         }
       });
     });
@@ -107,10 +107,10 @@ app.get('/public/uploads/:filename', function (req, res){
   res.sendFile(__dirname + '/public/uploads/' + req.params.filename);
 });
 app.get('/sign-in', function (req, res){
-	res.sendFile(__dirname + '/public/view/sign-in.html');
+  res.sendFile(__dirname + '/public/view/sign-in.html');
 });
 app.get('/sign-up', function (req, res){
-	res.sendFile(__dirname + '/public/view/sign-up.html');
+  res.sendFile(__dirname + '/public/view/sign-up.html');
 });
 app.get('/course/:id', function (req, res){
   if (req.user.priority == "0") {
