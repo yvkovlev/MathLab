@@ -6,24 +6,25 @@ var currenTr;
 
 function loadCourses(lastID) {
   $.ajax({
-    url: 'api/loadCourses',
+    url: '/api/loadCourses',
     method: 'post',
     data: {lastID: lastID},
     beforeSend: function() {
       pending = true;
     },
     success: function(response) {
+      console.log(response);
       var courses = "";
       pending = false;
       response.forEach(function(course, response){
         courses += 
           "<tr id='" + course._id + "'>" +
-            "<td>" + course.fullname + "</td>" +
-            "<td>" + course.email + "</td>" +
-            "<td>" + course.phone + "</td>" +
-            "<td>" + course.grade + "</td>" + 
-            "<td>" + course.sex + "</td>" + 
-            "<td>" + course.confirmed + "</td>" + 
+            "<td>" + course.subject + "</td>" +
+            "<td>" + course.student + "</td>" +
+            "<td>" + course.teacher + "</td>" +
+            "<td>" + course.time + "</td>" + 
+            "<td>" + course.date + "</td>" + 
+            "<td>" + course.endingTime + "</td>" + 
           "</tr>";
       });
       $('tbody').append(courses);
