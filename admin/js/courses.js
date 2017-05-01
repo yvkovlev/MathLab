@@ -13,7 +13,6 @@ function loadCourses(lastID) {
       pending = true;
     },
     success: function(response) {
-      console.log(response);
       var courses = "";
       pending = false;
       response.forEach(function(course, response){
@@ -22,9 +21,11 @@ function loadCourses(lastID) {
             "<td>" + course.subject + "</td>" +
             "<td>" + course.student + "</td>" +
             "<td>" + course.teacher + "</td>" +
+            "<td>" + course.days + "</td>" +
             "<td>" + course.time + "</td>" + 
-            "<td>" + course.date + "</td>" + 
-            "<td>" + course.endingTime + "</td>" + 
+            "<td>" + moment(course.date).format("DD.MM.YY") + "</td>" + 
+            "<td>" + moment(course.endingTime).format("DD.MM.YY") + "</td>" + 
+            "<td>Недоступно</td>" +
           "</tr>";
       });
       $('tbody').append(courses);
