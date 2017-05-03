@@ -32,7 +32,7 @@ function loadMessages(lastId) {
           messages +=
             "<div class='message-attachment'>" +
               "<div class='message-attachment-img'>" +
-                "<a href='" + message.fileUrl + "' class='btn btn-primary' role='button'><i class='fa fa-paperclip' aria-hidden='true'></i></a>" +
+                "<a href='" + message.fileUrl + "' class='btn btn-primary' role='button' download><i class='fa fa-paperclip' aria-hidden='true'></i></a>" +
               "</div>" +
               "<div class='message-attachment-body'>" +
                   "<h5>" + (message.fileUrl).split('/')[(message.fileUrl).split('/').length - 1] + "</h5>" +
@@ -128,7 +128,7 @@ $(document).ready(function() {
       message +=
         "<div class='message-attachment'>" +
           "<div class='message-attachment-img'>" +
-            "<a href='" + response.fileUrl + "' class='btn btn-primary' role='button'><i class='fa fa-paperclip' aria-hidden='true'></i></a>" +
+            "<a href='" + response.fileUrl + "' class='btn btn-primary' role='button' download><i class='fa fa-paperclip' aria-hidden='true'></i></a>" +
           "</div>" +
           "<div class='message-attachment-body'>" +
               "<h5>" + (response.fileUrl).split('/')[(response.fileUrl).split('/').length - 1] + "</h5>" +
@@ -225,7 +225,7 @@ function sendMessage() {
         message +=
           "<div class='message-attachment'>" +
             "<div class='message-attachment-img'>" +
-              "<a href='" + response.fileUrl + "' class='btn btn-primary' role='button'><i class='fa fa-paperclip' aria-hidden='true'></i></a>" +
+              "<a href='" + response.fileUrl + "' class='btn btn-primary' role='button' download><i class='fa fa-paperclip' aria-hidden='true'></i></a>" +
             "</div>" +
             "<div class='message-attachment-body'>" +
                 "<h5>" + (response.fileUrl).split('/')[(response.fileUrl).split('/').length - 1] + "</h5>" +
