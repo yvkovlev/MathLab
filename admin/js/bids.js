@@ -66,7 +66,6 @@ $(document).ready(function() {
     prefTime = $(this).find(".bid-prefTime").first().html();
     studentId = $(this).find(".bid-student").first().attr('id');
     currentStatus = $(this).find(".bid-status span").first().attr('id');
-    console.log(currentStatus);
     id = $(this).attr('id');
     if (currentStatus == 'inProgressStatus') {
       $("#student").html(student);
