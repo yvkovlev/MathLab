@@ -115,6 +115,17 @@ footer {
     margin: 20px 0 5px;
 }
 
+@media (max-width: 991px) {
+  .main-content {
+    margin-top: 0px;
+  }
+
+  .form-head {
+    margin: 0px 0 5px;
+  }
+}
+
+
 .form-head-reg {
     padding-top: 30px;
     padding-right: 0;
@@ -177,6 +188,12 @@ footer {
 
 .footer-links li a img:hover {
     opacity: 1;
+}
+
+@media (max-width: 767px) {
+    .md-text-center {
+        text-align: center !important;
+    } 
 }
 
 .nopadding {
@@ -474,8 +491,8 @@ footer {
 }
 
 .landing-head {
-  padding-top: 120px;
-  padding-bottom: 40px;
+  height: 100vh;
+  padding-top: 15vh;
   background-image: -webkit-linear-gradient(45deg, #00537e, #136d7e 33%, #3aa17e);
   background-image: linear-gradient(45deg, #00537e, #136d7e 33%, #3aa17e);
   color: #fff !important;
@@ -488,17 +505,45 @@ footer {
   margin: 0;
 }
 
+.start-button {
+  padding-top: 10px;
+}
+
+
+@media (max-width: 991px) {
+  .landing-head h1 {
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .landing-head {
+    padding-top: 30vh;
+  }
+
+  .start-button {
+    padding-top: 15px;
+  }
+
+  .start-button a {
+    padding: 6px 12px;
+    width: 90%;
+  }
+}
+
+@media (max-width: 767px) {
+  .landing-head h1 {
+    font-size: 26px;
+  }
+}
+
 .landing-lamp img {
   width: 60%;
 }
 
+
 .landing-text {
   padding: 10px 0;
   font-size: 15px;
-}
-
-.start-button {
-  padding-top: 10px;
 }
 
 .article-title {
@@ -518,6 +563,20 @@ footer {
 
 .article img {
   width: 60%;
+}
+
+@media (max-width: 991px) {
+  .article-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .article-p {
+    font-size: 15px;
+  }
+
+  .article {
+    margin-bottom: 20px;
+  }
 }
 
 .landing-comment {
@@ -553,6 +612,10 @@ footer {
   position: absolute;
   top: 60px;
   left: 7px;
+}
+
+.interface-img {
+  width: 100%;
 }
 
 .kv-avatar .file-preview-frame,.kv-avatar .file-preview-frame:hover {
@@ -679,6 +742,15 @@ footer {
   background-color: #EBF7F0 !important;
 }
 
+@media (max-width: 991px) {
+  .landing-teacher {
+   margin-bottom: 10px; 
+  }
+  .landing-comment {
+    margin-bottom: 10px;
+  }
+}
+
 .nav-anchor {
   padding-bottom: 30px;
 }
@@ -708,8 +780,16 @@ footer {
 .contacts-bg {
   background-color: #f6f7eb;
   border-radius: 4px;
-  padding: 30px 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 } 
+
+@media (max-width: 991px) {
+  .contacts-bg {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+}
 
 .center-cropped {
   width: 100px;
@@ -804,6 +884,12 @@ footer {
 #loader-md{
   width:56px;
   margin:auto;
+}
+
+blockquote footer {
+  margin: 0 !important;
+  padding: 0 !important;
+  border-top: none !important; 
 }
 
 .loader-md{
