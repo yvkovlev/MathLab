@@ -394,6 +394,10 @@ footer {
   padding: 0 !important;
 }
 
+.relative {
+  position: relative;
+}
+
 .messages-block {
   height: 500px;
   padding: 15px 30px;
@@ -559,6 +563,8 @@ footer {
 
 .article {
   margin-bottom: 60px;
+  display: flex;
+  align-items: center;
 }
 
 .article img {
@@ -572,16 +578,33 @@ footer {
   }
   .article-p {
     font-size: 15px;
+    padding-top: 20px;
   }
 
   .article {
     margin-bottom: 20px;
   }
+
+  .article img {
+    width: 70%;
+  }
+}
+
+@media (max-width: 767px) {
+  .article img {
+    width: 40%;
+  }
+  
+  .article {
+    margin-bottom: 20px;
+    display: inherit;
+    align-items: inherit;
+  }
 }
 
 .landing-comment {
   background-color: #ebf7f5;
-  border-radius: 4px;
+  border-radius: 2px;
   padding: 30px 10px;
 }
 
