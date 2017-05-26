@@ -33,21 +33,22 @@
     <div class="container main-content">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 base">
-                <form>
+                <form onsubmit="return false">
                     <div class="form-group">
                         <label for="email">Вопрос:</label>
-                        <input type="email" class="form-control" id="email">
+                        <input type="text" class="form-control" id="question">
                     </div>
                     <div class="form-group">
                         <label for="pwd">Ответ:</label>
-                        <input type="password" class="form-control" id="pwd">
+                        <input type="text" class="form-control" id="answer">
                     </div>
-                    <button type="submit" class="btn btn-default">Загрузить</button>
+                    <button type="submit" class="btn btn-default" id="send">Загрузить</button>
                 </form>
             </div>
         </div>
     </div>
 
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/question.js"></script>
 </body>
 </html>

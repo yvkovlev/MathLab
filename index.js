@@ -28,6 +28,8 @@ var bid = require('./models/bid');
 var course = require('./models/course');
 var message = require('./models/message');
 
+var question = require('./models/question');
+
 mongoose.connect('mongodb://mathlab1.kz:27017/MathLab');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -346,6 +348,25 @@ app.post('/api/log-out', function (req, res){
 
 app.post('/api/userInfo', function (req, res){
   res.send({id: req.user._id, fullname: req.user.fullname, email: req.user.email, phone: req.user.phone, sex: req.user.sex, grade: req.user.grade, confirmed: req.user.confirmed});
+});
+
+app.post('/api/uploadQuestion', function (req, res){
+  question.findOne({question: req.body.question}, function(err, data){
+    if (err) throw err;
+    if (data) res.send("Error");
+    else {
+      var newQuestion = question({
+        question: req.body.question,
+        answer: req.body.answer
+      });
+      newQuestion.save(function(err){
+        if (err) throw err;
+        question.find({}, function(err, data){
+          res.send(data);
+        });
+      });
+    }
+  });
 });
 
 io.on('connection', function(socket){
