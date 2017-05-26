@@ -90,7 +90,7 @@ app.use(function (req, res, next){
   if (req.url.split('/')[1] == 'api') next();
   else {
     if (!req.user) {
-      if (req.url == '/' || req.url == '/sign-in' || req.url == '/sign-up' || req.url == '/how-to-use' || req.url == '/upload-questions') next();
+      if (req.url == '/' || req.url == '/sign-in' || req.url == '/sign-up' || req.url == '/how-to-use' || req.url == '/upload-questions' || req.url == '/prices') next();
       else res.redirect('/sign-in');
     }
     else {
@@ -151,6 +151,9 @@ app.get('/access-denied', function (req, res){
 });
 app.get('/how-to-use', function (req, res){
   res.sendFile(__dirname + '/public/view/how-to-use.html');
+});
+app.get('/prices', function (req, res){
+  res.sendFile(__dirname + '/public/view/prices.html');
 });
 
 app.get('/upload-questions', function (req, res){
