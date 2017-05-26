@@ -28,6 +28,8 @@ var bid = require('./models/bid');
 var course = require('./models/course');
 var message = require('./models/message');
 
+var question = require('./models/question');
+
 mongoose.connect('mongodb://mathlab1.kz:27017/MathLab');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -90,7 +92,7 @@ app.use(function (req, res, next){
   if (req.url.split('/')[1] == 'api') next();
   else {
     if (!req.user) {
-      if (req.url == '/' || req.url == '/sign-in' || req.url == '/sign-up' || req.url == '/how-to-use' || req.url == '/upload-questions' || req.url == '/prices') next();
+      if (req.url == '/' || req.url == '/sign-in' || req.url == '/sign-up' || req.url == '/how-to-use' || req.url == '/upload-questions') next();
       else res.redirect('/sign-in');
     }
     else {
@@ -151,9 +153,6 @@ app.get('/access-denied', function (req, res){
 });
 app.get('/how-to-use', function (req, res){
   res.sendFile(__dirname + '/public/view/how-to-use.html');
-});
-app.get('/prices', function (req, res){
-  res.sendFile(__dirname + '/public/view/prices.html');
 });
 
 app.get('/upload-questions', function (req, res){
@@ -349,6 +348,25 @@ app.post('/api/log-out', function (req, res){
 
 app.post('/api/userInfo', function (req, res){
   res.send({id: req.user._id, fullname: req.user.fullname, email: req.user.email, phone: req.user.phone, sex: req.user.sex, grade: req.user.grade, confirmed: req.user.confirmed});
+});
+
+app.post('/api/uploadQuestion', function (req, res){
+  question.findOne({question: req.body.question}, function(err, data){
+    if (err) throw err;
+    if (data) res.send("Error");
+    else {
+      var newQuestion = question({
+        question: req.body.question,
+        answer: req.body.answer
+      });
+      newQuestion.save(function(err){
+        if (err) throw err;
+        question.find({}, function(err, data){
+          res.send(data);
+        });
+      });
+    }
+  });
 });
 
 io.on('connection', function(socket){
