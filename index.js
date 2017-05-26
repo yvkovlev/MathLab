@@ -28,6 +28,8 @@ var bid = require('./models/bid');
 var course = require('./models/course');
 var message = require('./models/message');
 
+var question = require('./models/question');
+
 mongoose.connect('mongodb://mathlab1.kz:27017/MathLab');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -51,11 +53,11 @@ app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(session({
-	secret: "Zs&2ls)).@df",
-	store: new MongoStore ({
-		mongooseConnection: mongoose.connection
-	}),
-	cookie: {httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 7}
+  secret: "Zs&2ls)).@df",
+  store: new MongoStore ({
+    mongooseConnection: mongoose.connection
+  }),
+  cookie: {httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 7}
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -80,7 +82,7 @@ passport.use(new LocalStrategy(
         if (!resp) return done(null, false);
         else
         {
-        	return done(null, user);
+          return done(null, user);
         }
       });
     });
@@ -90,7 +92,7 @@ app.use(function (req, res, next){
   if (req.url.split('/')[1] == 'api') next();
   else {
     if (!req.user) {
-      if (req.url == '/' || req.url == '/sign-in' || req.url == '/sign-up') next();
+      if (req.url == '/' || req.url == '/sign-in' || req.url == '/sign-up' || req.url == '/how-to-use' || req.url == '/upload-questions') next();
       else res.redirect('/sign-in');
     }
     else {
@@ -107,10 +109,10 @@ app.get('/public/uploads/:filename', function (req, res){
   res.sendFile(__dirname + '/public/uploads/' + req.params.filename);
 });
 app.get('/sign-in', function (req, res){
-	res.sendFile(__dirname + '/public/view/sign-in.html');
+  res.sendFile(__dirname + '/public/view/sign-in.html');
 });
 app.get('/sign-up', function (req, res){
-	res.sendFile(__dirname + '/public/view/sign-up.html');
+  res.sendFile(__dirname + '/public/view/sign-up.html');
 });
 app.get('/course/:id', function (req, res){
   if (req.user.priority == "0") {
@@ -148,6 +150,13 @@ app.get('/cabinet/:id', function (req, res){
 });
 app.get('/access-denied', function (req, res){
   res.sendFile(__dirname + '/public/view/access-denied.html');
+});
+app.get('/how-to-use', function (req, res){
+  res.sendFile(__dirname + '/public/view/how-to-use.html');
+});
+
+app.get('/upload-questions', function (req, res){
+  res.sendFile(__dirname + '/public/view/upload-questions.html');
 });
 
 app.put('/api/registration', function (req, res, next){
@@ -341,6 +350,25 @@ app.post('/api/userInfo', function (req, res){
   res.send({id: req.user._id, fullname: req.user.fullname, email: req.user.email, phone: req.user.phone, sex: req.user.sex, grade: req.user.grade, confirmed: req.user.confirmed});
 });
 
+app.post('/api/uploadQuestion', function (req, res){
+  question.findOne({question: req.body.question}, function(err, data){
+    if (err) throw err;
+    if (data) res.send("Error");
+    else {
+      var newQuestion = question({
+        question: req.body.question,
+        answer: req.body.answer
+      });
+      newQuestion.save(function(err){
+        if (err) throw err;
+        question.find({}, function(err, data){
+          res.send(data);
+        });
+      });
+    }
+  });
+});
+
 io.on('connection', function(socket){
   socket.on('setRooms', function(userId){
     User.
@@ -489,6 +517,19 @@ router.post('/api/loadStudents', function (req, res){
       $and: [ { _id: {$gt: mongoose.Types.ObjectId(req.body.lastID)} }, { priority: 0 } ]
     }).
     select('_id email fullname phone sex grade confirmed').
+    limit(10).
+    exec(function(err, data){
+      if (err) throw err;
+      res.send(data);
+    });
+});
+
+router.post('/api/loadCourses', function (req, res){
+  course.
+    find({
+      _id: { $gt: mongoose.Types.ObjectId(req.body.lastID) }
+    }).
+    select('_id subject student teacher days time date endingTime').
     limit(10).
     exec(function(err, data){
       if (err) throw err;

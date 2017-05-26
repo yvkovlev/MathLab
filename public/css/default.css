@@ -115,6 +115,17 @@ footer {
     margin: 20px 0 5px;
 }
 
+@media (max-width: 991px) {
+  .main-content {
+    margin-top: 0px;
+  }
+
+  .form-head {
+    margin: 0px 0 5px;
+  }
+}
+
+
 .form-head-reg {
     padding-top: 30px;
     padding-right: 0;
@@ -177,6 +188,12 @@ footer {
 
 .footer-links li a img:hover {
     opacity: 1;
+}
+
+@media (max-width: 767px) {
+    .md-text-center {
+        text-align: center !important;
+    } 
 }
 
 .nopadding {
@@ -377,6 +394,10 @@ footer {
   padding: 0 !important;
 }
 
+.relative {
+  position: relative;
+}
+
 .messages-block {
   height: 500px;
   padding: 15px 30px;
@@ -474,8 +495,8 @@ footer {
 }
 
 .landing-head {
-  padding-top: 120px;
-  padding-bottom: 40px;
+  height: 100vh;
+  padding-top: 15vh;
   background-image: -webkit-linear-gradient(45deg, #00537e, #136d7e 33%, #3aa17e);
   background-image: linear-gradient(45deg, #00537e, #136d7e 33%, #3aa17e);
   color: #fff !important;
@@ -488,17 +509,45 @@ footer {
   margin: 0;
 }
 
+.start-button {
+  padding-top: 10px;
+}
+
+
+@media (max-width: 991px) {
+  .landing-head h1 {
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .landing-head {
+    padding-top: 30vh;
+  }
+
+  .start-button {
+    padding-top: 15px;
+  }
+
+  .start-button a {
+    padding: 6px 12px;
+    width: 90%;
+  }
+}
+
+@media (max-width: 767px) {
+  .landing-head h1 {
+    font-size: 26px;
+  }
+}
+
 .landing-lamp img {
   width: 60%;
 }
 
+
 .landing-text {
   padding: 10px 0;
   font-size: 15px;
-}
-
-.start-button {
-  padding-top: 10px;
 }
 
 .article-title {
@@ -514,16 +563,51 @@ footer {
 
 .article {
   margin-bottom: 60px;
+  display: flex;
+  align-items: center;
 }
 
 .article img {
   width: 60%;
 }
 
+@media (max-width: 991px) {
+  .article-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .article-p {
+    font-size: 15px;
+    padding-top: 20px;
+  }
+
+  .article {
+    margin-bottom: 20px;
+  }
+
+  .article img {
+    width: 70%;
+  }
+}
+
+@media (max-width: 767px) {
+  .article img {
+    width: 40%;
+  }
+  
+  .article {
+    margin-bottom: 20px;
+    display: inherit;
+    align-items: inherit;
+  }
+}
+
 .landing-comment {
-  background-color: #ebf7f5;
-  border-radius: 4px;
+  border-radius: 2px;
   padding: 30px 10px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgb(214, 214, 214);
+  -moz-box-shadow: 0px 0px 5px 0px rgb(214, 214, 214);
+  box-shadow: 0px 0px 5px 0px rgb(214, 214, 214);
 }
 
 .landing-comment-body {
@@ -545,7 +629,7 @@ footer {
 }
 
 .landing-comment-body blockquote {
-  border-left: 2px solid #d1dad5;
+  border-left: 2px solid #e3e3e3;
   margin: 0;
 }
 
@@ -553,6 +637,10 @@ footer {
   position: absolute;
   top: 60px;
   left: 7px;
+}
+
+.interface-img {
+  width: 100%;
 }
 
 .kv-avatar .file-preview-frame,.kv-avatar .file-preview-frame:hover {
@@ -676,7 +764,17 @@ footer {
 }
 
 .landing-teacher {
-  background-color: #EBF7F0 !important;
+  background-color: #ffffff !important;
+  height: 405px;
+}
+
+@media (max-width: 991px) {
+  .landing-teacher {
+   margin-bottom: 20px;
+  }
+  .landing-comment {
+    margin-bottom: 20px;
+  }
 }
 
 .nav-anchor {
@@ -708,8 +806,16 @@ footer {
 .contacts-bg {
   background-color: #f6f7eb;
   border-radius: 4px;
-  padding: 30px 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 } 
+
+@media (max-width: 991px) {
+  .contacts-bg {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+}
 
 .center-cropped {
   width: 100px;
@@ -801,9 +907,45 @@ footer {
   border-bottom: 1px solid #dce1e8;
 }
 
+.contacts-block {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.contacts-block img {
+  width: 60px;
+}
+
+@media (max-width: 991px) {
+  .contacts-block {
+    display:inherit;
+    font-size: 14px;
+  }
+
+  .contacts-block p {
+    padding-top: 20px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .contacts-block {
+    font-size: 12px;
+    padding-top: 15px;
+  }
+}
+
 #loader-md{
   width:56px;
   margin:auto;
+}
+
+blockquote footer {
+  margin: 0 !important;
+  padding: 0 !important;
+  border-top: none !important; 
 }
 
 .loader-md{

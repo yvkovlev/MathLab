@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	  
+    
     <title>Cписок курсов </title>
 
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
@@ -34,7 +34,8 @@
 
     <script src="vendors/jquery/dist/jquery.min.js"></script>
     <script src="js/viewportchecker.js"></script>
-    <script src="js/students.js"></script>
+    <script src="js/courses.js"></script>
+    <!-- <script src="js/students.js"></script> -->
   </head>
 
   <body class="nav-md">
@@ -82,7 +83,7 @@
               </div>
             </div>
             <!-- /sidebar menu -->
-
+            <div class="abs-alerts"></div>
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
               <a data-toggle="tooltip" data-placement="top" title="Settings">
@@ -154,7 +155,7 @@
                             <th>Статус</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="tbody-courses">
                         </tbody>
                       </table>
                       <span id="anchor"></span>
@@ -182,9 +183,9 @@
                                 <div class="col-md-4 text-right"><h4>Предмет:</h4></div>
                                 <div class="col-md-8"><h4 id="subject"></h4></div>
                               </div>
-                              <div class="row">
+                              <div class="row" style="padding-top: 20px;">
                                 <div class="col-md-4 text-right">
-                                  <button type="button" class="btn btn-success" id="create-course">Продлить курс</button>
+                                  <button type="button" class="btn btn-success" id="extend-course">Продлить курс</button>
                                 </div>
                                 <div class="col-md-8">Курс будет продлен на один месяц.</div>
                               </div>
@@ -195,6 +196,7 @@
                           </div>
                         </div>
                       </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -248,6 +250,6 @@
     <script src="vendors/starrr/dist/starrr.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="js/custom.min.js"></script>
-	
+  
   </body>
 </html>
