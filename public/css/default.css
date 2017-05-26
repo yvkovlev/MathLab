@@ -918,6 +918,15 @@ footer {
   width: 60px;
 }
 
+.payment-method {
+  padding: 4px;
+  border: 1px solid #ddd;
+}
+
+.payment-method .qiwi {
+
+}
+
 @media (max-width: 991px) {
   .contacts-block {
     display:inherit;
