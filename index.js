@@ -29,7 +29,7 @@ var course = require('./models/course');
 var message = require('./models/message');
 var question = require('./models/question');
 
-mongoose.connect('mongodb://mathlab1.kz:27017/MathLab');
+mongoose.connect('mongodb://mathlab.kz:27017/MathLab');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/uploads/')
