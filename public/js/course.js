@@ -46,7 +46,7 @@ function loadMessages(lastId) {
                 "</ul>" +
               "</div>" +
               "<div class='message-date'>" +
-                "<span>" + moment(message.date).format("HH:mm") + "</span>" +
+                "<span>" + moment(message.date).format("DD.MM.YY, HH:mm") + "</span>" +
               "</div>" +
             "</div>";
         }
@@ -141,7 +141,7 @@ $(document).ready(function() {
           "</ul>" +
         "</div>" +
         "<div class='message-date'>" +
-          "<span>" + moment(response.date).format("HH:mm") + "</span>" +
+          "<span>" + moment(response.date).format("DD.MM.YY, HH:mm") + "</span>" +
         "</div>" +
       "</div>";
     $('.messages').append(message);
@@ -238,7 +238,7 @@ function sendMessage() {
             "</ul>" +
           "</div>" +
           "<div class='message-date'>" +
-            "<span>" + moment(response.date).format("HH:mm") + "</span>" +
+            "<span>" + moment(response.date).format("DD.MM.YY, HH:mm") + "</span>" +
           "</div>" +
         "</div>";
       $('.messages').append(message);
