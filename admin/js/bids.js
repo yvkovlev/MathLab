@@ -29,7 +29,7 @@ function loadBids(lastID) {
             "<td class='bid-prefDays'>" + bid.prefDays + "</td>" +
             "<td class='bid-prefTime'>" + bid.prefTime + "</td>" +
             "<td class='bid-phone'>" + bid.phone + "</td>" +
-            "<td class='bid-phone'>Поступление</td>" +
+            "<td class='bid-phone'>" + (bid.target ? bid.target : "Не выбрано") + "</td>" +
             "<td class='bid-status'>" + currentStatus + "</td>" +
             "<td class='bid-cancel'><a href='#' data-toggle='tooltip' data-placement='left' title='Отмена заявки' id='cancelBid'><i class='fa fa-times'></i></a></td>" +
           "</tr>";

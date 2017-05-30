@@ -264,6 +264,7 @@ app.put('/api/putBid', function (req, res){
     phone: req.user.phone,
     prefDays: req.body.prefDays,
     prefTime: req.body.prefTime,
+    target: req.body.target,
     date: Date.now(),
     status: "Pending"
   });
@@ -495,7 +496,7 @@ router.post('/api/loadBids', function (req, res){
     find({
       _id: {$lt: mongoose.Types.ObjectId(req.body.lastID)}
     }).
-    select('_id student studentId subject prefDays prefTime date phone status').
+    select('_id student studentId subject prefDays prefTime date target phone status').
     sort({date: -1}).
     limit(10).
     exec(function(err, data){
