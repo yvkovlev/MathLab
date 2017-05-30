@@ -68,13 +68,13 @@ $(document).ready(function() {
     studentId = $(this).find(".bid-student").first().attr('id');
     currentStatus = $(this).find(".bid-status span").first().attr('id');
     id = $(this).attr('id');
-    //if (currentStatus == 'inProgressStatus') {
+    if (currentStatus == 'inProgressStatus') {
       $("#student").html(student);
       $("#subject").html(subject);
       $("#prefDays").html(prefDays);
       $("#prefTime").html(prefTime);
       $("#courseAddingModal").modal({show: true});
-    //}
+    }
   });
   $("#create-course").on('click', function(){
     var prefDaysFinally = "";
