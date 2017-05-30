@@ -27,10 +27,9 @@ var User = require('./models/user');
 var bid = require('./models/bid');
 var course = require('./models/course');
 var message = require('./models/message');
-
 var question = require('./models/question');
 
-mongoose.connect('mongodb://mathlab1.kz:27017/MathLab');
+mongoose.connect('mongodb://mathlab.kz:27017/MathLab');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/uploads/')
@@ -92,7 +91,7 @@ app.use(function (req, res, next){
   if (req.url.split('/')[1] == 'api') next();
   else {
     if (!req.user) {
-      if (req.url == '/' || req.url == '/sign-in' || req.url == '/sign-up' || req.url == '/how-to-use' || req.url == '/upload-questions') next();
+      if (req.url == '/' || req.url == '/sign-in' || req.url == '/sign-up' || req.url == '/how-to-use' || req.url == '/upload-questions' || req.url == '/prices') next();
       else res.redirect('/sign-in');
     }
     else {
@@ -101,6 +100,17 @@ app.use(function (req, res, next){
     }
   }
 });
+
+function wwwRedirect(req, res, next) {
+    if (req.headers.host.slice(0, 4) === 'www.') {
+        var newHost = req.headers.host.slice(4);
+        return res.redirect(301, req.protocol + '://' + newHost + req.originalUrl);
+    }
+    next();
+};
+
+app.set('trust proxy', true);
+app.use(wwwRedirect);
 
 app.get('/', function (req, res){
   res.sendFile(__dirname + '/public/view/welcome.html');
@@ -153,6 +163,9 @@ app.get('/access-denied', function (req, res){
 });
 app.get('/how-to-use', function (req, res){
   res.sendFile(__dirname + '/public/view/how-to-use.html');
+});
+app.get('/prices', function (req, res){
+  res.sendFile(__dirname + '/public/view/prices.html');
 });
 
 app.get('/upload-questions', function (req, res){

@@ -30,7 +30,7 @@ function loadMessages(lastId) {
                 "<h5>" + message.sender + "</h5>";
         if (message.fileUrl) {
           messages +=
-            "<div class='message-attachment'>" +
+            "<div class='message-attachment' onClick='window.location = `" + message.fileUrl + "`'>" +
               "<div class='message-attachment-img'>" +
                 "<a href='" + message.fileUrl + "' class='btn btn-primary' role='button' download><i class='fa fa-paperclip' aria-hidden='true'></i></a>" +
               "</div>" +
@@ -46,7 +46,7 @@ function loadMessages(lastId) {
                 "</ul>" +
               "</div>" +
               "<div class='message-date'>" +
-                "<span>" + moment(message.date).format("HH:mm") + "</span>" +
+                "<span>" + moment(message.date).format("DD.MM.YY, HH:mm") + "</span>" +
               "</div>" +
             "</div>";
         }
@@ -115,7 +115,6 @@ $(document).ready(function() {
   $(".panel-body").height(windowHeight * 0.7);
 
   socket.on('newMessage', function(response){
-    console.log(response);
     var message = "";
     message += 
       "<div class='message' id='" + response.senderId + "'>" +
@@ -127,7 +126,7 @@ $(document).ready(function() {
     if (response.fileUrl) {
       message +=
         "<div class='message-attachment'>" +
-          "<div class='message-attachment-img'>" +
+          "<div class='message-attachment-img' onClick='window.location = `" + response.fileUrl + "`'>" +
             "<a href='" + response.fileUrl + "' class='btn btn-primary' role='button' download><i class='fa fa-paperclip' aria-hidden='true'></i></a>" +
           "</div>" +
           "<div class='message-attachment-body'>" +
@@ -142,7 +141,7 @@ $(document).ready(function() {
           "</ul>" +
         "</div>" +
         "<div class='message-date'>" +
-          "<span>" + moment(response.date).format("HH:mm") + "</span>" +
+          "<span>" + moment(response.date).format("DD.MM.YY, HH:mm") + "</span>" +
         "</div>" +
       "</div>";
     $('.messages').append(message);
@@ -224,7 +223,7 @@ function sendMessage() {
       if (response.fileUrl) {
         message +=
           "<div class='message-attachment'>" +
-            "<div class='message-attachment-img'>" +
+            "<div class='message-attachment-img' onClick='window.location = `" + response.fileUrl + "`'>" +
               "<a href='" + response.fileUrl + "' class='btn btn-primary' role='button' download><i class='fa fa-paperclip' aria-hidden='true'></i></a>" +
             "</div>" +
             "<div class='message-attachment-body'>" +
@@ -239,7 +238,7 @@ function sendMessage() {
             "</ul>" +
           "</div>" +
           "<div class='message-date'>" +
-            "<span>" + moment(response.date).format("HH:mm") + "</span>" +
+            "<span>" + moment(response.date).format("DD.MM.YY, HH:mm") + "</span>" +
           "</div>" +
         "</div>";
       $('.messages').append(message);

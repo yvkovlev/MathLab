@@ -918,6 +918,17 @@ footer {
   width: 60px;
 }
 
+.payment-method {
+  padding: 4px;
+  border: 1px solid #ddd;
+  border-radius: 6px; 
+}
+
+.payment-method img {
+  height: 40px;
+  margin: 30px auto 10px;
+}
+
 @media (max-width: 991px) {
   .contacts-block {
     display:inherit;
