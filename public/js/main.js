@@ -118,7 +118,7 @@ $(document).ready(function() {
     $.ajax({
       url: "api/putBid",
       method: "put",
-      data: {subject: $('#subject option:selected').text(), prefDays: prefDays, prefTime: $(".bfh-timepicker input").val()},
+      data: {subject: $('#subject option:selected').text(), prefDays: prefDays, prefTime: $(".bfh-timepicker input").val(), target: $('#target option:selected').text()},
       beforeLoad: function(){
         $(".modal-body").html("<img src='images/loading.svg'>");
       },

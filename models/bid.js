@@ -9,6 +9,7 @@ var bidSchema = new Schema({
 	prefDays: String,
 	prefTime: String,
 	date: {type: Date},
+	target: String,
 	status: String
 });
 
