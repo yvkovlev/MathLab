@@ -30,7 +30,8 @@ $(document).ready(function() {
       url: '/api/log-out',
       method: 'post',
       success: function(){
-        window.location.href = "/";
+        //window.location.href = "/";
+        console.log("log-out completed")
       }
     });
   });
