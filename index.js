@@ -1,33 +1,34 @@
-var compression = require('compression');
-var express = require('express');
-var app = express();
-var subdomain = require('express-subdomain');
-var router = express.Router();
-var http = require('http').Server(app);
-var path = require('path');
-var io = require('socket.io')(http);
-var MongoClient = require('mongodb').MongoClient;
-var session = require('express-session');
-var assert = require('assert');
-var ObjectId = require('mongodb').ObjectID;
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var cookieParser = require('cookie-parser');
-var MongoStore = require('connect-mongo')(session);
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var bcrypt = require('bcrypt');
-var multer = require('multer');
-var morgan = require('morgan');
-var flash = require('connect-flash');
-var fs = require('fs');
-var moment = require('moment');
+var compression = require('compression'),
+    express = require('express'),
+    app = express(),
+    subdomain = require('express-subdomain'),
+    router = express.Router(),
+    http = require('http').Server(app),
+    path = require('path'),
+    io = require('socket.io')(http),
+    MongoClient = require('mongodb').MongoClient,
+    session = require('express-session'),
+    assert = require('assert'),
+    ObjectId = require('mongodb').ObjectID,
+    bodyParser = require('body-parser'),
+    mongoose = require('mongoose'),
+    cookieParser = require('cookie-parser'),
+    MongoStore = require('connect-mongo')(session),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy,
+    bcrypt = require('bcrypt'),
+    multer = require('multer'),
+    morgan = require('morgan'),
+    flash = require('connect-flash'),
+    fs = require('fs'),
+    helmet = require('helmet'),
+    moment = require('moment');
 
-var User = require('./models/user');
-var bid = require('./models/bid');
-var course = require('./models/course');
-var message = require('./models/message');
-var question = require('./models/question');
+var User = require('./models/user'),
+    bid = require('./models/bid'),
+    course = require('./models/course'),
+    message = require('./models/message'),
+    question = require('./models/question');
 
 mongoose.connect('mongodb://mathlab.kz:27017/MathLab');
 var storage = multer.diskStorage({
@@ -46,6 +47,8 @@ var storage = multer.diskStorage({
     }
 });
 var upload = multer({ storage: storage });
+
+app.use(helmet());
 app.use(compression());
 app.use(subdomain('admin', router));
 app.use(express.static('public'));
