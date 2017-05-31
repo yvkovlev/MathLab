@@ -899,6 +899,13 @@ footer {
   margin: auto;
 }
 
+.empty-dialog {
+  display: none;
+  position: absolute;
+  top: 40%;
+  left: calc(50% - 150px);
+}
+
 .course-info-li {
   color: #232e3a;
 }

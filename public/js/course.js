@@ -17,6 +17,7 @@ function loadMessages(lastId) {
       $(".messages-loader").show();
     },
     success: function(response) {
+      if (response.length == 0) $("#empty-dialog").show();
       pending = false;
       var messages = "";
       response.forEach(function(message, response){
