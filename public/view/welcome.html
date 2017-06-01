@@ -33,7 +33,7 @@
         <script type="text/javascript" src="https://rawgit.com/codefucker/finalReject/master/reject/reject.min.js"></script>
     <![endif]-->
 </head>
-<body class="landing">
+<body class="landing" itemscope itemtype="http://schema.org/EducationalOrganization">
     <!-- NavBar -->
     <nav class="navbar navbar-inverse navbar-fixed-top no-margin">
         <div class="container-fluid">
@@ -45,8 +45,8 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/">
-                    <img src="images/logo.svg" alt="MathLab" title="MathLab - Logo">
-                    <span>MathLab.kz</span>
+                    <img src="images/logo.svg" alt="MathLab" title="MathLab - Logo" itemprop="logo">
+                    <span itemprop="brand">MathLab.kz</span>
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
@@ -69,7 +69,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-7">
-                    <h1>Интерактивный портал дистанционного обучения</h1>
+                    <h1 itemprop="name">Интерактивный портал дистанционного обучения</h1>
                 </div>
                 <div class="col-md-5 start-button text-center">
                     <a href="/sign-up" class="btn btn-landing btn-lg" role="button">Начать пользоваться</a>
@@ -79,7 +79,7 @@
             <div class="row main-content">
                 <div class="col-md-7">
                     <h3 class="no-margin normal-text hidden-sm hidden-xs">Дорогой друг! Добро пожаловать на интерактивный портал «Mathlab.kz»</h3>
-                    <p class="landing-text hidden-sm hidden-xs">Мы предлагаем Вам репетиторские услуги в on-line режиме по математике, физике и информатике. <br>On-line обучение имеет несколько неоспоримых преимуществ:<br>
+                    <p class="landing-text hidden-sm hidden-xs"><span itemprop="description">Мы предлагаем Вам репетиторские услуги в on-line режиме по математике, физике и информатике.</span> <br>On-line обучение имеет несколько неоспоримых преимуществ:<br>
                     </p>
                     <div class="landing-collapses hidden-sm hidden-xs">
                         <h4 data-toggle="collapse" data-target="#text-1" class="landing-h4">Нет привязки к месту <i class="fa fa-angle-down" aria-hidden="true"></i></h4>
@@ -266,8 +266,8 @@
                 </div>
                 <div class="col-md-7">
                     <p>
-                    +7 (707) 308-53-33 <br>
-                    +7 (777) 794-45-05
+                    <span itemprop="telephone">+7 (707) 308-53-33</span> <br>
+                    <span itemprop="telephone">+7 (777) 794-45-05</span>
                     </p>
                 </div>
             </div>
