@@ -170,7 +170,9 @@ $(document).ready(function() {
     $(".nano").nanoScroller({ 
       scroll: 'bottom' 
     });
-  });
+    $("#empty-dialog").hide();
+      emptyDialog = true;
+    });
   $(".send-button").on('click', function(){
     sendMessage();
   });
