@@ -6,6 +6,7 @@ var pending = true;
 var firstLoad = true;
 var endList = false;
 var currenTr;
+var emptyDialog = false;
 
 function loadMessages(lastId) {
   $.ajax({
@@ -17,7 +18,14 @@ function loadMessages(lastId) {
       $(".messages-loader").show();
     },
     success: function(response) {
-      if (response.length == 0) $("#empty-dialog").show();
+      if (response.length == 0 && emptyDialog == false){
+       $("#empty-dialog").show();
+       emptyDialog = true;
+      }
+      if (response.length != 0) {
+        emptyDialog = true;
+      }
+      console.log(response.length);
       pending = false;
       var messages = "";
       response.forEach(function(message, response){
@@ -263,6 +271,8 @@ function sendMessage() {
         scroll: 'bottom' 
       });
       $("#send-button").addClass("send-button").html("<i class='fa fa-paper-plane' aria-hidden='true'></i>");
+      $("#empty-dialog").hide();
+      emptyDialog = true;
     }
   });
 };
