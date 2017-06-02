@@ -6,7 +6,6 @@ var compression = require('compression'),
     http = require('http').Server(app),
     https = require('https'),
     path = require('path'),
-    io = require('socket.io')(https),
     MongoClient = require('mongodb').MongoClient,
     session = require('express-session'),
     assert = require('assert'),
@@ -23,7 +22,9 @@ var compression = require('compression'),
     flash = require('connect-flash'),
     fs = require('fs'),
     helmet = require('helmet'),
-    moment = require('moment');
+    moment = require('moment'),
+    server = https.createServer(options, app),
+    io = require('socket.io')(server);
 
 var User = require('./models/user'),
     bid = require('./models/bid'),
@@ -632,7 +633,7 @@ router.post('/api/log-out', function (req, res){
 });
 
 app.listen(80);
-https.createServer(options, app).listen(443);
+server.listen(443);
 
 /*http.listen(80, function(){
   console.log('MathLab is listening on port 80');
