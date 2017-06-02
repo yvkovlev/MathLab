@@ -49,6 +49,10 @@ var storage = multer.diskStorage({
     }
 });
 var upload = multer({ storage: storage });
+var options = {
+    cert: fs.readFileSync('./sslcert/fullchain.pem'),
+    key: fs.readFileSync('./sslcert/privkey.pem')
+};
 
 app.use(helmet());
 app.use(compression());
@@ -627,9 +631,9 @@ router.post('/api/log-out', function (req, res){
   });
 });
 
-/*express.listen(80);
-https.createServer(options, app).listen(443);*/
+express.listen(80);
+https.createServer(options, app).listen(443);
 
-http.listen(80, function(){
+/*http.listen(80, function(){
   console.log('MathLab is listening on port 80');
-});
+});*/
