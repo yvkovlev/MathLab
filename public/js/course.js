@@ -6,6 +6,7 @@ var pending = true;
 var firstLoad = true;
 var endList = false;
 var currenTr;
+var emptyDialog = false;
 
 function loadMessages(lastId) {
   $.ajax({
@@ -17,6 +18,14 @@ function loadMessages(lastId) {
       $(".messages-loader").show();
     },
     success: function(response) {
+      if (response.length == 0 && emptyDialog == false){
+       $("#empty-dialog").show();
+       emptyDialog = true;
+      }
+      if (response.length != 0) {
+        emptyDialog = true;
+      }
+      console.log(response.length);
       pending = false;
       var messages = "";
       response.forEach(function(message, response){
@@ -111,6 +120,20 @@ $(document).ready(function() {
     }
   });
 
+  $("#log-out").on("click", function(){
+    sessionStorage.clear();
+    $.ajax({
+      url: '/api/log-out',
+      method: 'post',
+      success: function(){
+        //window.location.href = "/";
+        console.log("log-out completed")
+      }
+    });
+  });
+
+  $('#link-to-cabinet').attr("href", "/cabinet/" + userInfo.id);
+
   var windowHeight = $(window).height();
   $(".panel-body").height(windowHeight * 0.7);
 
@@ -149,7 +172,9 @@ $(document).ready(function() {
     $(".nano").nanoScroller({ 
       scroll: 'bottom' 
     });
-  });
+    $("#empty-dialog").hide();
+      emptyDialog = true;
+    });
   $(".send-button").on('click', function(){
     sendMessage();
   });
@@ -250,7 +275,16 @@ function sendMessage() {
         scroll: 'bottom' 
       });
       $("#send-button").addClass("send-button").html("<i class='fa fa-paper-plane' aria-hidden='true'></i>");
+      $("#empty-dialog").hide();
+      emptyDialog = true;
     }
   });
 };
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-71816939-6', 'auto');
+      ga('send', 'pageview');
 

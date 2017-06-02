@@ -5,9 +5,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Мы предлагаем Вам репетиторские услуги в online режиме по математике, физике и информатике.">
+    <meta name="description" content="MathLab - это интерактивный обучающий портал, на который предоставляет качественные online курсы по таким предметам как математика, физика и информатика">
     <meta name="keywords" content="Репетитор онлайн, репетиторские услуги, математика онлайн, информатика онлайн, физика онлайн, онлайн образование">
     <meta name="author" content="Quve Development">
+    <meta property="og:title" content="Портал дистанционного обучения - MathLab.kz" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://mathlab.kz" />
+    <meta property="og:image" content="http://mathlab.kz/images/social-img.png" />
+    <meta property="og:description" content="MathLab - это интерактивный обучающий портал, который предоставляет качественные online курсы по таким предметам как математика, физика и информатика" />
 
     <title>Портал дистанционного обучения - MathLab.kz</title>
 
@@ -17,19 +22,18 @@
     <!-- Custom CSS -->
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
-    <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/default.css" rel="stylesheet">
 
     <!-- Scripts -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/viewportchecker.js"></script>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/viewportchecker.js" defer></script>
 
     <!--[if lt IE 9]>
         <link rel="stylesheet" href="https://rawgit.com/codefucker/finalReject/master/reject/reject.css" media="all" />
         <script type="text/javascript" src="https://rawgit.com/codefucker/finalReject/master/reject/reject.min.js"></script>
     <![endif]-->
 </head>
-<body class="landing">
+<body class="landing" itemscope itemtype="http://schema.org/EducationalOrganization">
     <!-- NavBar -->
     <nav class="navbar navbar-inverse navbar-fixed-top no-margin">
         <div class="container-fluid">
@@ -41,8 +45,8 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/">
-                    <img src="images/logo.svg" alt="Logo">
-                    <span>MathLab.kz</span>
+                    <img src="images/logo.svg" alt="MathLab" title="MathLab - Logo" itemprop="logo">
+                    <span itemprop="brand">MathLab.kz</span>
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
@@ -65,7 +69,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-7">
-                    <h1>Интерактивный портал дистанционного обучения</h1>
+                    <h1 itemprop="name">Интерактивный портал дистанционного обучения</h1>
                 </div>
                 <div class="col-md-5 start-button text-center">
                     <a href="/sign-up" class="btn btn-landing btn-lg" role="button">Начать пользоваться</a>
@@ -75,7 +79,7 @@
             <div class="row main-content">
                 <div class="col-md-7">
                     <h3 class="no-margin normal-text hidden-sm hidden-xs">Дорогой друг! Добро пожаловать на интерактивный портал «Mathlab.kz»</h3>
-                    <p class="landing-text hidden-sm hidden-xs">Мы предлагаем Вам репетиторские услуги в on-line режиме по математике, физике и информатике. <br>On-line обучение имеет несколько неоспоримых преимуществ:<br>
+                    <p class="landing-text hidden-sm hidden-xs"><span itemprop="description">Мы предлагаем Вам репетиторские услуги в on-line режиме по математике, физике и информатике.</span> <br>On-line обучение имеет несколько неоспоримых преимуществ:<br>
                     </p>
                     <div class="landing-collapses hidden-sm hidden-xs">
                         <h4 data-toggle="collapse" data-target="#text-1" class="landing-h4">Нет привязки к месту <i class="fa fa-angle-down" aria-hidden="true"></i></h4>
@@ -161,7 +165,7 @@
                 <div class="col-md-4">
                     <div class="landing-comment landing-teacher">
                         <div class="landing-comment-body text-center">
-                            <img src="images/teacher-img-2.jpg" class="img-circle img-thumbnail" alt="Галия Мрзановна Альжанова" title="Учитель математики, информатики">
+                            <img src="images/teacher-img-2.png" class="img-circle img-thumbnail" alt="Галия Мрзановна Альжанова" title="Учитель математики, информатики">
                             <h4>Галия Мрзановна Альжанова</h4>
                             <h6>Учитель математики, информатики</h6>
                             <blockquote>
@@ -174,7 +178,7 @@
                 <div class="col-md-4">
                     <div class="landing-comment landing-teacher">
                         <div class="landing-comment-body text-center">
-                            <img src="images/teacher-img-1.jpg" class="img-circle img-thumbnail" alt="Василий Васильевич Соколов" title="Учитель физики">
+                            <img src="images/teacher-img-1.png" class="img-circle img-thumbnail" alt="Василий Васильевич Соколов" title="Учитель физики">
                             <h4>Василий Васильевич Соколов</h4>
                             <h6>Учитель физики</h6>
                             <blockquote>
@@ -187,7 +191,7 @@
                 <div class="col-md-4">
                     <div class="landing-comment landing-teacher">
                         <div class="landing-comment-body text-center">
-                            <img src="images/teacher-img-3.jpg" class="img-circle img-thumbnail" alt="Анастасия Николаевна Гребенюк" title="Учитель математики">
+                            <img src="images/teacher-img-3.png" class="img-circle img-thumbnail" alt="Анастасия Николаевна Гребенюк" title="Учитель математики">
                             <h4>Анастасия Николаевна Гребенюк</h4>
                             <h6>Учитель математики</h6>
                             <blockquote>
@@ -212,7 +216,7 @@
                 <div class="col-md-4">
                     <div class="landing-comment">
                         <div class="landing-comment-body text-center">
-                            <img src="images/comment-img-2.jpg" class="img-circle" style="width: 100px;" alt="Отзыв" title="Отзыв">
+                            <img src="images/comment-img-2.png" class="img-circle" style="width: 100px;" alt="Отзыв" title="Отзыв">
                             <h4>Гулистан Нусипжан</h4>
                             <h6>Мама</h6>
                             <blockquote>
@@ -224,7 +228,7 @@
                 <div class="col-md-4">
                     <div class="landing-comment">
                         <div class="landing-comment-body text-center">
-                            <img src="images/comment-img-3.jpg" class="img-circle" style="width: 100px;" alt="Отзыв" title="Отзыв">
+                            <img src="images/comment-img-3.png" class="img-circle" style="width: 100px;" alt="Отзыв" title="Отзыв">
                             <h4>Алия Абдраимова</h4>
                             <h6>Мама</h6>
                             <blockquote>
@@ -236,7 +240,7 @@
                 <div class="col-md-4">
                     <div class="landing-comment">
                         <div class="landing-comment-body text-center">
-                            <img src="images/comment-img-1.jpg" class="img-circle" style="width: 100px;" alt="Отзыв" title="Отзыв">
+                            <img src="images/comment-img-1.png" class="img-circle" style="width: 100px;" alt="Отзыв" title="Отзыв">
                             <h4>Майя Ванькова</h4>
                             <h6>Мама</h6>
                             <blockquote>
@@ -258,18 +262,18 @@
         <div class="row">
             <div class="col-sm-4 contacts-block">
                 <div class="col-md-5 text-center">
-                    <img src="images/contacts-img-1.svg">
+                    <img src="images/contacts-img-1.svg" alt="Телефоны" title="Телефоны">
                 </div>
                 <div class="col-md-7">
                     <p>
-                    +7 (707) 308-53-33 <br>
-                    +7 (777) 794-45-05
+                    <span itemprop="telephone">+7 (707) 308-53-33</span> <br>
+                    <span itemprop="telephone">+7 (777) 794-45-05</span>
                     </p>
                 </div>
             </div>
             <div class="col-sm-4 contacts-block">
                 <div class="col-md-5 text-center">
-                    <img src="images/contacts-img-2.svg">
+                    <img src="images/contacts-img-2.svg" alt="Режим работы" title="Режим работы">
                 </div>
                 <div class="col-md-7">
                     <p>
@@ -280,7 +284,7 @@
             </div>
             <div class="col-sm-4 contacts-block">
                 <div class="col-md-5 text-center">
-                    <img src="images/contacts-img-3.svg">
+                    <img src="images/contacts-img-3.svg" alt="Методы оплаты" title="Методы оплаты">
                 </div>
                 <div class="col-md-7">
                     <p>
@@ -299,9 +303,9 @@
                     <div class="col-md-7 md-text-center">
                         <ul class="footer-links">
                             <li>Мы в социальных сетях: </li>
-                            <li><a href="https://vk.com/id424819339" target="_blank"><img src="images/vk.svg"></a></li>
-                            <li><a href="https://www.facebook.com/mathlabkz-246075022465656/?ref=aymt_homepage_panel" target="_blank"><img src="images/facebook.svg"></a></li>
-                            <li><a href="https://www.instagram.com/mathlab.kz/" target="_blank"><img src="images/instagram.svg"></a></li>
+                            <li><a href="https://vk.com/mathlabkz" target="_blank"><img src="images/vk.svg" alt="Мы в ВК" title="Мы в ВК"></a></li>
+                            <li><a href="https://www.facebook.com/mathlabkz-246075022465656/?ref=aymt_homepage_panel" target="_blank"><img src="images/facebook.svg" alt="Мы в Facebook" title="Мы в Facebook"></a></li>
+                            <li><a href="https://www.instagram.com/mathlab.kz/" target="_blank"><img src="images/instagram.svg" alt="Мы в Instagram" title="Мы в Instagram"></a></li>
                         </ul>
                     </div>
                     <div class="col-md-5 text-right md-text-center">
@@ -313,13 +317,9 @@
             </div>
         </div>
     </footer>
-    <script src="js/smoothscroll.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('nav').smoothScroll(500);  
-        })
-    </script>
-    <script src="js/bootstrap.min.js"></script>
+    <link href="/css/animate.css" rel="stylesheet">
+    <script src="js/smoothscroll.min.js" defer></script>
+    <script src="js/bootstrap.min.js" defer></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -329,5 +329,6 @@
       ga('create', 'UA-71816939-6', 'auto');
       ga('send', 'pageview');
     </script>
+    <span itemprop="address" style="display: none;">Казахстан, Алматы</span>
 </body>
 </html>

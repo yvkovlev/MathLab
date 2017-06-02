@@ -382,7 +382,7 @@ app.post('/api/uploadImg', upload.single('file'), function (req, res){
 
 app.post('/api/log-out', function (req, res){
   req.session.destroy(function (err) {
-    //res.redirect('/sign-in');
+    res.redirect('/sign-in');
   });
 });
 

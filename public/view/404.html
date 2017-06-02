@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Наши учителя</title>
+    <title>Запрашиваемой страницы не найдено</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -17,13 +17,11 @@
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link href="css/animate.css" rel="stylesheet">
-    <link href="css/bootstrap-formhelpers.min.css" rel="stylesheet">
     <link href="css/default.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script src="js/jquery.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/main.js"></script>
+
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -59,69 +57,31 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav">
-                    <li><a href="/" id="link-to-cabinet">Личный кабинет</a></li>
-                    <li class="active"><a href="/teachers">Наши преподаватели</a></li>
-                    <li><a href="/request">Подать заявку на обучение</a></li>
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/how-to-use">Как проходит обучение</a></li>
+                    <li><a href="/prices">Расценки и способы оплаты</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li id="log-out"><a href="">Выход</a></li>
+                    <li><a href="/sign-in">Кабинет</a></li>
                 </ul>
             </div>
         </div>
     </nav>
+    <div class="error-alerts"></div>
     <div class="container main-content">
         <div class="row">
-            <div class="col-md-12">
-                <h2>Наши преподаватели</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="base">
-                    <div class="col-md-10">
-                        <p>Наши учителя имеют многолетний опыт работы в физико-математических школах, внушительное портфолио собственных профессиональных и научных достижений, впечатляющее количество учеников – призеров международных, республиканских и городских олимпиад. Они постоянно повышают педагогическое мастерство, осваивают новые, передовые педагогические технологии. В своей педагогической деятельности основываются на гуманном отношении к ученику, индивидуальном подходе к обучению каждого ребенка, исходя из его способностей, уровня подготовки, целей обучения.</p>
+            <div class="col-md-8 col-md-offset-2 base">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <img src="/images/404.svg" class="img-100-p">
                     </div>
-                    <div class="col-md-2 text-left">
-                        <img src="images/network.svg" style="width: 120px;">
+                    <div class="col-md-8">
+                        <h3><small>Кажется, что-то пошло не так...</small></h3>
+                        <h3 class="margin-10">К сожалению, запрашиваемой Вами страницы не существует.</h3>
+                        <h5>Вы можете вернуться на <a href="/">главную страницу</a> и начать сначала.</h5>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="container main-content">
-        <div class="base">
-        <table class="table table-hover table-responsive teachers-list">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>ФИО</th>
-                    <th>Предмет</th>
-                </tr>
-            </thead>
-            <tbody> 
-                <tr>
-                    <td>
-                        <img src="images/teacher-img-2.jpg" class="teachers-list-img img-circle">
-                    </td>
-                    <td>Альжанова Галия Мрзановна</td>
-                    <td>Информатика, математика</td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="images/teacher-img-1.jpg" class="teachers-list-img img-circle">
-                    </td>
-                    <td>Соколов Василий Васильевич</td>
-                    <td>Физика</td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="images/teacher-img-3.jpg" class="teachers-list-img img-circle">
-                    </td>
-                    <td>Гребенюк Анастасия Николаевна</td>
-                    <td>Математика</td>
-                </tr>
-            </tbody>
-        </table>
         </div>
     </div>
     <footer>
@@ -130,7 +90,7 @@
                 <div class="col-md-12">
                     <div class="col-md-7">
                         <ul class="footer-links">
-                            <li><a href="#">Личный кабинет</a></li>
+                            <li><a href="/">Личный кабинет</a></li>
                             <li><a href="#">Техническая поддержка</a></li>
                             <li><a href="#">FAQ</a></li>
                         </ul>
@@ -146,6 +106,5 @@
     </footer>
 
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/formhelpers.min.js"></script>
 </body>
 </html>

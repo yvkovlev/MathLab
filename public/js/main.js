@@ -4,6 +4,7 @@ function setUserInfo(userInfo) {
   $('#phone').html(userInfo.phone);
   $('#grade').html(userInfo.grade);
   $('#profile-img').css('backgroundImage', "url(/uploads/" + userInfo.id + ".jpg)");
+  $('#link-to-cabinet').attr("href", "/cabinet/" + userInfo.id);
 }
 
 $(document).ready(function() { 
