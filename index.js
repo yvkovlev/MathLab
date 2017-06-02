@@ -30,7 +30,7 @@ var User = require('./models/user'),
     message = require('./models/message'),
     question = require('./models/question');
 
-mongoose.connect('mongodb://mathlab1.kz:27017/MathLab');
+mongoose.connect('mongodb://mathlab.kz:27017/MathLab');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/uploads/')
@@ -90,19 +90,6 @@ passport.use(new LocalStrategy(
     });
   }
 ));
-app.use(function (req, res, next){
-  if (req.url.split('/')[1] == 'api') next();
-  else {
-    if (!req.user) {
-      if (req.url == '/' || req.url == '/sign-in' || req.url == '/sign-up' || req.url == '/how-to-use' || req.url == '/prices') next();
-      else res.redirect('/sign-in');
-    }
-    else {
-      if (req.url == '/sign-in' || req.url == '/sign-up' || req.url == '/') res.redirect('/cabinet/' + req.user._id);
-      else next();
-    }
-  }
-});
 
 function wwwRedirect(req, res, next) {
     if (req.headers.host.slice(0, 4) === 'www.') {
@@ -122,47 +109,79 @@ app.get('/public/uploads/:filename', function (req, res){
   res.sendFile(__dirname + '/public/uploads/' + req.params.filename);
 });
 app.get('/sign-in', function (req, res){
-  res.sendFile(__dirname + '/public/view/sign-in.html');
+  if (req.user) {
+    res.redirect('/cabinet/' + req.user._id);
+  } else {
+    res.sendFile(__dirname + '/public/view/sign-in.html');
+  }
 });
 app.get('/sign-up', function (req, res){
-  res.sendFile(__dirname + '/public/view/sign-up.html');
+  if (req.user) {
+    res.redirect('/cabinet/' + req.user._id);
+  } else {
+    res.sendFile(__dirname + '/public/view/sign-up.html');
+  }
 });
 app.get('/course/:id', function (req, res){
-  if (req.user.priority == "0") {
-    course.findOne({ $and: [ {_id: mongoose.Types.ObjectId(req.params.id)}, {studentId: req.user._id} ] },
-      function(err, data){
-        if (err) throw err;
-        if (!data) res.redirect('/access-denied');
-        else res.sendFile(__dirname + '/public/view/course.html');
-      });
-  }
-  else  {
-    course.findOne({ $and: [ {_id: mongoose.Types.ObjectId(req.params.id)}, {teacherId: req.user._id} ] },
-      function(err, data){
-        if (err) throw err;
-        if (!data) res.redirect('/access-denied');
-        else res.sendFile(__dirname + '/public/view/course.html');
-      });
+  if (req.user) {
+    if (req.user.priority == "0") {
+      course.findOne({ $and: [ {_id: mongoose.Types.ObjectId(req.params.id)}, {studentId: req.user._id} ] },
+        function(err, data){
+          if (err) throw err;
+          if (!data) res.redirect('/access-denied');
+          else res.sendFile(__dirname + '/public/view/course.html');
+        });
+    }
+    else  {
+      course.findOne({ $and: [ {_id: mongoose.Types.ObjectId(req.params.id)}, {teacherId: req.user._id} ] },
+        function(err, data){
+          if (err) throw err;
+          if (!data) res.redirect('/access-denied');
+          else res.sendFile(__dirname + '/public/view/course.html');
+        });
+    }
+  } else {
+    res.redirect('/sign-in');
   }
 });
 app.get('/request', function (req, res){
-  res.sendFile(__dirname + '/public/view/request.html');
+  if (req.user) {
+    res.sendFile(__dirname + '/public/view/request.html');
+  } else {
+    res.redirect('/sign-in');
+  }
 });
 app.get('/settings', function (req, res){
-  res.sendFile(__dirname + '/public/view/settings.html');
+  if (req.user) {
+    res.sendFile(__dirname + '/public/view/settings.html');
+  } else {
+    res.redirect('/sign-in');
+  }
 });
 app.get('/teachers', function (req, res) {
-  res.sendFile(__dirname + '/public/view/teachers.html');
+  if (req.user) {
+    res.sendFile(__dirname + '/public/view/teachers.html');
+  } else {
+    res.redirect('/sign-in');
+  }
 });
 app.get('/cabinet/:id', function (req, res){
-  if (req.params.id == req.user._id) {
-    if (req.user.priority >= 1) res.sendFile(__dirname + '/public/view/teacher.html');
-    else res.sendFile(__dirname + '/public/view/cabinet.html');
+  if (req.user) {
+    if (req.params.id == req.user._id) {
+      if (req.user.priority >= 1) res.sendFile(__dirname + '/public/view/teacher.html');
+      else res.sendFile(__dirname + '/public/view/cabinet.html');
+    }
+    else res.redirect('/access-denied');
+  } else {
+    res.redirect('/sign-in');
   }
-  else res.redirect('/access-denied');
 });
 app.get('/access-denied', function (req, res){
-  res.sendFile(__dirname + '/public/view/access-denied.html');
+  if (req.user) {
+    res.sendFile(__dirname + '/public/view/access-denied.html');
+  } else {
+    res.redirect('/sign-in');
+  }
 });
 app.get('/how-to-use', function (req, res){
   res.sendFile(__dirname + '/public/view/how-to-use.html');
@@ -380,6 +399,10 @@ app.post('/api/uploadQuestion', function (req, res){
       });
     }
   });
+});
+
+app.get('*', function(req, res){
+  res.status(404).sendFile(__dirname + '/public/view/404.html');
 });
 
 io.on('connection', function(socket){
