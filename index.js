@@ -94,7 +94,7 @@ app.use(function (req, res, next){
   if (req.url.split('/')[1] == 'api') next();
   else {
     if (!req.user) {
-      if (req.url == '/' || req.url == '/sign-in' || req.url == '/sign-up' || req.url == '/how-to-use' || req.url == '/upload-questions' || req.url == '/prices') next();
+      if (req.url == '/' || req.url == '/sign-in' || req.url == '/sign-up' || req.url == '/how-to-use' || req.url == '/prices') next();
       else res.redirect('/sign-in');
     }
     else {
@@ -169,10 +169,6 @@ app.get('/how-to-use', function (req, res){
 });
 app.get('/prices', function (req, res){
   res.sendFile(__dirname + '/public/view/prices.html');
-});
-
-app.get('/upload-questions', function (req, res){
-  res.sendFile(__dirname + '/public/view/upload-questions.html');
 });
 
 app.put('/api/registration', function (req, res, next){
