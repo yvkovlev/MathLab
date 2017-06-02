@@ -4,7 +4,8 @@
   "description": "The education service",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "mongod & NODE_ENV=production node index.js > error.log"
   },
   "author": "Quve dev.",
   "license": "ISC",
@@ -18,6 +19,7 @@
     "express": "^4.10.2",
     "express-session": "^1.14.2",
     "express-subdomain": "^1.0.5",
+    "helmet": "^3.6.1",
     "moment": "^2.18.1",
     "mongoose": "^4.7.6",
     "morgan": "^1.7.0",

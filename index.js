@@ -1,36 +1,37 @@
-var compression = require('compression');
-var express = require('express');
-var app = express();
-var subdomain = require('express-subdomain');
-var router = express.Router();
-var http = require('http').Server(app);
-var path = require('path');
-var io = require('socket.io')(http);
-var MongoClient = require('mongodb').MongoClient;
-var session = require('express-session');
-var assert = require('assert');
-var ObjectId = require('mongodb').ObjectID;
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var cookieParser = require('cookie-parser');
-var MongoStore = require('connect-mongo')(session);
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var bcrypt = require('bcrypt');
-var multer = require('multer');
-var morgan = require('morgan');
-var flash = require('connect-flash');
-var fs = require('fs');
-var moment = require('moment');
+var compression = require('compression'),
+    express = require('express'),
+    app = express(),
+    subdomain = require('express-subdomain'),
+    router = express.Router(),
+    http = require('http').Server(app),
+    path = require('path'),
+    io = require('socket.io')(http),
+    MongoClient = require('mongodb').MongoClient,
+    session = require('express-session'),
+    assert = require('assert'),
+    ObjectId = require('mongodb').ObjectID,
+    bodyParser = require('body-parser'),
+    mongoose = require('mongoose'),
+    cookieParser = require('cookie-parser'),
+    MongoStore = require('connect-mongo')(session),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy,
+    bcrypt = require('bcrypt'),
+    multer = require('multer'),
+    morgan = require('morgan'),
+    flash = require('connect-flash'),
+    fs = require('fs'),
+    helmet = require('helmet'),
+    moment = require('moment');
 
-var User = require('./models/user');
-var bid = require('./models/bid');
-var course = require('./models/course');
-var message = require('./models/message');
+var User = require('./models/user'),
+    bid = require('./models/bid'),
+    course = require('./models/course'),
+    message = require('./models/message'),
+    question = require('./models/question');
 
-var question = require('./models/question');
+mongoose.connect('mongodb://mathlab.kz:27017/MathLab');
 
-mongoose.connect('mongodb://mathlab1.kz:27017/MathLab');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/uploads/')
@@ -47,6 +48,8 @@ var storage = multer.diskStorage({
     }
 });
 var upload = multer({ storage: storage });
+
+app.use(helmet());
 app.use(compression());
 app.use(subdomain('admin', router));
 app.use(express.static('public'));
@@ -88,19 +91,17 @@ passport.use(new LocalStrategy(
     });
   }
 ));
-app.use(function (req, res, next){
-  if (req.url.split('/')[1] == 'api') next();
-  else {
-    if (!req.user) {
-      if (req.url == '/' || req.url == '/sign-in' || req.url == '/sign-up' || req.url == '/how-to-use' || req.url == '/upload-questions') next();
-      else res.redirect('/sign-in');
+
+function wwwRedirect(req, res, next) {
+    if (req.headers.host.slice(0, 4) === 'www.') {
+        var newHost = req.headers.host.slice(4);
+        return res.redirect(301, req.protocol + '://' + newHost + req.originalUrl);
     }
-    else {
-      if (req.url == '/sign-in' || req.url == '/sign-up' || req.url == '/') res.redirect('/cabinet/' + req.user._id);
-      else next();
-    }
-  }
-});
+    next();
+};
+
+app.set('trust proxy', true);
+app.use(wwwRedirect);
 
 app.get('/', function (req, res){
   res.sendFile(__dirname + '/public/view/welcome.html');
@@ -109,47 +110,85 @@ app.get('/public/uploads/:filename', function (req, res){
   res.sendFile(__dirname + '/public/uploads/' + req.params.filename);
 });
 app.get('/sign-in', function (req, res){
-  res.sendFile(__dirname + '/public/view/sign-in.html');
+  if (req.user) {
+    res.redirect('/cabinet/' + req.user._id);
+  } else {
+    res.sendFile(__dirname + '/public/view/sign-in.html');
+  }
 });
 app.get('/sign-up', function (req, res){
-  res.sendFile(__dirname + '/public/view/sign-up.html');
+  if (req.user) {
+    res.redirect('/cabinet/' + req.user._id);
+  } else {
+    res.sendFile(__dirname + '/public/view/sign-up.html');
+  }
 });
 app.get('/course/:id', function (req, res){
-  if (req.user.priority == "0") {
-    course.findOne({ $and: [ {_id: mongoose.Types.ObjectId(req.params.id)}, {studentId: req.user._id} ] },
-      function(err, data){
-        if (err) throw err;
-        if (!data) res.redirect('/access-denied');
-        else res.sendFile(__dirname + '/public/view/course.html');
-      });
-  }
-  else  {
-    course.findOne({ $and: [ {_id: mongoose.Types.ObjectId(req.params.id)}, {teacherId: req.user._id} ] },
-      function(err, data){
-        if (err) throw err;
-        if (!data) res.redirect('/access-denied');
-        else res.sendFile(__dirname + '/public/view/course.html');
-      });
+  if (req.user) {
+    if (req.user.priority == "0") {
+      course.findOne({ $and: [ {_id: mongoose.Types.ObjectId(req.params.id)}, {studentId: req.user._id} ] },
+        function(err, data){
+          if (err) throw err;
+          if (!data) res.redirect('/access-denied');
+          else res.sendFile(__dirname + '/public/view/course.html');
+        });
+    }
+    else  {
+      course.findOne({ $and: [ {_id: mongoose.Types.ObjectId(req.params.id)}, {teacherId: req.user._id} ] },
+        function(err, data){
+          if (err) throw err;
+          if (!data) res.redirect('/access-denied');
+          else res.sendFile(__dirname + '/public/view/course.html');
+        });
+    }
+  } else {
+    res.redirect('/sign-in');
   }
 });
 app.get('/request', function (req, res){
-  res.sendFile(__dirname + '/public/view/request.html');
+  if (req.user) {
+    res.sendFile(__dirname + '/public/view/request.html');
+  } else {
+    res.redirect('/sign-in');
+  }
 });
 app.get('/settings', function (req, res){
-  res.sendFile(__dirname + '/public/view/settings.html');
+  if (req.user) {
+    res.sendFile(__dirname + '/public/view/settings.html');
+  } else {
+    res.redirect('/sign-in');
+  }
 });
 app.get('/teachers', function (req, res) {
-  res.sendFile(__dirname + '/public/view/teachers.html');
+  if (req.user) {
+    res.sendFile(__dirname + '/public/view/teachers.html');
+  } else {
+    res.redirect('/sign-in');
+  }
 });
 app.get('/cabinet/:id', function (req, res){
-  if (req.params.id == req.user._id) {
-    if (req.user.priority >= 1) res.sendFile(__dirname + '/public/view/teacher.html');
-    else res.sendFile(__dirname + '/public/view/cabinet.html');
+  if (req.user) {
+    if (req.params.id == req.user._id) {
+      if (req.user.priority >= 1) res.sendFile(__dirname + '/public/view/teacher.html');
+      else res.sendFile(__dirname + '/public/view/cabinet.html');
+    }
+    else res.redirect('/access-denied');
+  } else {
+    res.redirect('/sign-in');
   }
-  else res.redirect('/access-denied');
 });
 app.get('/access-denied', function (req, res){
-  res.sendFile(__dirname + '/public/view/access-denied.html');
+  if (req.user) {
+    res.sendFile(__dirname + '/public/view/access-denied.html');
+  } else {
+    res.redirect('/sign-in');
+  }
+});
+app.get('/how-to-use', function (req, res){
+  res.sendFile(__dirname + '/public/view/how-to-use.html');
+});
+app.get('/prices', function (req, res){
+  res.sendFile(__dirname + '/public/view/prices.html');
 });
 app.get('/how-to-use', function (req, res){
   res.sendFile(__dirname + '/public/view/how-to-use.html');
@@ -251,6 +290,7 @@ app.put('/api/putBid', function (req, res){
     phone: req.user.phone,
     prefDays: req.body.prefDays,
     prefTime: req.body.prefTime,
+    target: req.body.target,
     date: Date.now(),
     status: "Pending"
   });
@@ -369,6 +409,10 @@ app.post('/api/uploadQuestion', function (req, res){
   });
 });
 
+app.get('*', function(req, res){
+  res.status(404).sendFile(__dirname + '/public/view/404.html');
+});
+
 io.on('connection', function(socket){
   socket.on('setRooms', function(userId){
     User.
@@ -482,7 +526,7 @@ router.post('/api/loadBids', function (req, res){
     find({
       _id: {$lt: mongoose.Types.ObjectId(req.body.lastID)}
     }).
-    select('_id student studentId subject prefDays prefTime date phone status').
+    select('_id student studentId subject prefDays prefTime date target phone status').
     sort({date: -1}).
     limit(10).
     exec(function(err, data){
