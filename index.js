@@ -4,6 +4,7 @@ var compression = require('compression'),
     subdomain = require('express-subdomain'),
     router = express.Router(),
     http = require('http').Server(app),
+    https = require('https'),
     path = require('path'),
     io = require('socket.io')(http),
     MongoClient = require('mongodb').MongoClient,
@@ -47,6 +48,11 @@ var storage = multer.diskStorage({
     }
 });
 var upload = multer({ storage: storage });
+
+var options = {
+    cert: fs.readFileSync('./sslcert/fullchain.pem'),
+    key: fs.readFileSync('./sslcert/privkey.pem')
+};
 
 app.use(helmet());
 app.use(compression());
@@ -618,6 +624,9 @@ router.post('/api/log-out', function (req, res){
   });
 });
 
-http.listen(80, function(){
+express.listen(80);
+https.createServer(options, app).listen(443);
+
+/*http.listen(80, function(){
   console.log('MathLab is listening on port 80');
-});
+});*/
