@@ -31,6 +31,7 @@ var User = require('./models/user'),
     question = require('./models/question');
 
 mongoose.connect('mongodb://mathlab.kz:27017/MathLab');
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/uploads/')
@@ -188,6 +189,13 @@ app.get('/how-to-use', function (req, res){
 });
 app.get('/prices', function (req, res){
   res.sendFile(__dirname + '/public/view/prices.html');
+});
+app.get('/how-to-use', function (req, res){
+  res.sendFile(__dirname + '/public/view/how-to-use.html');
+});
+
+app.get('/upload-questions', function (req, res){
+  res.sendFile(__dirname + '/public/view/upload-questions.html');
 });
 
 app.put('/api/registration', function (req, res, next){
