@@ -30,7 +30,7 @@ var User = require('./models/user'),
     message = require('./models/message'),
     question = require('./models/question');
 
-mongoose.connect('mongodb://mathlab1.kz:27017/MathLab');
+mongoose.connect('mongodb://mathlab.kz:27017/MathLab');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/uploads/')
@@ -90,19 +90,6 @@ passport.use(new LocalStrategy(
     });
   }
 ));
-/*app.use(function (req, res, next){
-  if (req.url.split('/')[1] == 'api') next();
-  else {
-    if (!req.user) {
-      if (req.url == '/' || req.url == '/sign-in' || req.url == '/sign-up' || req.url == '/how-to-use' || req.url == '/prices') next();
-      else res.redirect('/sign-in');
-    }
-    else {
-      if (req.url == '/sign-in' || req.url == '/sign-up' || req.url == '/') res.redirect('/cabinet/' + req.user._id);
-      else next();
-    }
-  }
-});*/
 
 function wwwRedirect(req, res, next) {
     if (req.headers.host.slice(0, 4) === 'www.') {
