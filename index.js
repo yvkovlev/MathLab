@@ -22,9 +22,7 @@ var compression = require('compression'),
     flash = require('connect-flash'),
     fs = require('fs'),
     helmet = require('helmet'),
-    moment = require('moment'),
-    server = https.createServer(options, app),
-    io = require('socket.io')(server);
+    moment = require('moment');
 
 var User = require('./models/user'),
     bid = require('./models/bid'),
@@ -54,6 +52,8 @@ var options = {
     cert: fs.readFileSync('./sslcert/fullchain.pem'),
     key: fs.readFileSync('./sslcert/privkey.pem')
 };
+var server = https.createServer(options, app);
+var io = require('socket.io')(server);
 
 app.use(helmet());
 app.use(compression());
