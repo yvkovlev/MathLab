@@ -50,8 +50,8 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 var options = {
-    cert: fs.readFileSync('./sslcert/fullchain.pem'),
-    key: fs.readFileSync('./sslcert/privkey.pem')
+    cert: fs.readFileSync('../sslcert/fullchain.pem'),
+    key: fs.readFileSync('../sslcert/privkey.pem')
 };
 
 app.use(helmet());
