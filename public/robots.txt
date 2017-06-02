@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /uploads/
-Sitemap: http://mathlab.kz/sitemap.xml
+Sitemap: https://mathlab.kz/sitemap.xml
 Host: mathlab.kz
