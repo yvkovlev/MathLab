@@ -631,7 +631,7 @@ router.post('/api/log-out', function (req, res){
   });
 });
 
-express.listen(80);
+app.listen(80);
 https.createServer(options, app).listen(443);
 
 /*http.listen(80, function(){
