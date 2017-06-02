@@ -109,7 +109,6 @@ app.set('trust proxy', true);
 app.use(wwwRedirect);
 
 app.get('/', function (req, res){
-  res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
   res.sendFile(__dirname + '/public/view/welcome.html');
 });
 app.get('/public/uploads/:filename', function (req, res){
