@@ -4,6 +4,7 @@ var compression = require('compression'),
     subdomain = require('express-subdomain'),
     router = express.Router(),
     http = require('http').Server(app),
+    https = require('https'),
     path = require('path'),
     io = require('socket.io')(http),
     MongoClient = require('mongodb').MongoClient,
@@ -31,6 +32,7 @@ var User = require('./models/user'),
     question = require('./models/question');
 
 mongoose.connect('mongodb://mathlab.kz:27017/MathLab');
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/uploads/')
@@ -188,6 +190,13 @@ app.get('/how-to-use', function (req, res){
 });
 app.get('/prices', function (req, res){
   res.sendFile(__dirname + '/public/view/prices.html');
+});
+app.get('/how-to-use', function (req, res){
+  res.sendFile(__dirname + '/public/view/how-to-use.html');
+});
+
+app.get('/upload-questions', function (req, res){
+  res.sendFile(__dirname + '/public/view/upload-questions.html');
 });
 
 app.put('/api/registration', function (req, res, next){
@@ -617,6 +626,9 @@ router.post('/api/log-out', function (req, res){
     res.redirect('/sign-in');
   });
 });
+
+/*express.listen(80);
+https.createServer(options, app).listen(443);*/
 
 http.listen(80, function(){
   console.log('MathLab is listening on port 80');
