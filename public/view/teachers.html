@@ -22,6 +22,8 @@
 
     <!-- Scripts -->
     <script src="js/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/main.js"></script>
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -57,7 +59,7 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav">
-                    <li><a href="/">Личный кабинет</a></li>
+                    <li><a href="/" id="link-to-cabinet">Личный кабинет</a></li>
                     <li class="active"><a href="/teachers">Наши преподаватели</a></li>
                     <li><a href="/request">Подать заявку на обучение</a></li>
                 </ul>

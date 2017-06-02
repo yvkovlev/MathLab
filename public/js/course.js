@@ -132,6 +132,8 @@ $(document).ready(function() {
     });
   });
 
+  $('#link-to-cabinet').attr("href", "/cabinet/" + userInfo.id);
+
   var windowHeight = $(window).height();
   $(".panel-body").height(windowHeight * 0.7);
 
