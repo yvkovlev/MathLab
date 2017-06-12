@@ -52,7 +52,10 @@ var options = {
     cert: fs.readFileSync('./sslcert/fullchain.pem'),
     key: fs.readFileSync('./sslcert/privkey.pem')
 };
-var httpServer = http.createServer(app);
+var httpServer = http.createServer(function(req, res){
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+});
 var server = https.createServer(options, app);
 var io = require('socket.io')(server);
 
@@ -106,10 +109,6 @@ function wwwRedirect(req, res, next) {
     }
     next();
 };
-
-httpServer.get('*',function(req,res){
-    res.redirect('https://mathlab.kz'+req.url)
-})
 
 app.set('trust proxy', true);
 app.use(wwwRedirect);
