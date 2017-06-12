@@ -107,9 +107,9 @@ function wwwRedirect(req, res, next) {
     next();
 };
 
-http.get('*',function(req,res){  
+/*http.get('*',function(req,res){  
     res.redirect('https://mathlab.kz'+req.url)
-})
+})*/
 
 app.set('trust proxy', true);
 app.use(wwwRedirect);
