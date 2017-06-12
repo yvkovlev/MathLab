@@ -3,6 +3,7 @@ var compression = require('compression'),
     app = express(),
     subdomain = require('express-subdomain'),
     router = express.Router(),
+    http = require('http'),
     https = require('https'),
     path = require('path'),
     MongoClient = require('mongodb').MongoClient,
@@ -51,7 +52,6 @@ var options = {
     cert: fs.readFileSync('./sslcert/fullchain.pem'),
     key: fs.readFileSync('./sslcert/privkey.pem')
 };
-var http = express.createServer();
 var server = https.createServer(options, app);
 var io = require('socket.io')(server);
 
@@ -106,7 +106,7 @@ function wwwRedirect(req, res, next) {
     next();
 };
 
-http.get('*',function(req,res){  
+app.get('*',function(req,res){  
     res.redirect('https://mathlab.kz'+req.url)
 })
 
@@ -636,7 +636,7 @@ router.post('/api/log-out', function (req, res){
   });
 });
 
-http.listen(80);
+app.listen(80);
 server.listen(443);
 
 /*http.listen(80, function(){
