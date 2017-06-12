@@ -107,7 +107,7 @@ function wwwRedirect(req, res, next) {
     next();
 };
 
-httpServer.get('*',function(req,res){  
+http.get('*',function(req,res){  
     res.redirect('https://mathlab.kz'+req.url)
 })
 
