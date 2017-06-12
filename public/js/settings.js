@@ -1,11 +1,27 @@
 $(document).ready(function() {
-  var userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
-  $('#login').attr('placeholder', userInfo.fullname);
-  $('#email').attr('placeholder', userInfo.email);
-  $('#phone').attr('placeholder', userInfo.phone);
-  $('#phone').val("");
-  $('#grade1').val(userInfo.grade);
-  $('#sex').val(userInfo.sex);
+
+  function setSettings() {
+    $('#login').attr('placeholder', userInfo.fullname);
+    $('#email').attr('placeholder', userInfo.email);
+    $('#phone').attr('placeholder', userInfo.phone);
+    $('#phone').val("");
+    $('#grade1').val(userInfo.grade);
+    $('#sex').val(userInfo.sex);
+    setPhoto();
+  }
+
+  var socket = io();
+  var userInfo = new Object();
+
+  $.ajax({
+    url: '/api/userInfo',
+    method: 'post',
+    success: function(response){
+      userInfo = response;
+      setSettings();
+      socket.emit('setRooms', response.id);
+    }
+  });
 
   $('#save-settings').on('click', function(){
     if ($('#login').val() || $('#phone').val() || userInfo.grade != $('#grade1 option:selected').text()) {
@@ -38,6 +54,17 @@ $(document).ready(function() {
         }
       });
     }
+  });
+
+  $("#log-out").on("click", function(){
+    $.ajax({
+      url: '/api/log-out',
+      method: 'post',
+      success: function(){
+        //window.location.href = "/";
+        console.log("log-out completed")
+      }
+    });
   });
 
   $('#submit-1').on('click', function(){
@@ -95,24 +122,25 @@ $(document).ready(function() {
       });
     }
   });
-
-  $("#avatar").fileinput({
-    overwriteInitial: true,
-    maxFileSize: 1500,
-    showClose: false,
-    showCaption: false,
-    browseLabel: 'Выбрать...',
-    removeLabel: 'Удалить',
-    uploadLabel: 'Загрузить',
-    browseIcon: '<i class="fa fa-folder-open" aria-hidden="true"></i>',
-    removeIcon: '<i class="fa fa-close" aria-hidden="true"></i>',
-    uploadIcon: '<i class="fa fa-upload" aria-hidden="true"></i>',
-    browseClass: 'btn btn-default',
-    removeTitle: 'Отменить',
-    elErrorContainer: '#kv-avatar-errors-1',
-    msgErrorClass: 'alert alert-block alert-danger',
-    defaultPreviewContent: '<img src="/uploads/' + userInfo.id + ".jpg" + '" alt="Ваш аватар" class="img-circle" style="width:100%">',
-    layoutTemplates: {main2: '{preview} ' + '<div class="btn-group">' + '{browse} {remove} {upload}' + '</div>'},
-    allowedFileExtensions: ["jpg", "jpeg", "png"]
-  });
+  function setPhoto() {
+    $("#avatar").fileinput({
+      overwriteInitial: true,
+      maxFileSize: 1500,
+      showClose: false,
+      showCaption: false,
+      browseLabel: 'Выбрать...',
+      removeLabel: 'Удалить',
+      uploadLabel: 'Загрузить',
+      browseIcon: '<i class="fa fa-folder-open" aria-hidden="true"></i>',
+      removeIcon: '<i class="fa fa-close" aria-hidden="true"></i>',
+      uploadIcon: '<i class="fa fa-upload" aria-hidden="true"></i>',
+      browseClass: 'btn btn-default',
+      removeTitle: 'Отменить',
+      elErrorContainer: '#kv-avatar-errors-1',
+      msgErrorClass: 'alert alert-block alert-danger',
+      defaultPreviewContent: '<img src="/uploads/' + userInfo.id + ".jpg" + '" alt="Ваш аватар" class="img-circle" style="width:100%">',
+      layoutTemplates: {main2: '{preview} ' + '<div class="btn-group">' + '{browse} {remove} {upload}' + '</div>'},
+      allowedFileExtensions: ["jpg", "jpeg", "png"]
+    });
+  }
 });

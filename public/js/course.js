@@ -1,6 +1,6 @@
 var dialogId = (window.location.href).split('/')[4];
 var dialogInfo;
-var userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+var userInfo;
 var socket = io();
 var pending = true;
 var firstLoad = true;
@@ -72,8 +72,31 @@ function loadMessages(lastId) {
 }
 
 $(document).ready(function() {
+
   var rows = 1;
-  socket.emit('setRooms', userInfo.id);
+  var socket = io();
+
+  $.ajax({
+    url: '/api/userInfo',
+    method: 'post',
+    success: function(response){
+      userInfo = response;
+      socket.emit('setRooms', response.id);
+      $('#link-to-cabinet').attr("href", "/cabinet/" + userInfo.id);
+    }
+  });
+
+  $("#log-out").on("click", function(){
+    $.ajax({
+      url: '/api/log-out',
+      method: 'post',
+      success: function(){
+        //window.location.href = "/";
+        console.log("log-out completed")
+      }
+    });
+  });
+
   $.ajax({
     url: '/api/courseInfo',
     method: 'post',
@@ -131,8 +154,6 @@ $(document).ready(function() {
       }
     });
   });
-
-  $('#link-to-cabinet').attr("href", "/cabinet/" + userInfo.id);
 
   var windowHeight = $(window).height();
   $(".panel-body").height(windowHeight * 0.7);
