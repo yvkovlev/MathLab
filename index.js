@@ -22,7 +22,8 @@ var compression = require('compression'),
     flash = require('connect-flash'),
     fs = require('fs'),
     helmet = require('helmet'),
-    moment = require('moment');
+    moment = require('moment'),
+    config = require('config.json')('./config.json');
 
 var User = require('./models/user'),
     bid = require('./models/bid'),
@@ -30,7 +31,7 @@ var User = require('./models/user'),
     message = require('./models/message'),
     question = require('./models/question');
 
-mongoose.connect('mongodb://mathlab.kz:27017/MathLab');
+mongoose.connect(config.mongodb.url);
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -636,9 +637,9 @@ router.post('/api/log-out', function (req, res){
   });
 });
 
-httpServer.listen(80);
-server.listen(443);
+httpServer.listen(config.httpPort);
+server.listen(config.httpsPort);
 
-/*http.listen(80, function(){
-  console.log('MathLab is listening on port 80');
+/*http.createServer().listen(config.httpPort, function(){
+  console.log('MathLab is listening on port ' + config.httpPort);
 });*/
