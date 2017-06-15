@@ -3,7 +3,7 @@ var compression = require('compression'),
     app = express(),
     subdomain = require('express-subdomain'),
     router = express.Router(),
-    http = require('http').Server(app),
+    http = require('http'),
     https = require('https'),
     path = require('path'),
     MongoClient = require('mongodb').MongoClient,
@@ -30,7 +30,7 @@ var User = require('./models/user'),
     message = require('./models/message'),
     question = require('./models/question');
 
-mongoose.connect('mongodb://mathlab1.kz:27017/MathLab');
+mongoose.connect('mongodb://mathlab.kz:27017/MathLab');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -52,6 +52,10 @@ var options = {
     cert: fs.readFileSync('./sslcert/fullchain.pem'),
     key: fs.readFileSync('./sslcert/privkey.pem')
 };
+var httpServer = http.createServer(function(req, res){
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+});
 var server = https.createServer(options, app);
 var io = require('socket.io')(server);
 
@@ -632,7 +636,7 @@ router.post('/api/log-out', function (req, res){
   });
 });
 
-app.listen(80);
+httpServer.listen(80);
 server.listen(443);
 
 /*http.listen(80, function(){
