@@ -2,6 +2,6 @@
 	"httpPort": 80,
 	"httpsPort": 443,
 	"mongodb": {
-		"url": "mongodb://mathlab.kz:65784/MathLab"
+		"url": "mongodb://mathlab.kz:12012/MathLab"
 	}
 }
