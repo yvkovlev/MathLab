@@ -3,10 +3,9 @@ var compression = require('compression'),
     app = express(),
     subdomain = require('express-subdomain'),
     router = express.Router(),
-    http = require('http').Server(app),
+    http = require('http'),
     https = require('https'),
     path = require('path'),
-    io = require('socket.io')(http),
     MongoClient = require('mongodb').MongoClient,
     session = require('express-session'),
     assert = require('assert'),
@@ -23,7 +22,8 @@ var compression = require('compression'),
     flash = require('connect-flash'),
     fs = require('fs'),
     helmet = require('helmet'),
-    moment = require('moment');
+    moment = require('moment'),
+    config = require('config.json')('./config.json');
 
 var User = require('./models/user'),
     bid = require('./models/bid'),
@@ -31,7 +31,8 @@ var User = require('./models/user'),
     message = require('./models/message'),
     question = require('./models/question');
 
-mongoose.connect('mongodb://mathlab1.kz:27017/MathLab');
+
+mongoose.connect(config.mongodb.url);
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -49,6 +50,16 @@ var storage = multer.diskStorage({
     }
 });
 var upload = multer({ storage: storage });
+var options = {
+    cert: fs.readFileSync('./sslcert/fullchain.pem'),
+    key: fs.readFileSync('./sslcert/privkey.pem')
+};
+var httpServer = http.createServer(function(req, res){
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+});
+var server = https.createServer(options, app);
+var io = require('socket.io')(server);
 
 app.use(helmet());
 app.use(compression());
@@ -627,9 +638,9 @@ router.post('/api/log-out', function (req, res){
   });
 });
 
-/*express.listen(80);
-https.createServer(options, app).listen(443);*/
+httpServer.listen(config.httpPort);
+server.listen(config.httpsPort);
 
-http.listen(80, function(){
-  console.log('MathLab is listening on port 80');
-});
+/*http.createServer().listen(config.httpPort, function(){
+  console.log('MathLab is listening on port ' + config.httpPort);
+});*/

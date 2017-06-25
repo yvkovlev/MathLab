@@ -1,32 +1,27 @@
-function setUserInfo(userInfo) {
-  $('#fullname').html(userInfo.fullname);
-  $('#email').html(userInfo.email);
-  $('#phone').html(userInfo.phone);
-  $('#grade').html(userInfo.grade);
-  $('#profile-img').css('backgroundImage', "url(/uploads/" + userInfo.id + ".jpg)");
-  $('#link-to-cabinet').attr("href", "/cabinet/" + userInfo.id);
-}
-
 $(document).ready(function() { 
+
+  function setUserInfo() {
+    $('#fullname').html(userInfo.fullname);
+    $('#email').html(userInfo.email);
+    $('#phone').html(userInfo.phone);
+    $('#grade').html(userInfo.grade);
+    $('#profile-img').css('backgroundImage', "url(/uploads/" + userInfo.id + ".jpg)");
+    $('#link-to-cabinet').attr("href", "/cabinet/" + userInfo.id);
+  }
+
   var socket = io();
   var userInfo = new Object();
-  if (!sessionStorage.getItem("userInfo") || typeof(window.sessionStorage) === "undefined") {
-    $.ajax({
-      url: '/api/userInfo',
-      method: 'post',
-      success: function(response){
-        sessionStorage.setItem("userInfo", JSON.stringify(response));
-        setUserInfo(response);
-        socket.emit('setRooms', JSON.parse(sessionStorage.getItem("userInfo")).id);
-      }
-    });
-  }
-  else { 
-    setUserInfo(JSON.parse(sessionStorage.getItem("userInfo")));
-    socket.emit('setRooms', JSON.parse(sessionStorage.getItem("userInfo")).id);
-  }
+
+  $.ajax({
+    url: '/api/userInfo',
+    method: 'post',
+    success: function(response){
+      userInfo = response;
+      setUserInfo();
+      socket.emit('setRooms', response.id);
+    }
+  });
   $("#log-out").on("click", function(){
-    sessionStorage.clear();
     $.ajax({
       url: '/api/log-out',
       method: 'post',
