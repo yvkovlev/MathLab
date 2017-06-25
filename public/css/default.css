@@ -851,6 +851,10 @@ footer {
   height: 30px;
 }
 
+.panel {
+  margin-top: 10vh;
+}
+
 .panel-heading {
   background-color: #fff !important;
 }
