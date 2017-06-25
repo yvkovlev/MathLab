@@ -15,23 +15,32 @@ function loadStudents(lastID) {
     success: function(response) {
       var students = "";
       pending = false;
-      response.forEach(function(student, response){
+      console.log(response);
+
+      var datatable = new Vue({
+        el: "#datatable",
+        data: { response }
+      });
+
+      /*response.forEach(function(student, response){
         students += 
           "<tr id='" + student._id + "'>" +
             "<td>" + student.fullname + "</td>" +
-            "<td>" + student.email + "</td>" +
+            "<td>" + student.g + "</td>" +
             "<td>" + student.phone + "</td>" +
             "<td>" + student.grade + "</td>" + 
             "<td>" + student.sex + "</td>" + 
             "<td>" + student.confirmed + "</td>" + 
           "</tr>";
       });
-      $('tbody').append(students);
+      $('tbody').append(students);*/
       if(response[response.length - 1]) currenTr = response[response.length - 1]._id;
       else endList = true;
     }
   });
 }
+
+
 
 $(document).ready(function() {
   $('#anchor').viewportChecker({

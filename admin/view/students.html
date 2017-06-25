@@ -35,6 +35,7 @@
     <script src="vendors/jquery/dist/jquery.min.js"></script>
     <script src="js/viewportchecker.js"></script>
     <script src="js/students.js"></script>
+    <script src="https://unpkg.com/vue"></script>
   </head>
 
   <body class="nav-md">
@@ -152,6 +153,16 @@
                         </tr>
                       </thead>
                       <tbody>
+                        <template v-for="student in response">
+                          <tr v-bind:id="student._id">
+                            <td>{{ student.fullname }}</td>
+                            <td>{{ student.email }}</td>
+                            <td>{{ student.phone }}</td>
+                            <td>{{ student.grade }}</td>
+                            <td>{{ student.sex }}</td>
+                            <td>{{ student.confirmed }}</td> 
+                          </tr>
+                        </template>
                       </tbody>
                     </table>
                     <span id="anchor"></span>
